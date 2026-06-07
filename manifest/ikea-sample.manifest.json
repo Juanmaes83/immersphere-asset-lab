@@ -16,12 +16,28 @@
     "fileSizeMb": 2.4,
     "polygonCount": 12400,
     "textureCount": 3,
-    "dimensions": { "width": 220, "height": 85, "depth": 95, "unit": "cm" },
+    "dimensions": {
+      "width": 220,
+      "height": 85,
+      "depth": 95,
+      "unit": "cm"
+    },
     "color": "Light Grey",
     "material": "Fabric / Oak legs",
-    "styleTags": ["scandinavian", "minimalist", "nordic"],
-    "roomTags": ["living-room", "lounge"],
-    "useCases": ["staging", "render", "tour"],
+    "styleTags": [
+      "scandinavian",
+      "minimalist",
+      "nordic"
+    ],
+    "roomTags": [
+      "living-room",
+      "lounge"
+    ],
+    "useCases": [
+      "staging",
+      "render",
+      "tour"
+    ],
     "licenseType": "authorized-commercial-demo",
     "commercialUseAllowed": true,
     "redistributionAllowed": false,
@@ -47,19 +63,34 @@
     "previewPath": "previews/_placeholder/demo-preview.svg",
     "format": "glb",
     "fileSizeMb": 1.8,
-    "dimensions": { "width": 82, "height": 101, "depth": 85, "unit": "cm" },
+    "dimensions": {
+      "width": 82,
+      "height": 101,
+      "depth": 85,
+      "unit": "cm"
+    },
     "color": "Dark Green",
     "material": "Velvet / Birch legs",
-    "styleTags": ["scandinavian", "vintage"],
-    "roomTags": ["living-room", "bedroom"],
-    "useCases": ["staging", "render"],
+    "styleTags": [
+      "scandinavian",
+      "vintage"
+    ],
+    "roomTags": [
+      "living-room",
+      "bedroom"
+    ],
+    "useCases": [
+      "staging",
+      "render"
+    ],
     "licenseType": "authorized-commercial-demo",
     "commercialUseAllowed": true,
     "redistributionAllowed": false,
     "resaleAllowed": false,
     "brandUsageAllowed": true,
     "qaStatus": "pending",
-    "notes": "Demo placeholder"
+    "notes": "Demo placeholder",
+    "permissionDocumentRef": "permissions/README.md"
   },
   {
     "id": "ikea-demo-003",
@@ -73,18 +104,33 @@
     "previewPath": "previews/_placeholder/demo-preview.svg",
     "format": "glb",
     "fileSizeMb": 0.9,
-    "dimensions": { "width": 90, "height": 45, "depth": 90, "unit": "cm" },
+    "dimensions": {
+      "width": 90,
+      "height": 45,
+      "depth": 90,
+      "unit": "cm"
+    },
     "color": "Oak Veneer",
     "material": "Oak veneer / Steel",
-    "styleTags": ["scandinavian", "minimalist"],
-    "roomTags": ["living-room"],
-    "useCases": ["staging", "render", "tour"],
+    "styleTags": [
+      "scandinavian",
+      "minimalist"
+    ],
+    "roomTags": [
+      "living-room"
+    ],
+    "useCases": [
+      "staging",
+      "render",
+      "tour"
+    ],
     "licenseType": "authorized-commercial-demo",
     "commercialUseAllowed": true,
     "redistributionAllowed": false,
     "resaleAllowed": false,
     "brandUsageAllowed": true,
-    "qaStatus": "pending"
+    "qaStatus": "pending",
+    "permissionDocumentRef": "permissions/README.md"
   },
   {
     "id": "ikea-demo-004",
@@ -98,18 +144,33 @@
     "previewPath": "previews/_placeholder/demo-preview.svg",
     "format": "glb",
     "fileSizeMb": 1.5,
-    "dimensions": { "width": 180, "height": 75, "depth": 90, "unit": "cm" },
+    "dimensions": {
+      "width": 180,
+      "height": 75,
+      "depth": 90,
+      "unit": "cm"
+    },
     "color": "White / Oak",
     "material": "MDF / Oak veneer",
-    "styleTags": ["minimalist", "modern"],
-    "roomTags": ["dining-room", "kitchen"],
-    "useCases": ["staging", "render"],
+    "styleTags": [
+      "minimalist",
+      "modern"
+    ],
+    "roomTags": [
+      "dining-room",
+      "kitchen"
+    ],
+    "useCases": [
+      "staging",
+      "render"
+    ],
     "licenseType": "authorized-commercial-demo",
     "commercialUseAllowed": true,
     "redistributionAllowed": false,
     "resaleAllowed": false,
     "brandUsageAllowed": true,
-    "qaStatus": "pending"
+    "qaStatus": "pending",
+    "permissionDocumentRef": "permissions/README.md"
   },
   {
     "id": "ikea-demo-005",
@@ -123,18 +184,35 @@
     "previewPath": "previews/_placeholder/demo-preview.svg",
     "format": "glb",
     "fileSizeMb": 0.7,
-    "dimensions": { "width": 47, "height": 80, "depth": 50, "unit": "cm" },
+    "dimensions": {
+      "width": 47,
+      "height": 80,
+      "depth": 50,
+      "unit": "cm"
+    },
     "color": "Black",
     "material": "Polypropylene / Steel",
-    "styleTags": ["modern", "industrial"],
-    "roomTags": ["dining-room", "kitchen", "office"],
-    "useCases": ["staging", "render", "tour"],
+    "styleTags": [
+      "modern",
+      "industrial"
+    ],
+    "roomTags": [
+      "dining-room",
+      "kitchen",
+      "office"
+    ],
+    "useCases": [
+      "staging",
+      "render",
+      "tour"
+    ],
     "licenseType": "authorized-commercial-demo",
     "commercialUseAllowed": true,
     "redistributionAllowed": false,
     "resaleAllowed": false,
     "brandUsageAllowed": true,
-    "qaStatus": "pending"
+    "qaStatus": "pending",
+    "permissionDocumentRef": "permissions/README.md"
   },
   {
     "id": "ikea-demo-006",
@@ -148,18 +226,32 @@
     "previewPath": "previews/_placeholder/demo-preview.svg",
     "format": "glb",
     "fileSizeMb": 3.2,
-    "dimensions": { "width": 180, "height": 100, "depth": 200, "unit": "cm" },
+    "dimensions": {
+      "width": 180,
+      "height": 100,
+      "depth": 200,
+      "unit": "cm"
+    },
     "color": "White Stained Oak",
     "material": "Particleboard / Oak foil",
-    "styleTags": ["minimalist", "scandinavian"],
-    "roomTags": ["bedroom"],
-    "useCases": ["staging", "render"],
+    "styleTags": [
+      "minimalist",
+      "scandinavian"
+    ],
+    "roomTags": [
+      "bedroom"
+    ],
+    "useCases": [
+      "staging",
+      "render"
+    ],
     "licenseType": "authorized-commercial-demo",
     "commercialUseAllowed": true,
     "redistributionAllowed": false,
     "resaleAllowed": false,
     "brandUsageAllowed": true,
-    "qaStatus": "pending"
+    "qaStatus": "pending",
+    "permissionDocumentRef": "permissions/README.md"
   },
   {
     "id": "ikea-demo-007",
@@ -173,18 +265,32 @@
     "previewPath": "previews/_placeholder/demo-preview.svg",
     "format": "glb",
     "fileSizeMb": 4.1,
-    "dimensions": { "width": 200, "height": 236, "depth": 60, "unit": "cm" },
+    "dimensions": {
+      "width": 200,
+      "height": 236,
+      "depth": 60,
+      "unit": "cm"
+    },
     "color": "White",
     "material": "Particleboard / Foil",
-    "styleTags": ["minimalist", "functional"],
-    "roomTags": ["bedroom"],
-    "useCases": ["staging", "render"],
+    "styleTags": [
+      "minimalist",
+      "functional"
+    ],
+    "roomTags": [
+      "bedroom"
+    ],
+    "useCases": [
+      "staging",
+      "render"
+    ],
     "licenseType": "authorized-commercial-demo",
     "commercialUseAllowed": true,
     "redistributionAllowed": false,
     "resaleAllowed": false,
     "brandUsageAllowed": true,
-    "qaStatus": "pending"
+    "qaStatus": "pending",
+    "permissionDocumentRef": "permissions/README.md"
   },
   {
     "id": "ikea-demo-008",
@@ -198,18 +304,35 @@
     "previewPath": "previews/_placeholder/demo-preview.svg",
     "format": "glb",
     "fileSizeMb": 0.6,
-    "dimensions": { "width": 28, "height": 150, "depth": 28, "unit": "cm" },
+    "dimensions": {
+      "width": 28,
+      "height": 150,
+      "depth": 28,
+      "unit": "cm"
+    },
     "color": "Black / Brass",
     "material": "Steel / Brass",
-    "styleTags": ["industrial", "vintage"],
-    "roomTags": ["living-room", "bedroom", "office"],
-    "useCases": ["staging", "render", "tour"],
+    "styleTags": [
+      "industrial",
+      "vintage"
+    ],
+    "roomTags": [
+      "living-room",
+      "bedroom",
+      "office"
+    ],
+    "useCases": [
+      "staging",
+      "render",
+      "tour"
+    ],
     "licenseType": "authorized-commercial-demo",
     "commercialUseAllowed": true,
     "redistributionAllowed": false,
     "resaleAllowed": false,
     "brandUsageAllowed": true,
-    "qaStatus": "pending"
+    "qaStatus": "pending",
+    "permissionDocumentRef": "permissions/README.md"
   },
   {
     "id": "ikea-demo-009",
@@ -223,18 +346,33 @@
     "previewPath": "previews/_placeholder/demo-preview.svg",
     "format": "glb",
     "fileSizeMb": 1.2,
-    "dimensions": { "width": 170, "height": 1, "depth": 240, "unit": "cm" },
+    "dimensions": {
+      "width": 170,
+      "height": 1,
+      "depth": 240,
+      "unit": "cm"
+    },
     "color": "Natural / Black",
     "material": "Jute / Cotton",
-    "styleTags": ["bohemian", "natural"],
-    "roomTags": ["living-room", "bedroom"],
-    "useCases": ["staging", "render"],
+    "styleTags": [
+      "bohemian",
+      "natural"
+    ],
+    "roomTags": [
+      "living-room",
+      "bedroom"
+    ],
+    "useCases": [
+      "staging",
+      "render"
+    ],
     "licenseType": "authorized-commercial-demo",
     "commercialUseAllowed": true,
     "redistributionAllowed": false,
     "resaleAllowed": false,
     "brandUsageAllowed": true,
-    "qaStatus": "pending"
+    "qaStatus": "pending",
+    "permissionDocumentRef": "permissions/README.md"
   },
   {
     "id": "ikea-demo-010",
@@ -248,18 +386,35 @@
     "previewPath": "previews/_placeholder/demo-preview.svg",
     "format": "glb",
     "fileSizeMb": 0.3,
-    "dimensions": { "width": 15, "height": 30, "depth": 15, "unit": "cm" },
+    "dimensions": {
+      "width": 15,
+      "height": 30,
+      "depth": 15,
+      "unit": "cm"
+    },
     "color": "Clear Glass",
     "material": "Glass",
-    "styleTags": ["minimalist", "modern"],
-    "roomTags": ["living-room", "bedroom", "dining-room"],
-    "useCases": ["staging", "render", "tour"],
+    "styleTags": [
+      "minimalist",
+      "modern"
+    ],
+    "roomTags": [
+      "living-room",
+      "bedroom",
+      "dining-room"
+    ],
+    "useCases": [
+      "staging",
+      "render",
+      "tour"
+    ],
     "licenseType": "authorized-commercial-demo",
     "commercialUseAllowed": true,
     "redistributionAllowed": false,
     "resaleAllowed": false,
     "brandUsageAllowed": true,
-    "qaStatus": "pending"
+    "qaStatus": "pending",
+    "permissionDocumentRef": "permissions/README.md"
   },
   {
     "id": "ikea-demo-011",
@@ -273,18 +428,34 @@
     "previewPath": "previews/_placeholder/demo-preview.svg",
     "format": "glb",
     "fileSizeMb": 1.1,
-    "dimensions": { "width": 80, "height": 202, "depth": 28, "unit": "cm" },
+    "dimensions": {
+      "width": 80,
+      "height": 202,
+      "depth": 28,
+      "unit": "cm"
+    },
     "color": "White",
     "material": "Particleboard / Foil",
-    "styleTags": ["minimalist", "functional"],
-    "roomTags": ["living-room", "office", "bedroom"],
-    "useCases": ["staging", "render"],
+    "styleTags": [
+      "minimalist",
+      "functional"
+    ],
+    "roomTags": [
+      "living-room",
+      "office",
+      "bedroom"
+    ],
+    "useCases": [
+      "staging",
+      "render"
+    ],
     "licenseType": "authorized-commercial-demo",
     "commercialUseAllowed": true,
     "redistributionAllowed": false,
     "resaleAllowed": false,
     "brandUsageAllowed": true,
-    "qaStatus": "pending"
+    "qaStatus": "pending",
+    "permissionDocumentRef": "permissions/README.md"
   },
   {
     "id": "ikea-demo-012",
@@ -298,18 +469,32 @@
     "previewPath": "previews/_placeholder/demo-preview.svg",
     "format": "glb",
     "fileSizeMb": 2.8,
-    "dimensions": { "width": 126, "height": 90, "depth": 79, "unit": "cm" },
+    "dimensions": {
+      "width": 126,
+      "height": 90,
+      "depth": 79,
+      "unit": "cm"
+    },
     "color": "Black / Oak",
     "material": "Oak / Steel",
-    "styleTags": ["industrial", "modern"],
-    "roomTags": ["kitchen"],
-    "useCases": ["staging", "render"],
+    "styleTags": [
+      "industrial",
+      "modern"
+    ],
+    "roomTags": [
+      "kitchen"
+    ],
+    "useCases": [
+      "staging",
+      "render"
+    ],
     "licenseType": "authorized-commercial-demo",
     "commercialUseAllowed": true,
     "redistributionAllowed": false,
     "resaleAllowed": false,
     "brandUsageAllowed": true,
-    "qaStatus": "pending"
+    "qaStatus": "pending",
+    "permissionDocumentRef": "permissions/README.md"
   },
   {
     "id": "ikea-demo-013",
@@ -323,18 +508,32 @@
     "previewPath": "previews/_placeholder/demo-preview.svg",
     "format": "glb",
     "fileSizeMb": 1.9,
-    "dimensions": { "width": 100, "height": 64, "depth": 49, "unit": "cm" },
+    "dimensions": {
+      "width": 100,
+      "height": 64,
+      "depth": 49,
+      "unit": "cm"
+    },
     "color": "High Gloss White",
     "material": "Particleboard / Foil",
-    "styleTags": ["minimalist", "modern"],
-    "roomTags": ["bathroom"],
-    "useCases": ["staging", "render"],
+    "styleTags": [
+      "minimalist",
+      "modern"
+    ],
+    "roomTags": [
+      "bathroom"
+    ],
+    "useCases": [
+      "staging",
+      "render"
+    ],
     "licenseType": "authorized-commercial-demo",
     "commercialUseAllowed": true,
     "redistributionAllowed": false,
     "resaleAllowed": false,
     "brandUsageAllowed": true,
-    "qaStatus": "pending"
+    "qaStatus": "pending",
+    "permissionDocumentRef": "permissions/README.md"
   },
   {
     "id": "ikea-demo-014",
@@ -348,18 +547,34 @@
     "previewPath": "previews/_placeholder/demo-preview.svg",
     "format": "glb",
     "fileSizeMb": 1.4,
-    "dimensions": { "width": 150, "height": 74, "depth": 75, "unit": "cm" },
+    "dimensions": {
+      "width": 150,
+      "height": 74,
+      "depth": 75,
+      "unit": "cm"
+    },
     "color": "White / Grey",
     "material": "Particleboard / Steel",
-    "styleTags": ["minimalist", "functional"],
-    "roomTags": ["office", "bedroom"],
-    "useCases": ["staging", "render", "tour"],
+    "styleTags": [
+      "minimalist",
+      "functional"
+    ],
+    "roomTags": [
+      "office",
+      "bedroom"
+    ],
+    "useCases": [
+      "staging",
+      "render",
+      "tour"
+    ],
     "licenseType": "authorized-commercial-demo",
     "commercialUseAllowed": true,
     "redistributionAllowed": false,
     "resaleAllowed": false,
     "brandUsageAllowed": true,
-    "qaStatus": "pending"
+    "qaStatus": "pending",
+    "permissionDocumentRef": "permissions/README.md"
   },
   {
     "id": "ikea-demo-015",
@@ -373,18 +588,33 @@
     "previewPath": "previews/_placeholder/demo-preview.svg",
     "format": "glb",
     "fileSizeMb": 0.4,
-    "dimensions": { "width": 50, "height": 10, "depth": 50, "unit": "cm" },
+    "dimensions": {
+      "width": 50,
+      "height": 10,
+      "depth": 50,
+      "unit": "cm"
+    },
     "color": "Dark Blue",
     "material": "Cotton",
-    "styleTags": ["scandinavian", "cozy"],
-    "roomTags": ["living-room", "bedroom"],
-    "useCases": ["staging", "render"],
+    "styleTags": [
+      "scandinavian",
+      "cozy"
+    ],
+    "roomTags": [
+      "living-room",
+      "bedroom"
+    ],
+    "useCases": [
+      "staging",
+      "render"
+    ],
     "licenseType": "authorized-commercial-demo",
     "commercialUseAllowed": true,
     "redistributionAllowed": false,
     "resaleAllowed": false,
     "brandUsageAllowed": true,
-    "qaStatus": "pending"
+    "qaStatus": "pending",
+    "permissionDocumentRef": "permissions/README.md"
   },
   {
     "id": "ikea-demo-016",
@@ -398,18 +628,34 @@
     "previewPath": "previews/_placeholder/demo-preview.svg",
     "format": "glb",
     "fileSizeMb": 0.8,
-    "dimensions": { "width": 47, "height": 52, "depth": 47, "unit": "cm" },
+    "dimensions": {
+      "width": 47,
+      "height": 52,
+      "depth": 47,
+      "unit": "cm"
+    },
     "color": "Dark Grey",
     "material": "Steel",
-    "styleTags": ["industrial", "modern"],
-    "roomTags": ["dining-room", "kitchen"],
-    "useCases": ["staging", "render", "tour"],
+    "styleTags": [
+      "industrial",
+      "modern"
+    ],
+    "roomTags": [
+      "dining-room",
+      "kitchen"
+    ],
+    "useCases": [
+      "staging",
+      "render",
+      "tour"
+    ],
     "licenseType": "authorized-commercial-demo",
     "commercialUseAllowed": true,
     "redistributionAllowed": false,
     "resaleAllowed": false,
     "brandUsageAllowed": true,
-    "qaStatus": "pending"
+    "qaStatus": "pending",
+    "permissionDocumentRef": "permissions/README.md"
   },
   {
     "id": "ikea-demo-017",
@@ -423,18 +669,34 @@
     "previewPath": "previews/_placeholder/demo-preview.svg",
     "format": "glb",
     "fileSizeMb": 0.5,
-    "dimensions": { "width": 53, "height": 50, "depth": 53, "unit": "cm" },
+    "dimensions": {
+      "width": 53,
+      "height": 50,
+      "depth": 53,
+      "unit": "cm"
+    },
     "color": "Light Green",
     "material": "Steel / Powder-coated",
-    "styleTags": ["scandinavian", "playful"],
-    "roomTags": ["living-room", "bedroom", "balcony"],
-    "useCases": ["staging", "render"],
+    "styleTags": [
+      "scandinavian",
+      "playful"
+    ],
+    "roomTags": [
+      "living-room",
+      "bedroom",
+      "balcony"
+    ],
+    "useCases": [
+      "staging",
+      "render"
+    ],
     "licenseType": "authorized-commercial-demo",
     "commercialUseAllowed": true,
     "redistributionAllowed": false,
     "resaleAllowed": false,
     "brandUsageAllowed": true,
-    "qaStatus": "pending"
+    "qaStatus": "pending",
+    "permissionDocumentRef": "permissions/README.md"
   },
   {
     "id": "ikea-demo-018",
@@ -448,18 +710,34 @@
     "previewPath": "previews/_placeholder/demo-preview.svg",
     "format": "glb",
     "fileSizeMb": 0.6,
-    "dimensions": { "width": 65, "height": 150, "depth": 2, "unit": "cm" },
+    "dimensions": {
+      "width": 65,
+      "height": 150,
+      "depth": 2,
+      "unit": "cm"
+    },
     "color": "White",
     "material": "Glass / Fibreboard",
-    "styleTags": ["minimalist", "modern"],
-    "roomTags": ["bedroom", "hallway"],
-    "useCases": ["staging", "render", "tour"],
+    "styleTags": [
+      "minimalist",
+      "modern"
+    ],
+    "roomTags": [
+      "bedroom",
+      "hallway"
+    ],
+    "useCases": [
+      "staging",
+      "render",
+      "tour"
+    ],
     "licenseType": "authorized-commercial-demo",
     "commercialUseAllowed": true,
     "redistributionAllowed": false,
     "resaleAllowed": false,
     "brandUsageAllowed": true,
-    "qaStatus": "pending"
+    "qaStatus": "pending",
+    "permissionDocumentRef": "permissions/README.md"
   },
   {
     "id": "ikea-demo-019",
@@ -473,18 +751,33 @@
     "previewPath": "previews/_placeholder/demo-preview.svg",
     "format": "glb",
     "fileSizeMb": 0.7,
-    "dimensions": { "width": 42, "height": 91, "depth": 48, "unit": "cm" },
+    "dimensions": {
+      "width": 42,
+      "height": 91,
+      "depth": 48,
+      "unit": "cm"
+    },
     "color": "White",
     "material": "Reinforced polypropylene",
-    "styleTags": ["modern", "minimalist"],
-    "roomTags": ["kitchen", "dining-room"],
-    "useCases": ["staging", "render"],
+    "styleTags": [
+      "modern",
+      "minimalist"
+    ],
+    "roomTags": [
+      "kitchen",
+      "dining-room"
+    ],
+    "useCases": [
+      "staging",
+      "render"
+    ],
     "licenseType": "authorized-commercial-demo",
     "commercialUseAllowed": true,
     "redistributionAllowed": false,
     "resaleAllowed": false,
     "brandUsageAllowed": true,
-    "qaStatus": "pending"
+    "qaStatus": "pending",
+    "permissionDocumentRef": "permissions/README.md"
   },
   {
     "id": "ikea-demo-020",
@@ -498,18 +791,33 @@
     "previewPath": "previews/_placeholder/demo-preview.svg",
     "format": "glb",
     "fileSizeMb": 0.3,
-    "dimensions": { "width": 145, "height": 250, "depth": 1, "unit": "cm" },
+    "dimensions": {
+      "width": 145,
+      "height": 250,
+      "depth": 1,
+      "unit": "cm"
+    },
     "color": "Grey",
     "material": "100% Polyester",
-    "styleTags": ["minimalist", "modern"],
-    "roomTags": ["living-room", "bedroom"],
-    "useCases": ["staging", "render"],
+    "styleTags": [
+      "minimalist",
+      "modern"
+    ],
+    "roomTags": [
+      "living-room",
+      "bedroom"
+    ],
+    "useCases": [
+      "staging",
+      "render"
+    ],
     "licenseType": "authorized-commercial-demo",
     "commercialUseAllowed": true,
     "redistributionAllowed": false,
     "resaleAllowed": false,
     "brandUsageAllowed": true,
-    "qaStatus": "pending"
+    "qaStatus": "pending",
+    "permissionDocumentRef": "permissions/README.md"
   },
   {
     "id": "ikea-vittskar-armchair-outdoor-dark-grey-20575167",
@@ -534,12 +842,32 @@
     "fileSizeMb": 2.2,
     "hasRealModel": true,
     "isPlaceholder": false,
-    "dimensions": { "width": 64, "height": 95, "depth": 59, "unit": "cm" },
+    "dimensions": {
+      "width": 64,
+      "height": 95,
+      "depth": 59,
+      "unit": "cm"
+    },
     "color": "gris oscuro",
     "material": "ratán de plástico exterior",
-    "styleTags": ["outdoor", "dark", "mediterranean", "terrace"],
-    "roomTags": ["terrace", "outdoor", "garden"],
-    "useCases": ["staging", "render", "tour", "hotspot", "product-pack"],
+    "styleTags": [
+      "outdoor",
+      "dark",
+      "mediterranean",
+      "terrace"
+    ],
+    "roomTags": [
+      "terrace",
+      "outdoor",
+      "garden"
+    ],
+    "useCases": [
+      "staging",
+      "render",
+      "tour",
+      "hotspot",
+      "product-pack"
+    ],
     "licenseType": "authorized-commercial-demo",
     "rightsStatus": "authorized-commercial",
     "commercialUseAllowed": true,
@@ -558,7 +886,12 @@
     "optimized": false,
     "createdForDemo": true,
     "demoScene": "empty-apartment-to-furnished",
-    "recommendedFor": ["inmobiliarias", "promotoras", "interioristas", "terrazas"],
+    "recommendedFor": [
+      "inmobiliarias",
+      "promotoras",
+      "interioristas",
+      "terrazas"
+    ],
     "notes": "Primer asset real importado manualmente para prueba interna autorizada del Decor Asset Lab."
   }
 ]

@@ -1,0 +1,66 @@
+{
+  "_comment": "TEMPLATE DE METADATA PARA INGESTA MANUAL DE ASSET 3D",
+  "_instructions": "1. Copia este archivo. 2. Rellena todos los campos. 3. Guarda como {id}.json. 4. Ejecuta: npm run ingest -- --metadata path/to/tu-asset.json",
+  "_required": "id, brand, productName, category, sku, modelPath, previewPath, format, licenseType, qaStatus",
+
+  "id": "marca-producto-categoria-color-sku",
+  "brand": "IKEA",
+  "brandPartner": "IKEA",
+  "productName": "NOMBRE DEL PRODUCTO",
+  "collection": "COLECCION",
+  "category": "chair",
+  "subcategory": "armchair",
+  "sku": "SKU-INTERNO-001",
+  "externalSku": "SKU-EXTERNO-DE-MARCA",
+  "variantGroup": "nombre-grupo-variante",
+  "variantName": "nombre-variante-color-material",
+  "productUrl": "https://www.marca.com/producto",
+  "sourceUrl": "https://www.marca.com/producto",
+  "sourceDomain": "marca.com",
+  "sourceMethod": "manual-authorized-download",
+  "importMethod": "tampermonkey-manual",
+  "capturedAt": "2026-06-07T12:00:00Z",
+
+  "modelPath": "assets/ikea/chairs/nombre-producto.glb",
+  "previewPath": "previews/_placeholder/demo-preview.svg",
+  "format": "glb",
+  "fileSizeMb": 0.0,
+  "hasRealModel": false,
+  "isPlaceholder": true,
+
+  "dimensions": {
+    "width": 0,
+    "height": 0,
+    "depth": 0,
+    "unit": "cm"
+  },
+
+  "color": "color principal",
+  "material": "material principal",
+  "styleTags": ["scandinavian", "minimalist"],
+  "roomTags": ["living-room", "bedroom"],
+  "useCases": ["staging", "render", "tour"],
+
+  "licenseType": "authorized-commercial-demo",
+  "rightsStatus": "authorized-commercial",
+  "commercialUseAllowed": true,
+  "redistributionAllowed": false,
+  "resaleAllowed": false,
+  "brandUsageAllowed": true,
+  "attributionRequired": false,
+  "permissionDocumentRef": "permissions/README.md",
+  "permissionScope": "internal-premium-demo",
+  "permissionExpiresAt": null,
+
+  "qaStatus": "pending",
+  "qualityScore": 0,
+  "modelOpens": false,
+  "scaleChecked": false,
+  "texturesChecked": false,
+  "optimized": false,
+  "createdForDemo": false,
+  "demoScene": "",
+  "recommendedFor": ["inmobiliarias", "promotoras", "interioristas"],
+
+  "notes": "Notas sobre el asset, origen, estado, o tareas pendientes."
+}

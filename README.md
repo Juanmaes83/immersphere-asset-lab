@@ -97,11 +97,45 @@ immersphere-asset-lab/
 
 ```bash
 # Validar manifest
-node scripts/validate-manifest.js
+npm run check
+
+# Ingestar asset real desde metadata JSON
+npm run ingest -- --metadata path/to/asset.json
+
+# Preflight de seguridad antes de commit
+npm run preflight
 
 # Iniciar visor local (servidor estático)
 npm start
 ```
+
+---
+
+## Manual Asset Ingestion
+
+Este repositorio **no guarda archivos GLB en Git**. Los GLB viven localmente (o en storage autorizado futuro).
+
+Para añadir un asset real al catálogo:
+
+1. **Colocar el GLB** en `assets/{brand}/{category}/` (ej. `assets/ikea/chairs/`).
+2. **Crear metadata JSON** copiando `templates/asset-metadata.template.json`.
+3. **Ejecutar ingesta:**
+   ```bash
+   npm run ingest -- --metadata path/to/tu-asset.json
+   ```
+4. **Validar:**
+   ```bash
+   npm run check
+   npm run preflight
+   ```
+5. **Probar viewer:**
+   ```bash
+   npm start
+   # Abrir http://localhost:3456/viewer/
+   ```
+6. **Commitear solo metadata/código/documentación.** El GLB nunca entra en Git.
+
+Documentación completa: [`docs/manual-ingestion.md`](docs/manual-ingestion.md)
 
 ---
 

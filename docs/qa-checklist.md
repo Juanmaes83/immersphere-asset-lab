@@ -73,6 +73,25 @@
 
 ---
 
+## Manual Ingestion QA
+
+Antes de considerar un asset como "ingestado correctamente", verifica:
+
+- [ ] **Nombre limpio.** El archivo GLB sigue el naming estándar (`brand-product-category-color.glb`).
+- [ ] **SKU correcto.** El `sku` y `externalSku` coinciden con el catálogo de la marca.
+- [ ] **Categoría correcta.** `category` y `subcategory` coinciden con la taxonomía ICS.
+- [ ] **Ruta correcta.** El GLB está en `assets/{brand}/{category}/` y el `modelPath` refleja eso.
+- [ ] **GLB abre en viewer.** `npm start` → http://localhost:3456/viewer/ → el modelo se carga en 3D.
+- [ ] **Escala comprobada.** Las dimensiones del manifest coinciden con las del producto real.
+- [ ] **Licencia registrada.** `licenseType`, `commercialUseAllowed` y permisos booleanos están configurados.
+- [ ] **Permiso referenciado.** `permissionDocumentRef` apunta a un documento existente.
+- [ ] **No trackeado por Git.** `git ls-files | grep -i '\.glb'` devuelve vacío.
+- [ ] **Manifest válido.** `npm run check` pasa sin errores.
+- [ ] **Preflight OK.** `npm run preflight` pasa sin errores críticos.
+- [ ] **Commit limpio.** Solo se commitean manifest, código y docs. El GLB queda fuera.
+
+---
+
 ## Rechazo
 
 Si el asset NO pasa QA:

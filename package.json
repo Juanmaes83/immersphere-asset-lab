@@ -7,7 +7,9 @@
   "scripts": {
     "start": "node scripts/serve.js",
     "validate": "node scripts/validate-manifest.js",
-    "check": "node scripts/validate-manifest.js"
+    "check": "node scripts/validate-manifest.js",
+    "ingest": "node scripts/ingest-asset.js",
+    "preflight": "node scripts/preflight-assets.js"
   },
   "keywords": [
     "immersphere",
