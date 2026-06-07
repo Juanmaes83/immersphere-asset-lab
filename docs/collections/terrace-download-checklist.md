@@ -1,8 +1,14 @@
 # Checklist de Descarga · Terraza Mediterránea Premium
 
+## ✅ ESTADO: COMPLETO
+
+Todos los 10 assets de la colección **Terraza Mediterránea Premium** han sido descargados e ingeridos.
+
+---
+
 ## Instrucciones generales
 
-Esta guía sirve para descargar manualmente los 8 assets IKEA restantes de la colección **Terraza Mediterránea Premium**.
+Esta guía documenta el proceso usado para descargar manualmente los 8 assets IKEA restantes de la colección.
 
 **Reglas de oro:**
 
@@ -15,16 +21,18 @@ Esta guía sirve para descargar manualmente los 8 assets IKEA restantes de la co
 
 ## Tabla de descarga
 
-| # | Pieza | Búsqueda IKEA sugerida | Categoría | Carpeta destino | Metadata template | Criterio visual | Prioridad | Estado |
-|---|---|---|---|---|---|---|---|---|
-| 3 | Mesa exterior principal | "ÄPPLARÖ mesa exterior" / "BONDHOLMEN mesa" | `table` | `assets/ikea/tables/` | `pending-main-outdoor-table.metadata.json` | Madera acacia o gris oscuro, 4-6 comensales, superficie limpia | Alta | ⏳ |
-| 4 | Mesa auxiliar | "ÄPPLARÖ mesa auxiliar" / "KROKHOLMEN mesa" | `side-table` | `assets/ikea/side-tables/` | `pending-side-table.metadata.json` | Pequeña, estable, combinable con sillas | Media | ⏳ |
-| 5 | Sofá / lounge exterior | "ÄPPLARÖ sofá exterior" / "JUTHOLMEN sofá" | `lounge` | `assets/ikea/lounge/` | `pending-outdoor-lounge.metadata.json` | 2-3 plazas, cojines gruesos, proporciones bajas | Alta | ⏳ |
-| 6 | Lámpara exterior | "SOLVINDEN lámpara solar" / "LEDBERG guirnalda" | `lighting` | `assets/ikea/lighting/` | `pending-ambient-lamp.metadata.json` | Luz cálida, diseño simple, resistente a exterior | Media | ⏳ |
-| 7 | Alfombra exterior | "MORUM alfombra exterior" / "HÖLLVIKEN alfombra" | `rug` | `assets/ikea/rugs/` | `pending-outdoor-rug.metadata.json` | Textura plana, color natural o terracota, bajo perfil | Media | ⏳ |
-| 8 | Macetero / jardinera | "GRÄSLÖK maceta" / "SOCKER macetero" | `planter` | `assets/ikea/planters/` | `pending-planter.metadata.json` | Forma simple, material terracota/metal/negro, con planta | Media | ⏳ |
-| 9 | Cojín / textil exterior | "Kuddarna cojín" / "Järpön cojín" | `textile` | `assets/ikea/textile/` | `pending-outdoor-textile.metadata.json` | Cojín grueso, color tierra o terracota, con costuras | Baja | ⏳ |
-| 10 | Decoración / bandeja / accesorio | "ROMANTISK bandeja" / "SOMMARVIBBAR" | `decor` | `assets/ikea/decor/` | `pending-decor-accessory.metadata.json` | Pequeño detalle: bandeja, vela, jarrón. No dominante | Baja | ⏳ |
+| # | Pieza | Asset real | Categoría | Carpeta destino | Estado | Notas |
+|---|---|---|---|---|---|---|
+| 1 | Silla exterior principal | VITTSKÄR | `chair` | `assets/ikea/chairs/` | ✅ | Ingerido en fase anterior |
+| 2 | Sillón exterior secundario | VÄSMAN | `chair` | `assets/ikea/chairs/` | ✅ | Ingerido en fase anterior |
+| 3 | Mesa exterior principal | NÄMMARÖ mesa jardín | `table` | `assets/ikea/tables/` | ✅ | Ingerido |
+| 4 | Mesa auxiliar | HÅKANSKÄR mesa centro | `side-table` | `assets/ikea/side-tables/` | ✅ | Ingerido |
+| 5 | Sofá / lounge exterior | NÄMMARÖ sofá 2 plazas | `lounge` | `assets/ikea/lounge/` | ✅ | Ingerido |
+| 6 | Lámpara exterior | SOLVINDEN lámpara solar | `lighting` | `assets/ikea/lighting/` | ✅ | Ingerido |
+| 7 | Alfombra exterior | MORUM alfombra | `rug` | `assets/ikea/rugs/` | ✅ | Ingerido |
+| 8 | Macetero / jardinera | STJÄRNANIS jardinera | `planter` | `assets/ikea/planters/` | ✅ | Ingerido |
+| 9 | Cojín / textil exterior | HAVSTEN cojín | `textile` | `assets/ikea/textile/` | ✅ | Ingerido |
+| 10 | Decoración / bandeja / accesorio | SJÄLSLIGT adorno juego 3 | `decor` | `assets/ikea/decor/` | ✅ | Ingerido |
 
 ---
 

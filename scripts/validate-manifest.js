@@ -28,7 +28,8 @@ const REQUIRED_FIELDS = [
 const VALID_CATEGORIES = [
   'sofa', 'armchair', 'coffee-table', 'dining-table', 'chair',
   'bed', 'wardrobe', 'lamp', 'rug', 'decor', 'shelf',
-  'kitchen', 'bathroom', 'office', 'textile', 'other'
+  'kitchen', 'bathroom', 'office', 'textile', 'other',
+  'table', 'side-table', 'lounge', 'lighting', 'planter'
 ];
 
 const VALID_FORMATS = ['glb', 'gltf', 'fbx', 'obj', 'usdz', 'blend'];

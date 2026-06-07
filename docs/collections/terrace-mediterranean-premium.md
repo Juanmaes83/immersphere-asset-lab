@@ -33,16 +33,33 @@ Crear una escena exterior que:
 |---|---|---|---|---|---|---|
 | 1 | **Silla exterior principal** | Asiento principal de comedor exterior | Alta | `chair` | `assets/ikea/chairs/` | ✅ VITTSKÄR |
 | 2 | **Sillón exterior secundario** | Silla de apoyo o para rincón de lectura | Alta | `chair` | `assets/ikea/chairs/` | ✅ VÄSMAN |
-| 3 | **Mesa exterior principal** | Mesa de comedor para 4-6 personas | Alta | `table` | `assets/ikea/tables/` | ⏳ Pendiente |
-| 4 | **Mesa auxiliar** | Apoyo para bebidas, libros, plantas | Media | `side-table` | `assets/ikea/side-tables/` | ⏳ Pendiente |
-| 5 | **Sofá / lounge exterior** | Zona de descanso y conversación | Alta | `lounge` | `assets/ikea/lounge/` | ⏳ Pendiente |
-| 6 | **Lámpara exterior** | Iluminación de ambiente al atardecer | Media | `lighting` | `assets/ikea/lighting/` | ⏳ Pendiente |
-| 7 | **Alfombra exterior** | Define zona de estar, aporta calidez | Media | `rug` | `assets/ikea/rugs/` | ⏳ Pendiente |
-| 8 | **Macetero / jardinera** | Vegetación, verticalidad, vida | Media | `planter` | `assets/ikea/planters/` | ⏳ Pendiente |
-| 9 | **Cojín / textil exterior** | Confort, color, personalización | Baja | `textile` | `assets/ikea/textile/` | ⏳ Pendiente |
-| 10 | **Decoración / bandeja / accesorio** | Detalle que humaniza la escena | Baja | `decor` | `assets/ikea/decor/` | ⏳ Pendiente |
+| 3 | **Mesa exterior principal** | Mesa de comedor para 4-6 personas | Alta | `table` | `assets/ikea/tables/` | ✅ NÄMMARÖ |
+| 4 | **Mesa auxiliar** | Apoyo para bebidas, libros, plantas | Media | `side-table` | `assets/ikea/side-tables/` | ✅ HÅKANSKÄR |
+| 5 | **Sofá / lounge exterior** | Zona de descanso y conversación | Alta | `lounge` | `assets/ikea/lounge/` | ✅ NÄMMARÖ |
+| 6 | **Lámpara exterior** | Iluminación de ambiente al atardecer | Media | `lighting` | `assets/ikea/lighting/` | ✅ SOLVINDEN |
+| 7 | **Alfombra exterior** | Define zona de estar, aporta calidez | Media | `rug` | `assets/ikea/rugs/` | ✅ MORUM |
+| 8 | **Macetero / jardinera** | Vegetación, verticalidad, vida | Media | `planter` | `assets/ikea/planters/` | ✅ STJÄRNANIS |
+| 9 | **Cojín / textil exterior** | Confort, color, personalización | Baja | `textile` | `assets/ikea/textile/` | ✅ HAVSTEN |
+| 10 | **Decoración / bandeja / accesorio** | Detalle que humaniza la escena | Baja | `decor` | `assets/ikea/decor/` | ✅ SJÄLSLIGT |
 
-**Cobertura actual: 2 / 10 assets reales.**
+**Cobertura actual: 10 / 10 assets reales. ✅ Colección completa.**
+
+---
+
+## Inventario final
+
+| id | Producto | Categoría | modelPath | previewPath | QA | Uso en escena |
+|---|---|---|---|---|---|---|
+| `ikea-vittskar-armchair-outdoor-dark-grey-20575167` | VITTSKÄR silla con reposabrazos | `chair` | `assets/ikea/chairs/...` | `previews/ikea/chairs/...` | pending | Asiento principal |
+| `ikea-vasman-armchair-outdoor-brown` | VÄSMAN silla con reposabrazos | `chair` | `assets/ikea/chairs/...` | `previews/ikea/chairs/...` | pending | Silla de apoyo |
+| `ikea-nammaro-garden-table-light-brown` | NÄMMARÖ mesa jardín | `table` | `assets/ikea/tables/...` | `previews/ikea/tables/...` | pending | Mesa de comedor |
+| `ikea-hakanskar-outdoor-coffee-table-light-brown` | HÅKANSKÄR mesa de centro | `side-table` | `assets/ikea/side-tables/...` | `previews/ikea/side-tables/...` | pending | Mesa auxiliar |
+| `ikea-nammaro-2-seat-outdoor-sofa-light-brown-beige-grey` | NÄMMARÖ sofá 2 plazas | `lounge` | `assets/ikea/lounge/...` | `previews/ikea/lounge/...` | pending | Zona de descanso |
+| `ikea-solvinden-solar-floor-lamp-outdoor-beige` | SOLVINDEN lámpara solar | `lighting` | `assets/ikea/lighting/...` | `previews/ikea/lighting/...` | pending | Iluminación ambiente |
+| `ikea-morum-indoor-outdoor-rug-beige` | MORUM alfombra | `rug` | `assets/ikea/rugs/...` | `previews/ikea/rugs/...` | pending | Define zona de estar |
+| `ikea-stjarnanis-outdoor-planter-acacia-90612029` | STJÄRNANIS jardinera | `planter` | `assets/ikea/planters/...` | `previews/ikea/planters/...` | pending | Vegetación y vida |
+| `ikea-havsten-outdoor-back-seat-cushion-beige-90542499` | HAVSTEN cojín | `textile` | `assets/ikea/textile/...` | `previews/ikea/textile/...` | pending | Confort y color |
+| `ikea-sjalsligt-decoration-set-of-3` | SJÄLSLIGT adorno juego 3 | `decor` | `assets/ikea/decor/...` | `previews/ikea/decor/...` | pending | Detalle humanizador |
 
 ---
 
