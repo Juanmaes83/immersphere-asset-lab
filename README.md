@@ -186,15 +186,46 @@ Primera colección comercial del **Decor Asset Lab**: un set de 10 assets IKEA p
 
 **Objetivo:** preparar assets 3D autorizados para la demo comercial *"Piso vacío → Piso amueblado con catálogo IKEA"*.
 
-**Cobertura actual:** 2 / 10 assets reales
+**Cobertura actual:** ✅ 10 / 10 assets reales completados
 - ✅ VITTSKÄR — silla exterior principal
 - ✅ VÄSMAN — sillón exterior secundario
-- ⏳ 8 assets pendientes: mesa, mesa auxiliar, lounge, lámpara, alfombra, macetero, cojín, decoración
+- ✅ NÄMMARÖ — mesa de jardín
+- ✅ HÅKANSKÄR — mesa de centro exterior
+- ✅ NÄMMARÖ — sofá de 2 plazas exterior
+- ✅ SOLVINDEN — lámpara solar exterior
+- ✅ MORUM — alfombra interior/exterior
+- ✅ STJÄRNANIS — jardinera exterior
+- ✅ HAVSTEN — cojín exterior
+- ✅ SJÄLSLIGT — adorno juego de 3
 
 **Documentación:**
 - [`docs/collections/terrace-mediterranean-premium.md`](docs/collections/terrace-mediterranean-premium.md) — Visión, narrativa y set completo.
 - [`docs/collections/terrace-download-checklist.md`](docs/collections/terrace-download-checklist.md) — Checklist de descarga manual desde IKEA.
 - [`examples/terrace-mediterranean-premium-intake/`](examples/terrace-mediterranean-premium-intake/) — Plantillas de metadata listas para rellenar.
+
+---
+
+## Commercial demo: Terrace Mediterranean Premium
+
+Demo comercial interactiva que muestra cómo un espacio vacío se transforma en una terraza mediterránea premium amueblada con productos reales de catálogo autorizado.
+
+**URL local:**
+```bash
+npm run start
+# → http://localhost:3456/demos/terrace-mediterranean-premium/
+```
+
+**Qué incluye la demo:**
+- Landing premium con hero, before/after conceptual, features y CTAs.
+- Grid de 10 assets reales con previews, badges y botón "Ver en 3D".
+- Modal 3D interactivo con `model-viewer` por cada producto.
+- Tabla comercial con función en escena, marca, estado y uso recomendado.
+- Paquetes de servicio sugeridos (Basic, Premium, Developer, Brand).
+- CTA final para solicitar staging o integrar marca.
+
+**Documentación comercial:**
+- [`docs/commercial/terrace-mediterranean-premium-dossier.md`](docs/commercial/terrace-mediterranean-premium-dossier.md) — Dossier de venta completo.
+- [`docs/commercial/terrace-product-list.md`](docs/commercial/terrace-product-list.md) — Listado técnico-comercial de los 10 productos.
 
 ---
 

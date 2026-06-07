@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "start": "node scripts/serve.js",
+    "demo": "node scripts/serve.js",
     "validate": "node scripts/validate-manifest.js",
     "check": "node scripts/validate-manifest.js",
     "ingest": "node scripts/ingest-asset.js",

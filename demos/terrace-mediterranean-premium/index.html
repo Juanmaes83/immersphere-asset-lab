@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Terraza Mediterránea Premium · Decor Asset Lab by Immersphere</title>
+  <link rel="stylesheet" href="styles.css">
+  <script type="module" src="https://unpkg.com/@google/model-viewer@3.5.0/dist/model-viewer.min.js"></script>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="demo-header">
+    <div class="header-inner">
+      <div class="logo-mark">Immersphere <span>Asset Lab</span></div>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="#coleccion">Colección</a></li>
+          <li><a href="#listado">Productos</a></li>
+          <li><a href="#paquetes">Paquetes</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-inner">
+        <div class="hero-eyebrow">Decor Asset Lab · Demo Comercial</div>
+        <h1 class="hero-title">
+          Piso vacío<br>
+          <em>→ Terraza mediterránea premium</em>
+        </h1>
+        <p class="hero-subtitle">
+          Amueblamos espacios digitales con productos reales de catálogo autorizado.
+          Cada pieza es medible, visualizable en 3D y lista para integrar en tu propuesta comercial.
+        </p>
+        <p class="hero-claim">Una demo de Decor Asset Lab by Immersphere.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#coleccion">Ver colección</a>
+          <a class="btn btn-secondary" href="#listado">Explorar productos 3D</a>
+          <a class="btn btn-secondary" href="#contacto">Solicitar staging con catálogo real</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Before / After -->
+    <section class="before-after">
+      <div class="section-inner">
+        <h2 class="section-title">La transformación</h2>
+        <div class="before-after-grid">
+          <div class="ba-card">
+            <div class="ba-icon">◻</div>
+            <h3>Antes: terraza vacía</h3>
+            <p>
+              Espacio sin definir. Superficie vacía que no genera emoción ni ayuda a vender.
+              El comprador no se imagina vivir ahí. La propiedad pierde valor percibido.
+            </p>
+          </div>
+          <div class="ba-card after">
+            <div class="ba-icon">◈</div>
+            <h3>Después: terraza amueblada</h3>
+            <p>
+              Terraza mediterránea premium amueblada con productos reales de catálogo IKEA autorizado.
+              Cada pieza tiene SKU, dimensiones y modelo 3D verificable.
+            </p>
+            <div class="ba-mini-grid" id="ba-mini-grid"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features">
+      <div class="section-inner">
+        <h2 class="section-title">Qué demostramos</h2>
+        <div class="features-grid">
+          <div class="feature-item">
+            <div class="feature-icon">🛋</div>
+            <h4>Productos reales de catálogo</h4>
+            <p>Assets 3D extraídos de fichas de producto reales, con SKU, dimensiones y materiales verificados.</p>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">🔄</div>
+            <h4>Visualización 3D interactiva</h4>
+            <p>Cada producto se puede rotar, acercar e inspeccionar en el navegador sin plugins.</p>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">🏠</div>
+            <h4>Staging para venta inmobiliaria</h4>
+            <p>Transformamos pisos vacíos en espacios amueblados aspiracionales que aceleran la decisión de compra.</p>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">📋</div>
+            <h4>Dossier de mobiliario completo</h4>
+            <p>Listado comercial con función de cada pieza, marca, material y recomendación de uso.</p>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">📐</div>
+            <h4>Producto medible y reutilizable</h4>
+            <p>Una vez creado, el asset se reutiliza en renders, tours, campañas y configuradores sin coste adicional.</p>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">✅</div>
+            <h4>Catálogo autorizado</h4>
+            <p>Todos los assets operan bajo licencia de uso comercial demo autorizado por la marca.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Collection Grid -->
+    <section class="collection" id="coleccion">
+      <div class="section-inner">
+        <h2 class="section-title">Colección de 10 assets</h2>
+        <p class="text-center" style="color:var(--warm-grey);max-width:600px;margin:0 auto;">
+          Set completo de mobiliario exterior para construir una terraza mediterránea premium.
+          Todos los modelos son reales, con preview generado y listos para integrar.
+        </p>
+        <div class="collection-grid" id="collection-grid">
+          <!-- Rendered by app.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Product Table -->
+    <section class="product-table" id="listado">
+      <div class="section-inner">
+        <h2 class="section-title">Listado de productos</h2>
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Producto</th>
+                <th>Categoría</th>
+                <th>Función en escena</th>
+                <th>Marca</th>
+                <th>Color / Material</th>
+                <th>GLB</th>
+                <th>Preview</th>
+                <th>Uso recomendado</th>
+              </tr>
+            </thead>
+            <tbody id="products-tbody">
+              <!-- Rendered by app.js -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Packages -->
+    <section class="packages" id="paquetes">
+      <div class="section-inner">
+        <h2 class="section-title">Qué puede comprar un cliente</h2>
+        <div class="packages-grid">
+          <div class="package-card">
+            <h4>Decor Staging Basic</h4>
+            <p>Una estancia amueblada con 5-8 assets reales de catálogo, previews y listado de productos.</p>
+            <ul class="package-list">
+              <li>✓ Selección de assets por estancia</li>
+              <li>✓ Previews de alta calidad</li>
+              <li>✓ Listado comercial en PDF</li>
+              <li>✓ 1 revisión incluida</li>
+            </ul>
+          </div>
+          <div class="package-card featured">
+            <div class="package-tag">Más demandado</div>
+            <h4>Decor Staging Premium</h4>
+            <p>Terraza, salón o dormitorio completamente amueblado con 10-15 assets, dossier y landing de presentación.</p>
+            <ul class="package-list">
+              <li>✓ Todo lo de Basic</li>
+              <li>✓ Landing demo interactiva</li>
+              <li>✓ Visualizador 3D por producto</li>
+              <li>✓ Dossier de mobiliario premium</li>
+              <li>✓ 3 revisiones incluidas</li>
+            </ul>
+          </div>
+          <div class="package-card">
+            <h4>Developer Showroom Decor</h4>
+            <p>Promoción completa: varias tipologías amuebladas con catálogo real y tour virtual con hotspots de producto.</p>
+            <ul class="package-list">
+              <li>✓ Múltiples estancias / tipologías</li>
+              <li>✓ Tour virtual interactivo</li>
+              <li>✓ Hotspots vinculados a SKU</li>
+              <li>✓ Campaña de venta lista</li>
+            </ul>
+          </div>
+          <div class="package-card">
+            <h4>Brand Catalog Integration</h4>
+            <p>Tu marca de mobiliario integrada en el catálogo Immersphere con assets 3D autorizados y visibilidad comercial.</p>
+            <ul class="package-list">
+              <li>✓ Ingesta de catálogo 3D</li>
+              <li>✓ Previews y QA por modelo</li>
+              <li>✓ Distribución en demos comerciales</li>
+              <li>✓ Métricas de uso</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Final -->
+    <section class="cta-final" id="contacto">
+      <div class="section-inner">
+        <h2>¿Tienes una vivienda vacía, una promoción o una marca de mobiliario?</h2>
+        <p>
+          Convertimos espacios vacíos en experiencias amuebladas con productos reales,
+          medibles y comprables. Empecemos con una propuesta.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="mailto:hello@immersphere.studio">Solicitar staging con catálogo real</a>
+          <a class="btn btn-secondary" href="#">Quiero integrar mi marca</a>
+          <a class="btn btn-secondary" href="#listado">Ver dossier</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="demo-footer">
+    <p>© 2026 Immersphere Studio · Decor Asset Lab · Demo interno autorizado</p>
+    <p style="margin-top:0.4rem;">Los assets 3D mostrados pertenecen a sus respectivas marcas y se utilizan bajo licencia de demo comercial autorizada.</p>
+  </footer>
+
+  <!-- Modal -->
+  <div id="modal-overlay" class="modal-overlay" hidden>
+    <div class="modal-card">
+      <button id="modal-close" class="modal-close" aria-label="Cerrar">&times;</button>
+      <div class="modal-preview" id="modal-preview"></div>
+      <div class="modal-details" id="modal-details"></div>
+    </div>
+  </div>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
