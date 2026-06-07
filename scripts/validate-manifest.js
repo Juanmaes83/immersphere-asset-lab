@@ -35,7 +35,7 @@ const VALID_FORMATS = ['glb', 'gltf', 'fbx', 'obj', 'usdz', 'blend'];
 
 const VALID_LICENSES = [
   'unknown', 'personal-only', 'editorial', 'commercial-demo',
-  'authorized-commercial', 'internal', 'expired'
+  'authorized-commercial-demo', 'authorized-commercial', 'internal', 'expired'
 ];
 
 const VALID_QA = ['pending', 'in-review', 'approved', 'rejected', 'deprecated'];

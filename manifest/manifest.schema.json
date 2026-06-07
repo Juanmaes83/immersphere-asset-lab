@@ -169,6 +169,7 @@
           "personal-only",
           "editorial",
           "commercial-demo",
+          "authorized-commercial-demo",
           "authorized-commercial",
           "internal",
           "expired"
