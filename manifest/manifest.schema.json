@@ -1,0 +1,242 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://immersphere.local/schemas/asset-manifest",
+  "title": "Immersphere Asset Manifest",
+  "description": "Schema de validación para catálogos de assets 3D autorizados",
+  "type": "array",
+  "minItems": 1,
+  "items": {
+    "type": "object",
+    "required": [
+      "id",
+      "brand",
+      "productName",
+      "category",
+      "sku",
+      "modelPath",
+      "previewPath",
+      "format",
+      "licenseType",
+      "qaStatus"
+    ],
+    "properties": {
+      "id": {
+        "type": "string",
+        "description": "Identificador único interno (UUID o slug)",
+        "pattern": "^[a-z0-9-]+$",
+        "examples": ["ikea-demo-001"]
+      },
+      "brand": {
+        "type": "string",
+        "description": "Marca del producto",
+        "examples": ["IKEA"]
+      },
+      "productName": {
+        "type": "string",
+        "description": "Nombre legible del producto",
+        "minLength": 1
+      },
+      "collection": {
+        "type": "string",
+        "description": "Colección o serie a la que pertenece",
+        "default": ""
+      },
+      "category": {
+        "type": "string",
+        "description": "Categoría principal (taxonomía ICS simplificada)",
+        "enum": [
+          "sofa",
+          "armchair",
+          "coffee-table",
+          "dining-table",
+          "chair",
+          "bed",
+          "wardrobe",
+          "lamp",
+          "rug",
+          "decor",
+          "shelf",
+          "kitchen",
+          "bathroom",
+          "office",
+          "textile",
+          "other"
+        ]
+      },
+      "subcategory": {
+        "type": "string",
+        "description": "Subcategoría opcional",
+        "default": ""
+      },
+      "sku": {
+        "type": "string",
+        "description": "SKU interno Immersphere (único)",
+        "minLength": 1
+      },
+      "externalSku": {
+        "type": "string",
+        "description": "SKU original de la marca",
+        "default": ""
+      },
+      "productUrl": {
+        "type": "string",
+        "description": "URL pública del producto en la web de la marca",
+        "format": "uri",
+        "default": ""
+      },
+      "sourceUrl": {
+        "type": "string",
+        "description": "URL desde donde se importó el asset",
+        "format": "uri",
+        "default": ""
+      },
+      "modelPath": {
+        "type": "string",
+        "description": "Ruta local o URL del archivo 3D (relativa a la raíz del repo)",
+        "minLength": 1,
+        "examples": ["assets/_placeholder/demo-model.glb"]
+      },
+      "previewPath": {
+        "type": "string",
+        "description": "Ruta local o URL de la preview/thumbnail",
+        "minLength": 1,
+        "examples": ["previews/_placeholder/demo-preview.jpg"]
+      },
+      "format": {
+        "type": "string",
+        "description": "Formato del archivo 3D",
+        "enum": ["glb", "gltf", "fbx", "obj", "usdz", "blend"]
+      },
+      "fileSizeMb": {
+        "type": "number",
+        "description": "Tamaño del archivo en MB",
+        "minimum": 0,
+        "default": 0
+      },
+      "polygonCount": {
+        "type": ["integer", "null"],
+        "description": "Número aproximado de polígonos",
+        "minimum": 0
+      },
+      "textureCount": {
+        "type": ["integer", "null"],
+        "description": "Número de texturas",
+        "minimum": 0
+      },
+      "dimensions": {
+        "type": "object",
+        "description": "Dimensiones del producto en cm",
+        "properties": {
+          "width": { "type": "number" },
+          "height": { "type": "number" },
+          "depth": { "type": "number" },
+          "unit": { "type": "string", "default": "cm" }
+        }
+      },
+      "color": {
+        "type": "string",
+        "description": "Color principal o variante",
+        "default": ""
+      },
+      "material": {
+        "type": "string",
+        "description": "Material principal",
+        "default": ""
+      },
+      "styleTags": {
+        "type": "array",
+        "description": "Tags de estilo",
+        "items": { "type": "string" },
+        "default": []
+      },
+      "roomTags": {
+        "type": "array",
+        "description": "Tags de estancia/ambiente",
+        "items": { "type": "string" },
+        "default": []
+      },
+      "useCases": {
+        "type": "array",
+        "description": "Casos de uso aprobados",
+        "items": { "type": "string" },
+        "default": []
+      },
+      "licenseType": {
+        "type": "string",
+        "description": "Tipo de licencia",
+        "enum": [
+          "unknown",
+          "personal-only",
+          "editorial",
+          "commercial-demo",
+          "authorized-commercial",
+          "internal",
+          "expired"
+        ]
+      },
+      "commercialUseAllowed": {
+        "type": "boolean",
+        "description": "¿Se puede usar en renders comerciales de clientes?",
+        "default": false
+      },
+      "redistributionAllowed": {
+        "type": "boolean",
+        "description": "¿Se puede redistribuir el archivo GLB?",
+        "default": false
+      },
+      "resaleAllowed": {
+        "type": "boolean",
+        "description": "¿Se puede revender como asset pack?",
+        "default": false
+      },
+      "brandUsageAllowed": {
+        "type": "boolean",
+        "description": "¿Se puede usar el nombre/marca en campañas?",
+        "default": false
+      },
+      "attributionRequired": {
+        "type": "boolean",
+        "description": "¿Requiere atribución?",
+        "default": false
+      },
+      "permissionDocumentRef": {
+        "type": "string",
+        "description": "Referencia al documento de autorización (ruta o URL)",
+        "default": ""
+      },
+      "permissionScope": {
+        "type": "string",
+        "description": "Alcance geográfico del permiso",
+        "default": "",
+        "examples": ["spain", "europe", "global"]
+      },
+      "capturedAt": {
+        "type": "string",
+        "description": "Fecha de captura o importación (ISO 8601)",
+        "format": "date-time",
+        "default": ""
+      },
+      "optimizedAt": {
+        "type": ["string", "null"],
+        "description": "Fecha de optimización (ISO 8601)",
+        "format": "date-time"
+      },
+      "qaStatus": {
+        "type": "string",
+        "description": "Estado de revisión de calidad",
+        "enum": ["pending", "in-review", "approved", "rejected", "deprecated"]
+      },
+      "qaNotes": {
+        "type": "string",
+        "description": "Notas de QA",
+        "default": ""
+      },
+      "notes": {
+        "type": "string",
+        "description": "Notas generales",
+        "default": ""
+      }
+    },
+    "additionalProperties": false
+  }
+}

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Immersphere Asset Lab · Viewer</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="app-header">
+    <div class="header-inner">
+      <h1 class="logo">
+        <span class="logo-accent">Immersphere</span> Asset Lab
+      </h1>
+      <span class="badge">Internal Premium</span>
+    </div>
+  </header>
+
+  <main class="app-main">
+    <aside class="filters-panel">
+      <h2 class="panel-title">Filters</h2>
+
+      <div class="filter-group">
+        <label for="search-input" class="filter-label">Search</label>
+        <input type="text" id="search-input" class="filter-input" placeholder="Sofa, lamp, table...">
+      </div>
+
+      <div class="filter-group">
+        <label class="filter-label">Category</label>
+        <select id="category-filter" class="filter-select">
+          <option value="">All categories</option>
+          <option value="sofa">Sofas</option>
+          <option value="armchair">Armchairs</option>
+          <option value="coffee-table">Coffee Tables</option>
+          <option value="dining-table">Dining Tables</option>
+          <option value="chair">Chairs</option>
+          <option value="bed">Beds</option>
+          <option value="wardrobe">Wardrobes</option>
+          <option value="lamp">Lamps</option>
+          <option value="rug">Rugs</option>
+          <option value="decor">Decor</option>
+          <option value="shelf">Shelves</option>
+          <option value="kitchen">Kitchen</option>
+          <option value="bathroom">Bathroom</option>
+          <option value="office">Office</option>
+          <option value="textile">Textiles</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label class="filter-label">Room</label>
+        <select id="room-filter" class="filter-select">
+          <option value="">All rooms</option>
+          <option value="living-room">Living Room</option>
+          <option value="bedroom">Bedroom</option>
+          <option value="dining-room">Dining Room</option>
+          <option value="kitchen">Kitchen</option>
+          <option value="bathroom">Bathroom</option>
+          <option value="office">Office</option>
+          <option value="hallway">Hallway</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label class="filter-label">Style</label>
+        <select id="style-filter" class="filter-select">
+          <option value="">All styles</option>
+          <option value="scandinavian">Scandinavian</option>
+          <option value="minimalist">Minimalist</option>
+          <option value="industrial">Industrial</option>
+          <option value="modern">Modern</option>
+          <option value="vintage">Vintage</option>
+          <option value="bohemian">Bohemian</option>
+          <option value="natural">Natural</option>
+          <option value="cozy">Cozy</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label class="filter-label">License</label>
+        <select id="license-filter" class="filter-select">
+          <option value="">All licenses</option>
+          <option value="authorized-commercial">Authorized Commercial</option>
+          <option value="commercial-demo">Commercial Demo</option>
+          <option value="pending">Pending</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label class="filter-label">QA Status</label>
+        <select id="qa-filter" class="filter-select">
+          <option value="">All statuses</option>
+          <option value="approved">Approved</option>
+          <option value="pending">Pending</option>
+          <option value="in-review">In Review</option>
+          <option value="rejected">Rejected</option>
+        </select>
+      </div>
+
+      <div class="filter-count">
+        <span id="result-count">0</span> assets
+      </div>
+    </aside>
+
+    <section class="catalog-grid" id="catalog-grid">
+      <!-- Cards rendered by app.js -->
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    <p>Immersphere Asset Lab · Internal Use Only · Assets require documented authorization before commercial use</p>
+  </footer>
+
+  <div class="modal-overlay" id="modal-overlay" hidden>
+    <div class="modal-card" id="modal-card">
+      <button class="modal-close" id="modal-close">&times;</button>
+      <div class="modal-preview" id="modal-preview">
+        <div class="placeholder-block">Preview placeholder</div>
+      </div>
+      <div class="modal-details" id="modal-details">
+        <!-- Populated by app.js -->
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
