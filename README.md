@@ -159,6 +159,23 @@ Las cards del viewer pueden mostrar **previews reales** (miniaturas) de los asse
 7. Ejecuta `npm run check` y `npm run preflight`.
 8. Commitea la preview ligera + manifest. **NO commitees el GLB.**
 
+### Generar previews automáticamente
+
+Si tienes Playwright y Chromium instalados:
+
+```bash
+npm run generate-previews
+```
+
+Esto genera previews PNG para todos los assets reales que aún usen placeholder, actualiza el manifest, y deja las imágenes listas para commitear.
+
+Opciones:
+```bash
+npm run generate-previews -- --asset ikea-vittskar-armchair-outdoor-dark-grey-20575167
+npm run generate-previews -- --force
+npm run generate-previews -- --dry-run
+```
+
 Documentación completa: [`docs/preview-generation.md`](docs/preview-generation.md)
 
 ---

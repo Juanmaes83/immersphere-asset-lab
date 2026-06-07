@@ -9,7 +9,9 @@
     "validate": "node scripts/validate-manifest.js",
     "check": "node scripts/validate-manifest.js",
     "ingest": "node scripts/ingest-asset.js",
-    "preflight": "node scripts/preflight-assets.js"
+    "preflight": "node scripts/preflight-assets.js",
+    "generate-previews": "node scripts/generate-previews.js",
+    "previews": "node scripts/generate-previews.js"
   },
   "keywords": [
     "immersphere",
@@ -26,5 +28,8 @@
   "license": "UNLICENSED",
   "engines": {
     "node": ">=18.0.0"
+  },
+  "devDependencies": {
+    "playwright": "^1.60.0"
   }
 }

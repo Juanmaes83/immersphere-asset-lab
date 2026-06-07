@@ -86,9 +86,20 @@ if (!fs.existsSync(MANIFEST_PATH)) {
             fail(`Real asset "${asset.id}": isPlaceholder must be false`);
           }
 
-          // preview check: warn if still using placeholder
+          // preview check
           if (!asset.previewPath || asset.previewPath.includes('placeholder') || asset.previewPath.includes('_placeholder')) {
             warn(`Real asset "${asset.id}" still uses placeholder preview. Generate a real preview and update previewPath.`);
+          } else {
+            const previewFullPath = path.join(ROOT, asset.previewPath);
+            if (!fs.existsSync(previewFullPath)) {
+              fail(`Asset "${asset.id}": previewPath points to missing file: ${asset.previewPath}`);
+            } else {
+              const previewStat = fs.statSync(previewFullPath);
+              const previewKb = previewStat.size / 1024;
+              if (previewKb > 1024) {
+                warn(`Asset "${asset.id}": preview is ${previewKb.toFixed(1)} KB (max recommended 1024 KB). Consider optimizing.`);
+              }
+            }
           }
         } else {
           placeholders++;

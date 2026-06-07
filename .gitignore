@@ -1,8 +1,8 @@
 # Dependencies
 node_modules/
-package-lock.json
 yarn.lock
 pnpm-lock.yaml
+# package-lock.json se commite para reproducibilidad de Playwright
 
 # Environment
 .env
@@ -25,11 +25,14 @@ pnpm-lock.yaml
 /assets/**/*.blend
 
 # Previews pesados (solo thumbnails livianos permitidos)
+# Las previews de assets reales en /previews/ikea/ sí se commitean si son ligeras.
 /previews/**/*.png
 /previews/**/*.jpg
 /previews/**/*.jpeg
 !/previews/_placeholder/*.png
 !/previews/_placeholder/*.jpg
+!/previews/ikea/**/*.png
+!/previews/ikea/**/*.jpg
 
 # Build / temp
 /tmp/

@@ -116,6 +116,94 @@ git commit -m "feat(previews): add real preview for VITTSKÄR"
 
 ---
 
+## Automated preview generation
+
+Si prefieres no generar previews una a una manualmente, puedes usar el generador automático basado en **Playwright**.
+
+### Requisitos
+
+- Node.js ≥ 18
+- Playwright instalado como devDependency (ya en `package.json`)
+- Navegador Chromium instalado para Playwright:
+  ```bash
+  npx playwright install chromium
+  ```
+
+### Generar todas las previews automáticamente
+
+```bash
+npm run generate-previews
+```
+
+Este comando:
+
+1. Lee el manifest.
+2. Detecta assets con `hasRealModel=true` y `isPlaceholder=false`.
+3. Filtra los que usen preview placeholder.
+4. Lanza un servidor local y un navegador headless.
+5. Renderiza cada GLB en `scripts/preview-renderer.html`.
+6. Aplica una cámara consistente (¾ frontal, iluminación neutral).
+7. Captura un screenshot PNG de 1024×1024 px.
+8. Guarda la imagen en `previews/{brand}/{category}/{id}-preview.png`.
+9. Actualiza `previewPath` en el manifest.
+10. Imprime resumen con éxitos, saltos y errores.
+
+### Opciones
+
+| Opción | Descripción |
+|---|---|
+| `--asset <id>` | Genera preview solo para un asset específico. |
+| `--force` | Regenera previews aunque ya existan. |
+| `--dry-run` | Muestra qué haría sin escribir archivos. |
+
+Ejemplos:
+
+```bash
+# Solo VITTSKÄR
+npm run generate-previews -- --asset ikea-vittskar-armchair-outdoor-dark-grey-20575167
+
+# Forzar regeneración
+npm run generate-previews -- --force
+
+# Simular sin escribir
+npm run generate-previews -- --dry-run
+```
+
+### Después de generar
+
+```bash
+npm run check
+npm run preflight
+npm start
+# Abrir http://localhost:3456/viewer/ y verificar cards
+```
+
+### Commitear previews generadas
+
+```bash
+git add manifest/ikea-sample.manifest.json
+git add previews/ikea/chairs/*.png
+# NO hagas:
+# git add assets/**/*.glb
+
+git commit -m "feat(previews): add automated previews for real assets"
+```
+
+> **Las previews PNG ligeras sí pueden commitearse.** Los GLB nunca.
+
+### Si Playwright/Chromium no está instalado
+
+Si ves un error tipo `Could not launch browser`:
+
+```bash
+npm install
+npx playwright install chromium
+```
+
+Si la red no permite descargar Chromium, usa el flujo manual del botón "Generar preview" en el viewer.
+
+---
+
 ## Estructura de carpetas de previews
 
 ```
