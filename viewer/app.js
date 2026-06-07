@@ -115,6 +115,10 @@
       ? `${asset.dimensions.width} × ${asset.dimensions.depth} × ${asset.dimensions.height} ${asset.dimensions.unit}`
       : '—';
 
+    // Build preview area dynamically
+    const previewContainer = document.getElementById('modal-preview');
+    previewContainer.innerHTML = buildModalPreview(asset);
+
     modalDetails.innerHTML = `
       <h2 class="modal-title">${escapeHtml(asset.productName)}</h2>
       <p class="modal-subtitle">${escapeHtml(asset.brand)} · ${escapeHtml(asset.collection || '—')} · SKU: ${escapeHtml(asset.sku)}</p>
@@ -177,6 +181,42 @@
   function closeModal() {
     modalOverlay.hidden = true;
     document.body.style.overflow = '';
+  }
+
+  function buildModalPreview(asset) {
+    if (asset.hasRealModel && asset.modelPath) {
+      const modelUrl = '../' + asset.modelPath;
+      const fallbackId = 'mv-fallback-' + Math.random().toString(36).slice(2, 8);
+      return `
+        <model-viewer
+          src="${escapeHtml(modelUrl)}"
+          alt="${escapeHtml(asset.productName)}"
+          camera-controls
+          auto-rotate
+          auto-rotate-delay="1000"
+          rotation-per-second="30deg"
+          environment-image="neutral"
+          exposure="1"
+          shadow-intensity="1"
+          shadow-softness="0.5"
+          style="width:100%;height:100%;"
+          loading="eager"
+          reveal="auto"
+          onload="document.getElementById('${fallbackId}').classList.add('hidden');"
+          onerror="document.getElementById('${fallbackId}').innerHTML='<div>Failed to load 3D model.<br><small>Check that the GLB exists at ${escapeHtml(modelUrl)}</small></div>';"
+        ></model-viewer>
+        <div id="${fallbackId}" class="model-viewer-fallback">
+          <div>Loading 3D model…<br><small>${escapeHtml(asset.modelPath)}</small></div>
+        </div>
+      `;
+    }
+
+    return `
+      <div class="placeholder-block">
+        Modelo 3D pendiente de importación autorizada
+        <small>${escapeHtml(asset.modelPath || '')}</small>
+      </div>
+    `;
   }
 
   // ── Filters ────────────────────────────────────────────────────
