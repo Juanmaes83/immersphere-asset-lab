@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f8f9fa"/>
+      <stop offset="100%" stop-color="#e9ecef"/>
+    </linearGradient>
+    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M 32 0 L 0 0 0 32" fill="none" stroke="#dee2e6" stroke-width="0.5"/>
+    </pattern>
+  </defs>
+  <rect width="512" height="512" fill="url(#bg)"/>
+  <rect width="512" height="512" fill="url(#grid)"/>
+
+  <!-- 3D wireframe cube -->
+  <g stroke="#495057" stroke-width="1.5" fill="none" opacity="0.6">
+    <path d="M160 200 L240 160 L352 160 L272 200 Z"/>
+    <path d="M160 200 L160 320 L272 360 L272 200"/>
+    <path d="M272 360 L352 320 L352 160"/>
+    <path d="M160 320 L240 280 L352 320"/>
+    <path d="M240 160 L240 280"/>
+    <path d="M240 280 L272 200"/>
+  </g>
+
+  <!-- Wireframe chair shape -->
+  <g stroke="#6c757d" stroke-width="1" fill="none" opacity="0.4">
+    <ellipse cx="256" cy="420" rx="120" ry="16"/>
+    <path d="M180 380 L180 420 M332 380 L332 420 M200 380 L200 430 M312 380 L312 430"/>
+  </g>
+
+  <!-- Label -->
+  <rect x="96" y="440" width="320" height="48" rx="8" fill="#343a40" opacity="0.85"/>
+  <text x="256" y="472" text-anchor="middle" fill="#f8f9fa" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="500" letter-spacing="0.5">
+    Asset Placeholder
+  </text>
+  <text x="256" y="428" text-anchor="middle" fill="#adb5bd" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="400">
+    Preview not available — waiting for real asset
+  </text>
+
+  <!-- Corner markers -->
+  <g stroke="#adb5bd" stroke-width="1.5" fill="none">
+    <path d="M24 48 L24 24 L48 24"/>
+    <path d="M464 24 L488 24 L488 48"/>
+    <path d="M24 464 L24 488 L48 488"/>
+    <path d="M464 488 L488 488 L488 464"/>
+  </g>
+</svg>
