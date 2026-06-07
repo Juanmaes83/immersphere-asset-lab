@@ -176,8 +176,8 @@ for (let i = 0; i < manifest.length; i++) {
       error(`${prefix} dimensions must be an object`);
     } else {
       for (const dimKey of ['width', 'height', 'depth']) {
-        if (item.dimensions[dimKey] !== undefined && typeof item.dimensions[dimKey] !== 'number') {
-          error(`${prefix} dimensions.${dimKey} must be a number`);
+        if (item.dimensions[dimKey] !== undefined && item.dimensions[dimKey] !== null && typeof item.dimensions[dimKey] !== 'number') {
+          error(`${prefix} dimensions.${dimKey} must be a number or null`);
         }
       }
     }

@@ -893,5 +893,80 @@
       "terrazas"
     ],
     "notes": "Primer asset real importado manualmente para prueba interna autorizada del Decor Asset Lab."
+  },
+  {
+    "id": "ikea-vasman-armchair-outdoor-brown",
+    "brand": "IKEA",
+    "brandPartner": "IKEA",
+    "productName": "VÄSMAN silla con reposabrazos exterior",
+    "collection": "VÄSMAN",
+    "category": "chair",
+    "subcategory": "armchair",
+    "sku": "IKEA-VASMAN-BROWN-DEMO",
+    "externalSku": "VASMAN-BROWN-DEMO",
+    "variantGroup": "vasman-armchair",
+    "variantName": "outdoor-brown",
+    "productUrl": "",
+    "sourceUrl": "",
+    "sourceDomain": "ikea.com",
+    "sourceMethod": "manual-authorized-download",
+    "importMethod": "tampermonkey-manual",
+    "capturedAt": "2026-06-07T20:41:03Z",
+    "modelPath": "assets/ikea/chairs/vasman-armchair-outdoor-brown.glb",
+    "previewPath": "previews/_placeholder/demo-preview.svg",
+    "format": "glb",
+    "fileSizeMb": 0.4,
+    "hasRealModel": true,
+    "isPlaceholder": false,
+    "dimensions": {
+      "width": null,
+      "height": null,
+      "depth": null,
+      "unit": "cm"
+    },
+    "color": "marrón",
+    "material": "exterior",
+    "styleTags": [
+      "outdoor",
+      "terrace",
+      "warm"
+    ],
+    "roomTags": [
+      "terrace",
+      "outdoor",
+      "garden"
+    ],
+    "useCases": [
+      "staging",
+      "render",
+      "tour",
+      "hotspot",
+      "product-pack"
+    ],
+    "licenseType": "authorized-commercial-demo",
+    "rightsStatus": "authorized-commercial",
+    "commercialUseAllowed": true,
+    "redistributionAllowed": false,
+    "resaleAllowed": false,
+    "brandUsageAllowed": true,
+    "attributionRequired": false,
+    "permissionDocumentRef": "permissions/README.md",
+    "permissionScope": "internal-premium-demo",
+    "permissionExpiresAt": null,
+    "qaStatus": "pending",
+    "qualityScore": 0,
+    "modelOpens": false,
+    "scaleChecked": false,
+    "texturesChecked": false,
+    "optimized": false,
+    "createdForDemo": true,
+    "demoScene": "empty-apartment-to-furnished",
+    "recommendedFor": [
+      "inmobiliarias",
+      "promotoras",
+      "interioristas",
+      "terrazas"
+    ],
+    "notes": "Segundo asset real importado para validar el pipeline de ingesta manual controlada del Decor Asset Lab."
   }
 ]
