@@ -203,6 +203,15 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
+}
+.card-preview-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 .preview-placeholder {
   display: flex;
@@ -404,6 +413,16 @@ model-viewer {
   color: var(--accent-green);
   border-color: rgba(61,213,152,0.35);
 }
+.badge-preview-real {
+  background: rgba(0,212,255,0.15);
+  color: var(--accent-cyan);
+  border-color: rgba(0,212,255,0.35);
+}
+.badge-preview-pending {
+  background: rgba(245,166,35,0.15);
+  color: var(--accent-orange);
+  border-color: rgba(245,166,35,0.35);
+}
 .modal-details {
   padding: 1.5rem;
 }
@@ -471,6 +490,40 @@ model-viewer {
   font-size: 0.85rem;
   color: var(--text-secondary);
   line-height: 1.6;
+}
+.preview-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.btn-generate-preview {
+  align-self: flex-start;
+  background: var(--accent-cyan);
+  color: var(--bg-primary);
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 0.5rem 1rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+.btn-generate-preview:hover {
+  opacity: 0.85;
+}
+.preview-hint {
+  margin: 0;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+.preview-hint code {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  background: var(--bg-tertiary);
+  padding: 1px 4px;
+  border-radius: 3px;
+  color: var(--accent-cyan);
 }
 
 /* ── Footer ───────────────────────────────────────────────────── */

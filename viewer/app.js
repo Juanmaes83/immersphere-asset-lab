@@ -75,22 +75,48 @@
     }
   }
 
+  function resolvePreviewUrl(asset) {
+    if (!asset.previewPath) return null;
+    return '../' + asset.previewPath;
+  }
+
+  function isPlaceholderPreview(asset) {
+    return !asset.previewPath || asset.previewPath.includes('placeholder') || asset.previewPath.includes('_placeholder');
+  }
+
   function buildCardHtml(asset) {
     const licenseBadge = getLicenseBadge(asset.licenseType);
     const qaBadge = getQaBadge(asset.qaStatus);
     const dim = asset.dimensions
-      ? `${asset.dimensions.width}×${asset.dimensions.depth}×${asset.dimensions.height} ${asset.dimensions.unit}`
+      ? `${asset.dimensions.width ?? '—'}×${asset.dimensions.depth ?? '—'}×${asset.dimensions.height ?? '—'} ${asset.dimensions.unit}`
       : '—';
+    const previewUrl = resolvePreviewUrl(asset);
+    const placeholderPreview = isPlaceholderPreview(asset);
+
+    let previewBadge = '';
+    if (asset.hasRealModel && !placeholderPreview) {
+      previewBadge = '<span class="badge-pill badge-preview-real">Real Preview</span>';
+    } else if (asset.hasRealModel && placeholderPreview) {
+      previewBadge = '<span class="badge-pill badge-preview-pending">Preview pending</span>';
+    }
 
     return `
       <div class="card-preview">
-        <div class="preview-placeholder">
-          <span class="preview-label">${asset.category}</span>
-        </div>
+        ${previewUrl ? `
+          <img class="card-preview-img" src="${escapeHtml(previewUrl)}" alt="${escapeHtml(asset.productName)}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+          <div class="preview-placeholder" style="display:none">
+            <span class="preview-label">${asset.category}</span>
+          </div>
+        ` : `
+          <div class="preview-placeholder">
+            <span class="preview-label">${asset.category}</span>
+          </div>
+        `}
         <div class="card-badges">
           <span class="badge-pill ${licenseBadge.class}">${licenseBadge.label}</span>
           <span class="badge-pill ${qaBadge.class}">${qaBadge.label}</span>
           ${asset.hasRealModel ? '<span class="badge-pill badge-real">Real Model</span>' : ''}
+          ${previewBadge}
         </div>
       </div>
       <div class="card-body">
@@ -167,6 +193,18 @@
         </dl>
       </div>
 
+      <div class="modal-section">
+        <h4>Preview</h4>
+        ${asset.hasRealModel ? `
+          <div class="preview-actions">
+            <button class="btn-generate-preview" id="btn-generate-preview">📸 Generar preview</button>
+            <p class="preview-hint">Orienta el modelo, pulsa el botón y guarda la imagen en <code>previews/ikea/{category}/</code></p>
+          </div>
+        ` : `
+          <p class="preview-hint">Modelo 3D pendiente de importación autorizada. No se puede generar preview sin GLB real.</p>
+        `}
+      </div>
+
       ${asset.notes ? `
       <div class="modal-section">
         <h4>Notes</h4>
@@ -176,11 +214,66 @@
 
     modalOverlay.hidden = false;
     document.body.style.overflow = 'hidden';
+
+    // Attach generate preview handler after modal is in DOM
+    if (asset.hasRealModel) {
+      const btn = document.getElementById('btn-generate-preview');
+      if (btn) {
+        btn.addEventListener('click', () => capturePreview(asset));
+      }
+    }
   }
 
   function closeModal() {
     modalOverlay.hidden = true;
     document.body.style.overflow = '';
+  }
+
+  function capturePreview(asset) {
+    const mv = document.querySelector('model-viewer');
+    if (!mv) {
+      alert('Model viewer not found. Open a real asset first.');
+      return;
+    }
+
+    // Try to get canvas from model-viewer's shadow DOM
+    let canvas = null;
+    try {
+      canvas = mv.shadowRoot.querySelector('canvas');
+    } catch (e) {
+      console.error('Could not access model-viewer canvas:', e);
+    }
+
+    if (!canvas) {
+      alert('Canvas not ready yet. Wait for the 3D model to finish loading, then try again.');
+      return;
+    }
+
+    try {
+      const dataUrl = canvas.toDataURL('image/png');
+      const link = document.createElement('a');
+      const safeName = asset.id.replace(/[^a-z0-9-]/gi, '-').toLowerCase();
+      link.download = `${safeName}-preview.png`;
+      link.href = dataUrl;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+
+      // Show instructions
+      const hint = document.querySelector('.preview-hint');
+      if (hint) {
+        hint.innerHTML = `
+          ✅ Imagen descargada como <strong>${safeName}-preview.png</strong>.<br>
+          Mueve el archivo a:<br>
+          <code>previews/ikea/${escapeHtml(asset.category)}/${safeName}-preview.png</code><br>
+          Luego actualiza <code>previewPath</code> en el manifest y ejecuta <code>npm run check</code>.
+        `;
+        hint.style.color = 'var(--accent-green)';
+      }
+    } catch (e) {
+      alert('Failed to capture preview: ' + e.message);
+      console.error(e);
+    }
   }
 
   function buildModalPreview(asset) {

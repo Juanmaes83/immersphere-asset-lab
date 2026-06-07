@@ -85,6 +85,11 @@ if (!fs.existsSync(MANIFEST_PATH)) {
           if (asset.isPlaceholder !== false) {
             fail(`Real asset "${asset.id}": isPlaceholder must be false`);
           }
+
+          // preview check: warn if still using placeholder
+          if (!asset.previewPath || asset.previewPath.includes('placeholder') || asset.previewPath.includes('_placeholder')) {
+            warn(`Real asset "${asset.id}" still uses placeholder preview. Generate a real preview and update previewPath.`);
+          }
         } else {
           placeholders++;
 

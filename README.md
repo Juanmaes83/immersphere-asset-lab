@@ -139,6 +139,30 @@ Documentación completa: [`docs/manual-ingestion.md`](docs/manual-ingestion.md)
 
 ---
 
+## Asset Previews
+
+Las cards del viewer pueden mostrar **previews reales** (miniaturas) de los assets 3D.
+
+- Si existe una preview real ligera (PNG/JPG/WebP ≤ 512 KB), la card la muestra.
+- Si no existe, la card muestra un **placeholder** con el nombre de la categoría.
+- Los assets reales sin preview muestran el badge **"Preview pending"**.
+- Los assets reales con preview muestran el badge **"Real Preview"**.
+
+### Generar una preview manualmente
+
+1. Abre el viewer local: `npm start` → http://localhost:3456/viewer/
+2. Busca un asset con GLB real (badge "Real Model").
+3. Abre la ficha, orienta el modelo en 3D.
+4. Pulsa **"📸 Generar preview"** — se descarga una imagen PNG.
+5. Mueve la imagen a `previews/{brand}/{category}/`.
+6. Actualiza `previewPath` en el manifest.
+7. Ejecuta `npm run check` y `npm run preflight`.
+8. Commitea la preview ligera + manifest. **NO commitees el GLB.**
+
+Documentación completa: [`docs/preview-generation.md`](docs/preview-generation.md)
+
+---
+
 ## Reglas del repositorio
 
 1. **NO subir assets reales a Git.** Usar `.gitignore` para GLB, GLTF, FBX, OBJ, USDZ, BLEND, ZIP.
