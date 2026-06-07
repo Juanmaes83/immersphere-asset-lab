@@ -12,7 +12,9 @@
     "ingest": "node scripts/ingest-asset.js",
     "preflight": "node scripts/preflight-assets.js",
     "generate-previews": "node scripts/generate-previews.js",
-    "previews": "node scripts/generate-previews.js"
+    "previews": "node scripts/generate-previews.js",
+    "export-sales-kit": "node scripts/export-sales-kit.js",
+    "export": "node scripts/export-sales-kit.js"
   },
   "keywords": [
     "immersphere",

@@ -249,6 +249,35 @@ Material comercial listo para enviar a clientes, presentar en reuniones o imprim
 
 ---
 
+## Export Sales Kit
+
+Genera automáticamente material comercial listo para enviar a clientes (PDF + capturas PNG).
+
+```bash
+npm run export-sales-kit
+# alias:
+npm run export
+```
+
+**Salida:** `exports/sales-kit/decor-asset-lab/`
+
+| Archivo | Uso |
+|---|---|
+| `decor-asset-lab-one-pager.pdf` | Documento adjunto en email, handout impreso |
+| `01-demo-hero.png` | Portada de email, LinkedIn, web |
+| `02-before-after.png` | Presentación, narrativa de transformación |
+| `03-product-grid.png` | Prueba de catálogo real |
+| `04-product-modal-3d.png` | Diferenciador: interactividad 3D |
+| `05-commercial-packages.png` | Cierre comercial con precios |
+| `06-final-cta.png` | Última diapositiva, cierre de vídeo |
+| `07-one-pager-preview.png` | Thumbnail de descarga |
+
+**Workflow completo:** [`docs/commercial/sales-kit-export-workflow.md`](docs/commercial/sales-kit-export-workflow.md)
+
+> Nota: `exports/` está en `.gitignore`. Los archivos generados son outputs locales y no deben commitearse.
+
+---
+
 ## Reglas del repositorio
 
 1. **NO subir assets reales a Git.** Usar `.gitignore` para GLB, GLTF, FBX, OBJ, USDZ, BLEND, ZIP.

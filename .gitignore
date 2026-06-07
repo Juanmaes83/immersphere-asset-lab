@@ -40,6 +40,9 @@ pnpm-lock.yaml
 /downloads/
 .cache/
 
+# Generated exports (sales kit, demos, etc.)
+/exports/
+
 # OS
 .DS_Store
 Thumbs.db
