@@ -180,6 +180,24 @@ Documentación completa: [`docs/preview-generation.md`](docs/preview-generation.
 
 ---
 
+## Colección: Terrace Mediterranean Premium
+
+Primera colección comercial del **Decor Asset Lab**: un set de 10 assets IKEA para construir una terraza mediterránea premium aspiracional.
+
+**Objetivo:** preparar assets 3D autorizados para la demo comercial *"Piso vacío → Piso amueblado con catálogo IKEA"*.
+
+**Cobertura actual:** 2 / 10 assets reales
+- ✅ VITTSKÄR — silla exterior principal
+- ✅ VÄSMAN — sillón exterior secundario
+- ⏳ 8 assets pendientes: mesa, mesa auxiliar, lounge, lámpara, alfombra, macetero, cojín, decoración
+
+**Documentación:**
+- [`docs/collections/terrace-mediterranean-premium.md`](docs/collections/terrace-mediterranean-premium.md) — Visión, narrativa y set completo.
+- [`docs/collections/terrace-download-checklist.md`](docs/collections/terrace-download-checklist.md) — Checklist de descarga manual desde IKEA.
+- [`examples/terrace-mediterranean-premium-intake/`](examples/terrace-mediterranean-premium-intake/) — Plantillas de metadata listas para rellenar.
+
+---
+
 ## Reglas del repositorio
 
 1. **NO subir assets reales a Git.** Usar `.gitignore` para GLB, GLTF, FBX, OBJ, USDZ, BLEND, ZIP.

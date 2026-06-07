@@ -1,0 +1,66 @@
+{
+  "_comment": "PLANTILLA PENDIENTE — Mesa exterior principal para colección Terraza Mediterránea Premium",
+  "_status": "pending-download",
+  "_collection": "terrace-mediterranean-premium",
+
+  "id": "pending-main-outdoor-table",
+  "brand": "IKEA",
+  "brandPartner": "IKEA",
+  "productName": "PENDING — outdoor dining table",
+  "collection": "Terrace Mediterranean Premium",
+  "category": "table",
+  "subcategory": "dining-table",
+  "sku": "PENDING-OUTDOOR-TABLE",
+  "externalSku": "PENDING-EXTERNAL-SKU",
+  "variantGroup": "outdoor-dining-table",
+  "variantName": "pending-variant",
+  "productUrl": "",
+  "sourceUrl": "",
+  "sourceDomain": "ikea.com",
+  "sourceMethod": "pending-authorized-download",
+  "importMethod": "pending",
+  "capturedAt": "",
+
+  "modelPath": "",
+  "previewPath": "previews/_placeholder/demo-preview.svg",
+  "format": "glb",
+  "fileSizeMb": 0,
+  "hasRealModel": false,
+  "isPlaceholder": true,
+
+  "dimensions": {
+    "width": null,
+    "height": null,
+    "depth": null,
+    "unit": "cm"
+  },
+
+  "color": "PENDING",
+  "material": "PENDING",
+  "styleTags": ["mediterranean", "outdoor", "warm", "terrace"],
+  "roomTags": ["terrace", "outdoor", "garden"],
+  "useCases": ["staging", "render", "tour", "hotspot", "product-pack"],
+
+  "licenseType": "authorized-commercial-demo",
+  "rightsStatus": "pending-permission-document",
+  "commercialUseAllowed": false,
+  "redistributionAllowed": false,
+  "resaleAllowed": false,
+  "brandUsageAllowed": false,
+  "attributionRequired": false,
+  "permissionDocumentRef": "",
+  "permissionScope": "internal-premium-demo",
+  "permissionExpiresAt": null,
+
+  "qaStatus": "pending",
+  "qualityScore": 0,
+  "modelOpens": false,
+  "scaleChecked": false,
+  "texturesChecked": false,
+  "optimized": false,
+  "createdForDemo": true,
+  "demoScene": "terrace-mediterranean-premium",
+  "recommendedFor": ["inmobiliarias", "promotoras", "interioristas", "terrazas"],
+
+  "notes": "Pendiente de selección y descarga manual autorizada desde IKEA. Producto sugerido: ÄPPLARÖ o BONDHOLMEN. Debe ser mesa de comedor exterior para 4-6 personas, madera acacia o gris oscuro."
+}

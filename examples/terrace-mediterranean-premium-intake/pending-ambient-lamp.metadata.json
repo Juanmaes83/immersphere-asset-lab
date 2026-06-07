@@ -1,0 +1,66 @@
+{
+  "_comment": "PLANTILLA PENDIENTE — Lámpara exterior de ambiente para colección Terraza Mediterránea Premium",
+  "_status": "pending-download",
+  "_collection": "terrace-mediterranean-premium",
+
+  "id": "pending-ambient-lamp",
+  "brand": "IKEA",
+  "brandPartner": "IKEA",
+  "productName": "PENDING — outdoor ambient lamp",
+  "collection": "Terrace Mediterranean Premium",
+  "category": "lighting",
+  "subcategory": "outdoor-lamp",
+  "sku": "PENDING-AMBIENT-LAMP",
+  "externalSku": "PENDING-EXTERNAL-SKU",
+  "variantGroup": "outdoor-lighting",
+  "variantName": "pending-variant",
+  "productUrl": "",
+  "sourceUrl": "",
+  "sourceDomain": "ikea.com",
+  "sourceMethod": "pending-authorized-download",
+  "importMethod": "pending",
+  "capturedAt": "",
+
+  "modelPath": "",
+  "previewPath": "previews/_placeholder/demo-preview.svg",
+  "format": "glb",
+  "fileSizeMb": 0,
+  "hasRealModel": false,
+  "isPlaceholder": true,
+
+  "dimensions": {
+    "width": null,
+    "height": null,
+    "depth": null,
+    "unit": "cm"
+  },
+
+  "color": "PENDING",
+  "material": "PENDING",
+  "styleTags": ["mediterranean", "outdoor", "warm", "terrace", "ambient"],
+  "roomTags": ["terrace", "outdoor", "garden"],
+  "useCases": ["staging", "render", "tour", "hotspot", "product-pack"],
+
+  "licenseType": "authorized-commercial-demo",
+  "rightsStatus": "pending-permission-document",
+  "commercialUseAllowed": false,
+  "redistributionAllowed": false,
+  "resaleAllowed": false,
+  "brandUsageAllowed": false,
+  "attributionRequired": false,
+  "permissionDocumentRef": "",
+  "permissionScope": "internal-premium-demo",
+  "permissionExpiresAt": null,
+
+  "qaStatus": "pending",
+  "qualityScore": 0,
+  "modelOpens": false,
+  "scaleChecked": false,
+  "texturesChecked": false,
+  "optimized": false,
+  "createdForDemo": true,
+  "demoScene": "terrace-mediterranean-premium",
+  "recommendedFor": ["inmobiliarias", "promotoras", "interioristas", "terrazas"],
+
+  "notes": "Pendiente de selección y descarga manual autorizada desde IKEA. Producto sugerido: SOLVINDEN solar o LEDBERG guirnalda. Debe aportar luz cálida de ambiente al atardecer."
+}
