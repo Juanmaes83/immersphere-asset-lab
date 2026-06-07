@@ -90,11 +90,12 @@
         <div class="card-badges">
           <span class="badge-pill ${licenseBadge.class}">${licenseBadge.label}</span>
           <span class="badge-pill ${qaBadge.class}">${qaBadge.label}</span>
+          ${asset.hasRealModel ? '<span class="badge-pill badge-real">Real Model</span>' : ''}
         </div>
       </div>
       <div class="card-body">
         <h3 class="card-title">${escapeHtml(asset.productName)}</h3>
-        <p class="card-brand">${escapeHtml(asset.brand)} · ${escapeHtml(asset.category)}</p>
+        <p class="card-brand">${escapeHtml(asset.brand)} · ${escapeHtml(asset.category)}${asset.hasRealModel ? ' · <strong>Modelo real</strong>' : ''}</p>
         <div class="card-meta">
           <span class="meta-item">${escapeHtml(asset.color || '—')}</span>
           <span class="meta-sep">·</span>
@@ -138,6 +139,9 @@
           <dt>Brand Usage</dt><dd>${asset.brandUsageAllowed ? '✓ Allowed' : '✗ Not allowed'}</dd>
           <dt>QA Status</dt><dd>${escapeHtml(asset.qaStatus)}</dd>
           <dt>Scope</dt><dd>${escapeHtml(asset.permissionScope || '—')}</dd>
+          ${asset.hasRealModel !== undefined ? `<dt>Real Model</dt><dd>${asset.hasRealModel ? '✓ Yes — GLB on disk' : '✗ Placeholder only'}</dd>` : ''}
+          ${asset.scaleChecked !== undefined ? `<dt>Scale Checked</dt><dd>${asset.scaleChecked ? '✓ Yes' : 'Pending'}</dd>` : ''}
+          ${asset.optimized !== undefined ? `<dt>Optimized</dt><dd>${asset.optimized ? '✓ Yes' : 'No'}</dd>` : ''}
         </dl>
       </div>
 
