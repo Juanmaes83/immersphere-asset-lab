@@ -229,6 +229,26 @@ npm run start
 
 ---
 
+## Sales Kit
+
+Material comercial listo para enviar a clientes, presentar en reuniones o imprimir.
+
+**One-pager comercial (imprimible / exportable a PDF):**
+- [`sales/decor-asset-lab-one-pager.html`](sales/decor-asset-lab-one-pager.html) — Versión HTML premium, A4 vertical.
+- [`sales/decor-asset-lab-one-pager.css`](sales/decor-asset-lab-one-pager.css) — Estilos del one-pager.
+- [`docs/commercial/decor-asset-lab-one-pager.md`](docs/commercial/decor-asset-lab-one-pager.md) — Versión texto para PDF/email/presentación.
+
+**Guiones de venta:**
+- [`docs/commercial/decor-asset-lab-pitch-script.md`](docs/commercial/decor-asset-lab-pitch-script.md) — Pitches de 15s, 30s, 60s por segmento.
+
+**Argumentario comercial:**
+- [`docs/commercial/decor-asset-lab-objections-and-answers.md`](docs/commercial/decor-asset-lab-objections-and-answers.md) — Objeciones y respuestas por tipo de cliente.
+
+**Checklist de capturas:**
+- [`docs/commercial/decor-asset-lab-capture-checklist.md`](docs/commercial/decor-asset-lab-capture-checklist.md) — Qué pantallazos y clips grabar para vender la demo.
+
+---
+
 ## Reglas del repositorio
 
 1. **NO subir assets reales a Git.** Usar `.gitignore` para GLB, GLTF, FBX, OBJ, USDZ, BLEND, ZIP.

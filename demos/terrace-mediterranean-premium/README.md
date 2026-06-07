@@ -43,3 +43,12 @@ demos/terrace-mediterranean-premium/
 - No incluye GLB en Git. Los modelos se sirven desde `assets/ikea/` localmente.
 - Las previews PNG sí están en Git y se sirven desde `previews/ikea/`.
 - Si se añaden más assets a la colección con `roomTags: ["terrace"]`, la demo los mostrará automáticamente.
+
+## Sales Kit
+
+Material comercial asociado a esta demo:
+
+- [`../../sales/decor-asset-lab-one-pager.html`](../../sales/decor-asset-lab-one-pager.html) — One-pager comercial imprimible.
+- [`../../docs/commercial/decor-asset-lab-pitch-script.md`](../../docs/commercial/decor-asset-lab-pitch-script.md) — Guiones de presentación.
+- [`../../docs/commercial/decor-asset-lab-objections-and-answers.md`](../../docs/commercial/decor-asset-lab-objections-and-answers.md) — Argumentario por cliente.
+- [`../../docs/commercial/decor-asset-lab-capture-checklist.md`](../../docs/commercial/decor-asset-lab-capture-checklist.md) — Checklist de pantallazos y clips.
