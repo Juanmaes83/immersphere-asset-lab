@@ -27,6 +27,17 @@ pnpm-lock.yaml
 !assets/ikea/
 !assets/ikea/**/*.glb
 
+# Temporary assisted imports
+/imports/inbox/*.glb
+/imports/processed/*.glb
+/imports/rejected/*.glb
+!/imports/
+!/imports/inbox/
+!/imports/metadata-drafts/
+!/imports/processed/
+!/imports/rejected/
+!/imports/**/.gitkeep
+
 # Previews pesados (solo thumbnails livianos permitidos)
 # Las previews de assets reales en /previews/ikea/ sí se commitean si son ligeras.
 /previews/**/*.png

@@ -357,6 +357,35 @@ Documentacion:
 
 ---
 
+## Importer asistido por carpeta
+
+Flujo semi-automatico para preparar lotes de GLB descargados manualmente y ampliar el catalogo por colecciones/estancias.
+
+**Comando:**
+```bash
+npm run ingest-folder -- --collection living-room-nordic-premium --room living-room --dry-run
+npm run ingest-folder -- --collection living-room-nordic-premium --room living-room --apply
+```
+
+**Rutas:**
+- `imports/inbox/` — entrada temporal de GLB descargados manualmente.
+- `imports/metadata-drafts/` — JSON draft revisable.
+- `imports/processed/` — area temporal de procesados futuros.
+- `imports/rejected/` — GLB con categoria desconocida o no aptos.
+- `assets/ikea/{category}/` — destino de GLB autorizados cuando la categoria es conocida.
+
+**Importante:**
+- No descarga modelos.
+- No hace scraping.
+- No actualiza manifest automaticamente.
+- No publica assets sin revision humana.
+- La licencia, SKU, nombre comercial y previews deben revisarse antes de cualquier alta oficial.
+
+Documentacion:
+- [`docs/importer/ingest-folder-workflow.md`](docs/importer/ingest-folder-workflow.md)
+
+---
+
 ## Reglas del repositorio
 
 1. **NO subir assets reales a Git.** Usar `.gitignore` para GLB, GLTF, FBX, OBJ, USDZ, BLEND, ZIP.

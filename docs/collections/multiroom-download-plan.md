@@ -20,3 +20,30 @@ Este documento es una plantilla de control. No autoriza descargas ni scraping. C
 ## Criterio de avance
 
 Una coleccion pasa de `planned` a `active` solo cuando tenga 10 assets reales autorizados, previews disponibles, manifest validado y QA visual completado.
+
+## Flujo con ingest-folder
+
+Ejemplo para preparar la coleccion `living-room-nordic-premium`:
+
+1. Descargar manualmente 10 GLB autorizados para Salon Nordico Premium.
+2. Colocarlos en `imports/inbox/`.
+3. Ejecutar dry-run:
+   ```bash
+   npm run ingest-folder -- --collection living-room-nordic-premium --room living-room --dry-run
+   ```
+4. Revisar categorias detectadas, posibles duplicados y rutas propuestas.
+5. Ejecutar apply:
+   ```bash
+   npm run ingest-folder -- --collection living-room-nordic-premium --room living-room --apply
+   ```
+6. Revisar los drafts en `imports/metadata-drafts/`.
+7. Completar SKU, nombre, licencia, permisos y preview.
+8. Ingerir oficialmente en manifest cuando todos los campos criticos esten completos.
+9. Generar previews.
+10. Validar:
+    ```bash
+    npm run check
+    npm run preflight
+    ```
+
+El importer no descarga assets, no hace scraping y no publica nada automaticamente.

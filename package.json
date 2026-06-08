@@ -10,6 +10,7 @@
     "validate": "node scripts/validate-manifest.js",
     "check": "node scripts/validate-manifest.js",
     "ingest": "node scripts/ingest-asset.js",
+    "ingest-folder": "node scripts/ingest-folder.js",
     "preflight": "node scripts/preflight-assets.js",
     "generate-previews": "node scripts/generate-previews.js",
     "previews": "node scripts/generate-previews.js",
