@@ -80,10 +80,14 @@ Crear un módulo MVP visual para diseñar estancias base personalizables sin nec
 ## Limitaciones
 
 - Es un MVP visual 2.5D. No sustituye un planner 3D calibrado con medidas reales.
-- No carga GLB dentro de la escena (usa previews).
-- No calibra perspectiva ni escala física.
-- No genera sombras reales ni oclusión.
-- Las vistas son representaciones visuales simplificadas, no proyecciones 3D exactas.
+- No carga GLB dentro de la escena (usa previews PNG).
+- No calibra perspectiva ni escala física real.
+- No genera sombras 3D reales ni oclusión.
+- Las vistas son representaciones 2.5D visuales simplificadas, no proyecciones 3D exactas.
+- Los suelos son patrones CSS, no texturas fotográficas.
+- No hay escala física real ni medición en metros.
+- No hay precios reales ni checkout.
+- "Sustituir por similar" y "Combina bien con" usan reglas simples por categoría, no IA.
 
 ## Roadmap
 
@@ -105,27 +109,27 @@ Crear un módulo MVP visual para diseñar estancias base personalizables sin nec
 - ✅ Resumen de propuesta con cards visuales, contador y agrupación.
 - ✅ Enlace "Ver en catálogo 3D" al viewer.
 
-### Fase 4H.4 — Panel de producto avanzado (próxima)
-- Ficha lateral de producto con más metadatos.
-- Variantes visuales del producto si existen.
-- "Sustituir por similar" con sugerencias del catálogo.
-- "Combina bien con" recomendaciones.
-- Añadir a presupuesto con cantidad editable.
-- Listado de productos usados más comercial con precios (cuando estén disponibles).
+### Fase 4H.4 completada — Panel de producto avanzado
+- ✅ Ficha lateral de producto con preview, marca, SKU, categoría, colección, badge "Producto real 3D disponible".
+- ✅ "Sustituir por similar" — lista compacta de productos de la misma categoría, reemplazo manteniendo posición/escala/rotación.
+- ✅ "Combina bien con" — recomendaciones por reglas de categoría (hasta 6 productos).
+- ✅ Botón "Añadir a propuesta" con toggle y estado visual.
+- ✅ Resumen de propuesta con contador, cards visuales y productos excluidos marcados.
 
-### Fase 4H.5 — Vistas avanzadas y miniaturas (próxima)
-- Miniaturas de vistas en barra lateral.
-- Guardar cámara/vista preferida.
-- Vista superior más clara con grid.
-- Vista lateral izquierda/derecha con perspectiva refinada.
-- Modo casa de muñecas más pulido con sombras ambientales.
+### Fase 4H.5 completada — Vistas avanzadas y miniaturas
+- ✅ Barra de miniaturas de vista bajo la escena (Casa de muñecas, Frontal, Superior, Izquierda, Derecha).
+- ✅ Guardar vista actual en localStorage (template, colores, suelo, vista, layers).
+- ✅ Listar, cargar y eliminar vistas guardadas.
+- ✅ Vista superior más limpia (plano 2D sin paredes).
+- ✅ Vistas laterales con perspectiva refinada y énfasis en profundidad.
+- ✅ Modo casa de muñecas más pulido con sombras ambientales en suelo.
 
-### Fase 4H.6 — Materiales y pintura avanzada (próxima)
-- Pintar pared principal y pared lateral por separado.
-- Cambiar suelo con más opciones y texturas.
-- Guardar presets de estilo personalizados.
-- Paletas por estancia: mood mediterráneo, nórdico, minimal, industrial.
-- Aplicar mood con un solo clic.
+### Fase 4H.6 completada — Materiales y pintura avanzada
+- ✅ Color de pared principal y pared lateral por separado (8 colores cada uno).
+- ✅ Suelos mejorados con patrones CSS y orientación visual.
+- ✅ Presets de estilo rápidos: Mediterráneo claro, Nórdico premium, Minimal cálido, Urbano grafito, Natural soft.
+- ✅ Guardar estilo personalizado en localStorage con nombre automático.
+- ✅ Listar, cargar y eliminar estilos guardados.
 
 ## URLs
 

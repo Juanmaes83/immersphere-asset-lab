@@ -39,8 +39,13 @@
       </section>
 
       <section class="control-group">
-        <h3>Color de paredes</h3>
-        <div class="swatch-grid" id="wallColorGrid" aria-label="Paleta de paredes"></div>
+        <h3>Color pared principal</h3>
+        <div class="swatch-grid" id="wallColorGrid" aria-label="Paleta de pared principal"></div>
+      </section>
+
+      <section class="control-group">
+        <h3>Color pared lateral</h3>
+        <div class="swatch-grid" id="wallSideColorGrid" aria-label="Paleta de pared lateral"></div>
       </section>
 
       <section class="control-group">
@@ -52,10 +57,26 @@
         <h3>Vista</h3>
         <div class="view-grid" id="viewGrid" aria-label="Selector de vista"></div>
       </section>
+
+      <section class="control-group">
+        <h3>Estilos rápidos</h3>
+        <div class="preset-grid" id="presetGrid" aria-label="Presets de estilo"></div>
+      </section>
+
+      <section class="control-group">
+        <h3>Estilos guardados</h3>
+        <div id="savedPresetsList" class="saved-list">Ninguno guardado.</div>
+      </section>
+
+      <section class="control-group">
+        <h3>Vistas guardadas</h3>
+        <div id="savedViewsList" class="saved-list">Ninguna guardada.</div>
+      </section>
     </aside>
 
     <section class="workspace">
       <div class="scene-label" id="sceneLabel">Salón · Casa de muñecas</div>
+      <div class="view-thumbnails" id="viewThumbnails" aria-label="Miniaturas de vista"></div>
       <div class="stage" id="stage" aria-label="Area de escena">
         <div class="room-scene" id="roomScene">
           <div class="room-shell" id="roomShell">
@@ -143,6 +164,14 @@
         <button id="proposalToggleBtn" type="button" class="proposal-toggle is-included">Añadir a propuesta</button>
         <a id="viewerLink" class="viewer-link" href="/viewer/index.html" target="_blank" style="display:none">Ver en catálogo 3D →</a>
         <button id="deleteBtn" type="button" class="danger" style="margin-top:10px;width:100%">Eliminar de escena</button>
+      </div>
+      <div id="similarSection" class="inspector-section is-disabled" style="margin-top:14px;border-top:1px solid rgba(255,255,255,.12);padding-top:14px;">
+        <h3 style="font-size:13px;margin:0 0 8px;text-transform:uppercase;letter-spacing:1px;color:var(--muted)">Sustituir por similar</h3>
+        <div id="similarList" class="compact-list">Selecciona un producto para ver similares.</div>
+      </div>
+      <div id="combinesSection" class="inspector-section is-disabled" style="margin-top:14px;border-top:1px solid rgba(255,255,255,.12);padding-top:14px;">
+        <h3 style="font-size:13px;margin:0 0 8px;text-transform:uppercase;letter-spacing:1px;color:var(--muted)">Combina bien con</h3>
+        <div id="combinesList" class="compact-list">Selecciona un producto para ver recomendaciones.</div>
       </div>
 
       <section class="used-products" aria-labelledby="usedTitle">

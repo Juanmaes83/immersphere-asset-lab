@@ -1,12 +1,14 @@
 const MANIFEST_URL = "/manifest/ikea-sample.manifest.json";
 const STORAGE_KEY = "immersphere.assetLab.roomDesignerLite.v1";
+const VIEWS_STORAGE_KEY = "immersphere.assetLab.roomDesignerLite.views.v1";
+const PRESETS_STORAGE_KEY = "immersphere.assetLab.roomDesignerLite.presets.v1";
 
 const TEMPLATES = {
-  "living-room": { name: "Salón", defaultWall: "warm-white", defaultFloor: "light-wood", hasWindow: true, hasDoor: false },
-  terrace: { name: "Terraza", defaultWall: "sand", defaultFloor: "terrace-exterior", hasWindow: true, hasDoor: false },
-  bedroom: { name: "Dormitorio", defaultWall: "light-grey", defaultFloor: "dark-wood", hasWindow: true, hasDoor: true },
-  "dining-room": { name: "Comedor", defaultWall: "stone-beige", defaultFloor: "light-tile", hasWindow: true, hasDoor: false },
-  "home-office": { name: "Home Office", defaultWall: "warm-white", defaultFloor: "soft-cement", hasWindow: true, hasDoor: false },
+  "living-room": { name: "Salón", defaultWall: "warm-white", defaultWallSide: "light-grey", defaultFloor: "light-wood", hasWindow: true, hasDoor: false },
+  terrace: { name: "Terraza", defaultWall: "sand", defaultWallSide: "stone-beige", defaultFloor: "terrace-exterior", hasWindow: true, hasDoor: false },
+  bedroom: { name: "Dormitorio", defaultWall: "light-grey", defaultWallSide: "warm-white", defaultFloor: "dark-wood", hasWindow: true, hasDoor: true },
+  "dining-room": { name: "Comedor", defaultWall: "stone-beige", defaultWallSide: "warm-white", defaultFloor: "light-tile", hasWindow: true, hasDoor: false },
+  "home-office": { name: "Home Office", defaultWall: "warm-white", defaultWallSide: "light-grey", defaultFloor: "soft-cement", hasWindow: true, hasDoor: false },
 };
 
 const WALL_COLORS = {
@@ -31,10 +33,10 @@ const FLOOR_TYPES = {
 
 const VIEWS = {
   dollhouse: { name: "Casa de muñecas", icon: "🏠" },
-  front: { name: "Vista frontal", icon: "▭" },
-  top: { name: "Vista superior", icon: "▢" },
-  left: { name: "Lateral izquierda", icon: "◧" },
-  right: { name: "Lateral derecha", icon: "◨" },
+  front: { name: "Frontal", icon: "▭" },
+  top: { name: "Superior", icon: "▢" },
+  left: { name: "Izquierda", icon: "◧" },
+  right: { name: "Derecha", icon: "◨" },
 };
 
 const TYPE_MAP = {
@@ -49,24 +51,99 @@ const TYPE_MAP = {
   textile: ["textile"],
 };
 
+const COMBINES_RULES = {
+  sofa: ["coffee-table", "rug", "lighting", "textile", "decor"],
+  armchair: ["coffee-table", "rug", "lighting", "decor"],
+  "tv-unit": ["sofa", "armchair", "decor", "lighting"],
+  "coffee-table": ["sofa", "armchair", "rug", "decor"],
+  rug: ["sofa", "armchair", "coffee-table"],
+  lighting: ["sofa", "armchair", "decor"],
+  chair: ["table", "side-table", "decor"],
+  table: ["chair", "lighting", "decor"],
+  bed: ["side-table", "lighting", "rug", "wardrobe"],
+  desk: ["chair", "lighting", "shelf"],
+  decor: ["sofa", "armchair", "table", "lighting"],
+  planter: ["decor", "table"],
+  textile: ["sofa", "armchair", "chair"],
+  lounge: ["coffee-table", "rug", "lighting"],
+  "side-table": ["sofa", "armchair", "decor"],
+  "dining-table": ["chair", "lighting", "decor"],
+};
+
+const STYLE_PRESETS = {
+  mediterranean: {
+    name: "Mediterráneo claro",
+    icon: "☀️",
+    template: "terrace",
+    wallColor: "warm-white",
+    wallSideColor: "sand",
+    floorType: "mediterranean-stone",
+    collectionFilter: "terrace-mediterranean-premium",
+  },
+  nordic: {
+    name: "Nórdico premium",
+    icon: "🌲",
+    template: "living-room",
+    wallColor: "light-grey",
+    wallSideColor: "warm-white",
+    floorType: "light-wood",
+    collectionFilter: "living-room-nordic-premium",
+  },
+  minimal: {
+    name: "Minimal cálido",
+    icon: "⬜",
+    template: "living-room",
+    wallColor: "warm-white",
+    wallSideColor: "warm-white",
+    floorType: "soft-cement",
+    collectionFilter: "",
+  },
+  urban: {
+    name: "Urbano grafito",
+    icon: "🏙",
+    template: "home-office",
+    wallColor: "graphite",
+    wallSideColor: "light-grey",
+    floorType: "dark-wood",
+    collectionFilter: "",
+  },
+  natural: {
+    name: "Natural soft",
+    icon: "🌿",
+    template: "bedroom",
+    wallColor: "stone-beige",
+    wallSideColor: "sand",
+    floorType: "light-wood",
+    collectionFilter: "",
+  },
+};
+
 const state = {
   catalog: [],
   filteredCatalog: [],
   template: "living-room",
   wallColor: "warm-white",
+  wallSideColor: "light-grey",
   floorType: "light-wood",
   view: "dollhouse",
   layers: [],
   selectedId: null,
   drag: null,
   zCounter: 10,
+  savedViews: [],
+  savedPresets: [],
 };
 
 const els = {
   templateGrid: document.querySelector("#templateGrid"),
   wallColorGrid: document.querySelector("#wallColorGrid"),
+  wallSideColorGrid: document.querySelector("#wallSideColorGrid"),
   floorGrid: document.querySelector("#floorGrid"),
   viewGrid: document.querySelector("#viewGrid"),
+  presetGrid: document.querySelector("#presetGrid"),
+  savedViewsList: document.querySelector("#savedViewsList"),
+  savedPresetsList: document.querySelector("#savedPresetsList"),
+  viewThumbnails: document.querySelector("#viewThumbnails"),
   roomScene: document.querySelector("#roomScene"),
   roomShell: document.querySelector("#roomShell"),
   wallBack: document.querySelector("#wallBack"),
@@ -89,6 +166,10 @@ const els = {
   inspectorPreview: document.querySelector("#inspectorPreview"),
   inspectorBadge: document.querySelector("#inspectorBadge"),
   inspectorMeta: document.querySelector("#inspectorMeta"),
+  similarSection: document.querySelector("#similarSection"),
+  similarList: document.querySelector("#similarList"),
+  combinesSection: document.querySelector("#combinesSection"),
+  combinesList: document.querySelector("#combinesList"),
   scaleInput: document.querySelector("#scaleInput"),
   rotationInput: document.querySelector("#rotationInput"),
   xInput: document.querySelector("#xInput"),
@@ -112,6 +193,8 @@ const els = {
 init();
 
 async function init() {
+  loadSavedViews();
+  loadSavedPresets();
   renderControls();
   bindEvents();
   await loadCatalog();
@@ -120,6 +203,7 @@ async function init() {
   renderLayers();
   renderInspector();
   renderUsedProducts();
+  renderViewThumbnails();
 }
 
 function renderControls() {
@@ -134,12 +218,20 @@ function renderControls() {
     btn.addEventListener("click", () => setTemplate(btn.dataset.template));
   });
 
-  // Wall colors
+  // Wall colors (main)
   els.wallColorGrid.innerHTML = Object.entries(WALL_COLORS).map(([key, col]) => `
     <button type="button" class="swatch-btn${state.wallColor === key ? " is-active" : ""}" data-wall="${escapeAttr(key)}" title="${escapeAttr(col.name)}" style="background:${col.value};${key==="warm-white"||key==="sand"||key==="light-grey"||key==="stone-beige"?"border-color:rgba(0,0,0,.15)":""}"></button>
   `).join("");
   els.wallColorGrid.querySelectorAll("[data-wall]").forEach((btn) => {
     btn.addEventListener("click", () => setWallColor(btn.dataset.wall));
+  });
+
+  // Wall side colors
+  els.wallSideColorGrid.innerHTML = Object.entries(WALL_COLORS).map(([key, col]) => `
+    <button type="button" class="swatch-btn${state.wallSideColor === key ? " is-active" : ""}" data-wall-side="${escapeAttr(key)}" title="${escapeAttr(col.name)}" style="background:${col.value};${key==="warm-white"||key==="sand"||key==="light-grey"||key==="stone-beige"?"border-color:rgba(0,0,0,.15)":""}"></button>
+  `).join("");
+  els.wallSideColorGrid.querySelectorAll("[data-wall-side]").forEach((btn) => {
+    btn.addEventListener("click", () => setWallSideColor(btn.dataset.wallSide));
   });
 
   // Floor types
@@ -163,6 +255,20 @@ function renderControls() {
   els.viewGrid.querySelectorAll("[data-view]").forEach((btn) => {
     btn.addEventListener("click", () => setView(btn.dataset.view));
   });
+
+  // Style presets
+  els.presetGrid.innerHTML = Object.entries(STYLE_PRESETS).map(([key, preset]) => `
+    <button type="button" class="preset-btn" data-preset="${escapeAttr(key)}">
+      <span class="preset-icon">${preset.icon}</span>
+      <span>${escapeHtml(preset.name)}</span>
+    </button>
+  `).join("");
+  els.presetGrid.querySelectorAll("[data-preset]").forEach((btn) => {
+    btn.addEventListener("click", () => applyPreset(btn.dataset.preset));
+  });
+
+  renderSavedViews();
+  renderSavedPresets();
 }
 
 function bindEvents() {
@@ -197,6 +303,7 @@ function setTemplate(key) {
   if (!TEMPLATES[key]) return;
   state.template = key;
   state.wallColor = TEMPLATES[key].defaultWall;
+  state.wallSideColor = TEMPLATES[key].defaultWallSide;
   state.floorType = TEMPLATES[key].defaultFloor;
   renderControls();
   updateRoomVisuals();
@@ -205,6 +312,13 @@ function setTemplate(key) {
 function setWallColor(key) {
   if (!WALL_COLORS[key]) return;
   state.wallColor = key;
+  renderControls();
+  updateRoomVisuals();
+}
+
+function setWallSideColor(key) {
+  if (!WALL_COLORS[key]) return;
+  state.wallSideColor = key;
   renderControls();
   updateRoomVisuals();
 }
@@ -220,37 +334,41 @@ function setView(key) {
   if (!VIEWS[key]) return;
   state.view = key;
   renderControls();
+  renderViewThumbnails();
   updateRoomVisuals();
+}
+
+function applyPreset(key) {
+  const preset = STYLE_PRESETS[key];
+  if (!preset) return;
+  state.template = preset.template;
+  state.wallColor = preset.wallColor;
+  state.wallSideColor = preset.wallSideColor;
+  state.floorType = preset.floorType;
+  if (preset.collectionFilter) {
+    els.collectionFilter.value = preset.collectionFilter;
+    applyCatalogFilters();
+  }
+  renderControls();
+  updateRoomVisuals();
+  saveScene();
 }
 
 function updateRoomVisuals() {
   const tpl = TEMPLATES[state.template];
   const wall = WALL_COLORS[state.wallColor];
+  const wallSide = WALL_COLORS[state.wallSideColor];
   const floor = FLOOR_TYPES[state.floorType];
   const view = VIEWS[state.view];
 
-  // Update scene label
   els.sceneLabel.textContent = `${tpl.name} · ${view.name}`;
-
-  // Update view class
   els.roomScene.className = "room-scene view-" + state.view;
   els.roomShell.className = "room-shell tpl-" + state.template;
 
-  // Update colors
   els.wallBack.style.background = wall.value;
-  const sideColor = adjustBrightness(wall.value, -12);
-  els.wallLeft.style.background = sideColor;
-  els.wallRight.style.background = sideColor;
+  els.wallLeft.style.background = wallSide.value;
+  els.wallRight.style.background = wallSide.value;
   els.roomFloor.style.background = floor.style;
-}
-
-function adjustBrightness(hex, percent) {
-  const num = parseInt(hex.replace("#", ""), 16);
-  const amt = Math.round(2.55 * percent);
-  const R = Math.min(255, Math.max(0, (num >> 16) + amt));
-  const G = Math.min(255, Math.max(0, ((num >> 8) & 0x00ff) + amt));
-  const B = Math.min(255, Math.max(0, (num & 0x0000ff) + amt));
-  return "#" + ((1 << 24) + (R << 16) + (G << 8) + B).toString(16).slice(1);
 }
 
 async function loadCatalog() {
@@ -505,7 +623,9 @@ function renderInspector() {
   const layer = getLayer(state.selectedId);
   const asset = layer ? getAsset(layer.assetId) : null;
   els.inspectorFields.classList.toggle("is-disabled", !layer);
-  els.selectionStatus.textContent = asset ? `Editando: ${asset.productName}` : "Ningún elemento seleccionado.";
+  els.similarSection.classList.toggle("is-disabled", !layer);
+  els.combinesSection.classList.toggle("is-disabled", !layer);
+  els.selectionStatus.textContent = asset ? `Editando: ${asset.productName}` : "Selecciona un producto de la escena para ver sus detalles.";
 
   if (asset) {
     els.inspectorPreview.style.display = "block";
@@ -524,6 +644,8 @@ function renderInspector() {
     const isIn = layer.includedInProposal !== false;
     els.proposalToggleBtn.classList.toggle("is-included", isIn);
     els.proposalToggleBtn.textContent = isIn ? "✓ Incluido en propuesta" : "+ Añadir a propuesta";
+    renderSimilar();
+    renderCombines();
   } else {
     els.inspectorPreview.style.display = "none";
     els.inspectorPreview.src = "";
@@ -531,6 +653,8 @@ function renderInspector() {
     els.inspectorMeta.innerHTML = "";
     els.viewerLink.style.display = "none";
     els.proposalToggleBtn.style.display = "none";
+    els.similarList.innerHTML = "Selecciona un producto para ver similares.";
+    els.combinesList.innerHTML = "Selecciona un producto para ver recomendaciones.";
   }
 
   els.scaleInput.value = layer?.scale ?? 1;
@@ -539,8 +663,78 @@ function renderInspector() {
   els.yInput.value = layer ? round(layer.y) : "";
 }
 
+function renderSimilar() {
+  const layer = getLayer(state.selectedId);
+  if (!layer) return;
+  const asset = getAsset(layer.assetId);
+  if (!asset) return;
+  const similars = state.catalog.filter((a) => a.id !== asset.id && a.category === asset.category).slice(0, 6);
+  if (!similars.length) {
+    els.similarList.innerHTML = `<div class="proposal-empty">No hay productos similares disponibles.</div>`;
+    return;
+  }
+  els.similarList.innerHTML = similars.map((a) => `
+    <div class="compact-item" data-similar="${escapeAttr(a.id)}">
+      <img src="${escapeAttr(normalizePath(a.previewPath))}" alt="${escapeAttr(a.productName)}">
+      <div class="info">
+        <p class="name">${escapeHtml(a.productName)}</p>
+        <p class="meta">${escapeHtml(a.brand)} · ${escapeHtml(categoryLabel(a.category))}</p>
+      </div>
+      <span class="action">↻</span>
+    </div>
+  `).join("");
+  els.similarList.querySelectorAll("[data-similar]").forEach((item) => {
+    item.addEventListener("click", () => substituteAsset(item.dataset.similar));
+  });
+}
+
+function substituteAsset(newAssetId) {
+  const layer = getLayer(state.selectedId);
+  if (!layer) return;
+  const newAsset = state.catalog.find((a) => a.id === newAssetId);
+  if (!newAsset) return;
+  layer.assetId = newAsset.id;
+  renderLayers();
+  renderInspector();
+  renderUsedProducts();
+  saveScene();
+}
+
+function renderCombines() {
+  const layer = getLayer(state.selectedId);
+  if (!layer) return;
+  const asset = getAsset(layer.assetId);
+  if (!asset) return;
+  const relatedCats = COMBINES_RULES[asset.category] || [];
+  if (!relatedCats.length) {
+    els.combinesList.innerHTML = `<div class="proposal-empty">No hay recomendaciones para esta categoría.</div>`;
+    return;
+  }
+  const recommendations = state.catalog
+    .filter((a) => a.id !== asset.id && relatedCats.includes(a.category))
+    .slice(0, 6);
+  if (!recommendations.length) {
+    els.combinesList.innerHTML = `<div class="proposal-empty">No hay productos recomendados disponibles.</div>`;
+    return;
+  }
+  els.combinesList.innerHTML = recommendations.map((a) => `
+    <div class="compact-item" data-combine="${escapeAttr(a.id)}">
+      <img src="${escapeAttr(normalizePath(a.previewPath))}" alt="${escapeAttr(a.productName)}">
+      <div class="info">
+        <p class="name">${escapeHtml(a.productName)}</p>
+        <p class="meta">${escapeHtml(a.brand)} · ${escapeHtml(categoryLabel(a.category))}</p>
+      </div>
+      <span class="action">+</span>
+    </div>
+  `).join("");
+  els.combinesList.querySelectorAll("[data-combine]").forEach((item) => {
+    item.addEventListener("click", () => addAssetToScene(item.dataset.combine));
+  });
+}
+
 function renderUsedProducts() {
   const proposalLayers = state.layers.filter((l) => l.includedInProposal !== false);
+  const excludedLayers = state.layers.filter((l) => l.includedInProposal === false);
   if (!state.layers.length) {
     els.usedProductsList.innerHTML = `<div class="proposal-empty">Sin productos en escena. Añade productos desde el catálogo.</div>`;
     els.proposalCount.textContent = "0";
@@ -553,7 +747,7 @@ function renderUsedProducts() {
   }
   const grouped = getUsedProducts(true);
   els.proposalCount.textContent = `${grouped.length} ref. · ${proposalLayers.length} uds.`;
-  els.usedProductsList.innerHTML = grouped.map((item) => `
+  let html = grouped.map((item) => `
     <article class="proposal-card">
       <img src="${escapeAttr(normalizePath(item.previewPath))}" alt="${escapeAttr(item.productName)}">
       <div class="info">
@@ -563,6 +757,10 @@ function renderUsedProducts() {
       <span class="qty">×${item.quantity}</span>
     </article>
   `).join("");
+  if (excludedLayers.length) {
+    html += `<div class="proposal-empty" style="margin-top:10px;border-top:1px solid var(--line);padding-top:8px;"><strong>En escena, fuera de propuesta:</strong> ${excludedLayers.length} producto(s)</div>`;
+  }
+  els.usedProductsList.innerHTML = html;
 }
 
 function getUsedProducts(onlyProposal = false) {
@@ -588,10 +786,197 @@ function getUsedProducts(onlyProposal = false) {
   return Array.from(map.values());
 }
 
+function renderViewThumbnails() {
+  els.viewThumbnails.innerHTML = Object.entries(VIEWS).map(([key, vw]) => `
+    <button type="button" class="view-thumb-btn${state.view === key ? " is-active" : ""}" data-thumb="${escapeAttr(key)}">
+      <span class="view-thumb-icon"></span>
+      <span>${escapeHtml(vw.name)}</span>
+    </button>
+  `).join("") + `
+    <div class="view-thumb-actions">
+      <button type="button" id="saveViewBtn">Guardar vista</button>
+    </div>
+  `;
+  els.viewThumbnails.querySelectorAll("[data-thumb]").forEach((btn) => {
+    btn.addEventListener("click", () => setView(btn.dataset.thumb));
+  });
+  const saveBtn = els.viewThumbnails.querySelector("#saveViewBtn");
+  if (saveBtn) saveBtn.addEventListener("click", saveCurrentView);
+}
+
+function saveCurrentView() {
+  const name = prompt("Nombre de la vista guardada:", `Vista ${state.savedViews.length + 1}`);
+  if (!name) return;
+  const view = {
+    id: `view-${Date.now()}-${Math.random().toString(16).slice(2)}`,
+    name: name.trim(),
+    template: state.template,
+    wallColor: state.wallColor,
+    wallSideColor: state.wallSideColor,
+    floorType: state.floorType,
+    view: state.view,
+    layers: JSON.parse(JSON.stringify(state.layers)),
+    zCounter: state.zCounter,
+    savedAt: new Date().toISOString(),
+  };
+  state.savedViews.push(view);
+  persistSavedViews();
+  renderSavedViews();
+}
+
+function loadView(viewId) {
+  const view = state.savedViews.find((v) => v.id === viewId);
+  if (!view) return;
+  state.template = view.template;
+  state.wallColor = view.wallColor;
+  state.wallSideColor = view.wallSideColor || view.wallColor;
+  state.floorType = view.floorType;
+  state.view = view.view;
+  state.layers = JSON.parse(JSON.stringify(view.layers));
+  state.zCounter = view.zCounter || 10;
+  state.selectedId = null;
+  renderControls();
+  updateRoomVisuals();
+  renderViewThumbnails();
+  renderLayers();
+  renderInspector();
+  renderUsedProducts();
+}
+
+function deleteView(viewId) {
+  state.savedViews = state.savedViews.filter((v) => v.id !== viewId);
+  persistSavedViews();
+  renderSavedViews();
+}
+
+function renderSavedViews() {
+  if (!state.savedViews.length) {
+    els.savedViewsList.innerHTML = "Ninguna guardada.";
+    return;
+  }
+  els.savedViewsList.innerHTML = state.savedViews.map((v) => `
+    <div class="saved-item">
+      <div>
+        <span class="name">${escapeHtml(v.name)}</span>
+        <span class="meta">${escapeHtml(TEMPLATES[v.template]?.name || v.template)} · ${escapeHtml(VIEWS[v.view]?.name || v.view)}</span>
+      </div>
+      <div class="actions">
+        <button type="button" data-load-view="${escapeAttr(v.id)}">Cargar</button>
+        <button type="button" class="danger" data-delete-view="${escapeAttr(v.id)}">×</button>
+      </div>
+    </div>
+  `).join("");
+  els.savedViewsList.querySelectorAll("[data-load-view]").forEach((btn) => {
+    btn.addEventListener("click", () => loadView(btn.dataset.loadView));
+  });
+  els.savedViewsList.querySelectorAll("[data-delete-view]").forEach((btn) => {
+    btn.addEventListener("click", () => deleteView(btn.dataset.deleteView));
+  });
+}
+
+function loadSavedViews() {
+  try {
+    const raw = localStorage.getItem(VIEWS_STORAGE_KEY);
+    if (raw) state.savedViews = JSON.parse(raw);
+  } catch {
+    state.savedViews = [];
+  }
+}
+
+function persistSavedViews() {
+  localStorage.setItem(VIEWS_STORAGE_KEY, JSON.stringify(state.savedViews));
+}
+
+function saveCurrentPreset() {
+  const name = prompt("Nombre del estilo guardado:", `Estilo guardado ${state.savedPresets.length + 1}`);
+  if (!name) return;
+  const preset = {
+    id: `preset-${Date.now()}-${Math.random().toString(16).slice(2)}`,
+    name: name.trim(),
+    template: state.template,
+    wallColor: state.wallColor,
+    wallSideColor: state.wallSideColor,
+    floorType: state.floorType,
+    view: state.view,
+    savedAt: new Date().toISOString(),
+  };
+  state.savedPresets.push(preset);
+  persistSavedPresets();
+  renderSavedPresets();
+}
+
+function applyCustomPreset(presetId) {
+  const preset = state.savedPresets.find((p) => p.id === presetId);
+  if (!preset) return;
+  state.template = preset.template;
+  state.wallColor = preset.wallColor;
+  state.wallSideColor = preset.wallSideColor || preset.wallColor;
+  state.floorType = preset.floorType;
+  state.view = preset.view;
+  renderControls();
+  updateRoomVisuals();
+  renderViewThumbnails();
+  saveScene();
+}
+
+function deletePreset(presetId) {
+  state.savedPresets = state.savedPresets.filter((p) => p.id !== presetId);
+  persistSavedPresets();
+  renderSavedPresets();
+}
+
+function renderSavedPresets() {
+  if (!state.savedPresets.length) {
+    els.savedPresetsList.innerHTML = `
+      Ninguno guardado.
+      <div style="margin-top:8px;"><button type="button" id="saveCustomPresetBtn" style="padding:5px 10px;border-radius:6px;border:1px solid var(--line);background:rgba(255,255,255,.06);color:var(--text);font-size:11px;cursor:pointer">Guardar estilo actual</button></div>
+    `;
+    const btn = els.savedPresetsList.querySelector("#saveCustomPresetBtn");
+    if (btn) btn.addEventListener("click", saveCurrentPreset);
+    return;
+  }
+  els.savedPresetsList.innerHTML = state.savedPresets.map((p) => `
+    <div class="saved-item">
+      <div>
+        <span class="name">${escapeHtml(p.name)}</span>
+        <span class="meta">${escapeHtml(TEMPLATES[p.template]?.name || p.template)} · ${escapeHtml(WALL_COLORS[p.wallColor]?.name || p.wallColor)} · ${escapeHtml(FLOOR_TYPES[p.floorType]?.name || p.floorType)}</span>
+      </div>
+      <div class="actions">
+        <button type="button" data-load-preset="${escapeAttr(p.id)}">Cargar</button>
+        <button type="button" class="danger" data-delete-preset="${escapeAttr(p.id)}">×</button>
+      </div>
+    </div>
+  `).join("") + `
+    <div style="margin-top:8px;"><button type="button" id="saveCustomPresetBtn" style="padding:5px 10px;border-radius:6px;border:1px solid var(--line);background:rgba(255,255,255,.06);color:var(--text);font-size:11px;cursor:pointer">Guardar estilo actual</button></div>
+  `;
+  els.savedPresetsList.querySelectorAll("[data-load-preset]").forEach((btn) => {
+    btn.addEventListener("click", () => applyCustomPreset(btn.dataset.loadPreset));
+  });
+  els.savedPresetsList.querySelectorAll("[data-delete-preset]").forEach((btn) => {
+    btn.addEventListener("click", () => deletePreset(btn.dataset.deletePreset));
+  });
+  const btn = els.savedPresetsList.querySelector("#saveCustomPresetBtn");
+  if (btn) btn.addEventListener("click", saveCurrentPreset);
+}
+
+function loadSavedPresets() {
+  try {
+    const raw = localStorage.getItem(PRESETS_STORAGE_KEY);
+    if (raw) state.savedPresets = JSON.parse(raw);
+  } catch {
+    state.savedPresets = [];
+  }
+}
+
+function persistSavedPresets() {
+  localStorage.setItem(PRESETS_STORAGE_KEY, JSON.stringify(state.savedPresets));
+}
+
 function saveScene() {
   const payload = {
     template: state.template,
     wallColor: state.wallColor,
+    wallSideColor: state.wallSideColor,
     floorType: state.floorType,
     view: state.view,
     layers: state.layers,
@@ -611,10 +996,10 @@ function loadLastScene() {
     const payload = JSON.parse(raw);
     state.template = payload.template || "living-room";
     state.wallColor = payload.wallColor || "warm-white";
+    state.wallSideColor = payload.wallSideColor || payload.wallColor || "warm-white";
     state.floorType = payload.floorType || "light-wood";
     state.view = payload.view || "dollhouse";
     state.layers = Array.isArray(payload.layers) ? payload.layers : [];
-    // Backward compatibility: ensure includedInProposal exists
     state.layers.forEach((layer) => {
       if (layer.includedInProposal === undefined) layer.includedInProposal = true;
     });
@@ -622,6 +1007,7 @@ function loadLastScene() {
     state.selectedId = null;
     renderControls();
     updateRoomVisuals();
+    renderViewThumbnails();
     renderLayers();
     renderInspector();
     renderUsedProducts();
@@ -648,11 +1034,9 @@ async function exportPng() {
   const ctx = canvas.getContext("2d");
   ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
 
-  // Background
   ctx.fillStyle = "#0a0f1a";
   ctx.fillRect(0, 0, rect.width, rect.height);
 
-  // Draw room shell (simplified for export)
   const wall = WALL_COLORS[state.wallColor];
   const floor = FLOOR_TYPES[state.floorType];
 
@@ -662,22 +1046,9 @@ async function exportPng() {
   ctx.fillStyle = "#0a0f1a";
   ctx.fillRect(0, rect.height * 0.62, rect.width, rect.height * 0.38);
 
-  // Floor
-  const floorY = rect.height * 0.62;
-  const floorH = rect.height * 0.38;
-
-  // Create pattern for floor
-  const floorCanvas = document.createElement("canvas");
-  floorCanvas.width = 40;
-  floorCanvas.height = 40;
-  const fctx = floorCanvas.getContext("2d");
-  fctx.fillStyle = "#d4a574";
-  fctx.fillRect(0, 0, 40, 40);
-  // Simplified floor: use a solid color approximation
   ctx.fillStyle = extractBaseColor(floor.style) || "#d4a574";
-  ctx.fillRect(0, floorY, rect.width, floorH);
+  ctx.fillRect(0, rect.height * 0.62, rect.width, rect.height * 0.38);
 
-  // Products
   const ordered = state.layers.slice().sort((a, b) => a.z - b.z);
   for (const layer of ordered) {
     const asset = getAsset(layer.assetId);
@@ -695,7 +1066,7 @@ async function exportPng() {
       ctx.drawImage(img, -width / 2, -height / 2, width, height);
       ctx.restore();
     } catch {
-      // skip product that fails to load
+      // skip
     }
   }
 
@@ -714,6 +1085,7 @@ function exportProjectJson() {
     exportedAt: new Date().toISOString(),
     template: state.template,
     wallColor: state.wallColor,
+    wallSideColor: state.wallSideColor,
     floorType: state.floorType,
     view: state.view,
     layers: state.layers,
