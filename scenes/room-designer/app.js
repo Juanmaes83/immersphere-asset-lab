@@ -213,7 +213,6 @@ async function init() {
   renderControls();
   bindEvents();
   await loadCatalog();
-  applyCatalogFilters();
   updateRoomVisuals();
   renderLayers();
   renderInspector();
@@ -288,31 +287,31 @@ function renderControls() {
 }
 
 function bindEvents() {
-  els.catalogSearch.addEventListener("input", applyCatalogFilters);
-  els.collectionFilter.addEventListener("change", applyCatalogFilters);
-  els.typeFilter.addEventListener("change", applyCatalogFilters);
+  on(els.catalogSearch, "input", applyCatalogFilters);
+  on(els.collectionFilter, "change", applyCatalogFilters);
+  on(els.typeFilter, "change", applyCatalogFilters);
 
-  els.scaleInput.addEventListener("input", () => updateSelected({ scale: Number(els.scaleInput.value) }));
-  els.rotationInput.addEventListener("input", () => updateSelected({ rotation: Number(els.rotationInput.value) }));
-  els.xInput.addEventListener("input", () => updateSelected({ x: clamp(Number(els.xInput.value), 0, 100) }));
-  els.yInput.addEventListener("input", () => updateSelected({ y: clamp(Number(els.yInput.value), 0, 100) }));
-  els.deleteBtn.addEventListener("click", deleteSelected);
-  els.frontBtn.addEventListener("click", () => moveSelectedZ("front"));
-  els.backBtn.addEventListener("click", () => moveSelectedZ("back"));
-  els.proposalToggleBtn.addEventListener("click", toggleProposal);
+  on(els.scaleInput, "input", () => updateSelected({ scale: Number(els.scaleInput.value) }));
+  on(els.rotationInput, "input", () => updateSelected({ rotation: Number(els.rotationInput.value) }));
+  on(els.xInput, "input", () => updateSelected({ x: clamp(Number(els.xInput.value), 0, 100) }));
+  on(els.yInput, "input", () => updateSelected({ y: clamp(Number(els.yInput.value), 0, 100) }));
+  on(els.deleteBtn, "click", deleteSelected);
+  on(els.frontBtn, "click", () => moveSelectedZ("front"));
+  on(els.backBtn, "click", () => moveSelectedZ("back"));
+  on(els.proposalToggleBtn, "click", toggleProposal);
 
-  els.clearSceneBtn.addEventListener("click", clearScene);
-  els.saveSceneBtn.addEventListener("click", saveScene);
+  on(els.clearSceneBtn, "click", clearScene);
+  on(els.saveSceneBtn, "click", saveScene);
 
-  els.projectNameInput.addEventListener("input", updateProposalData);
-  els.clientNameInput.addEventListener("input", updateProposalData);
-  els.clientEmailInput.addEventListener("input", updateProposalData);
-  els.clientPhoneInput.addEventListener("input", updateProposalData);
-  els.proposalNotesInput.addEventListener("input", updateProposalData);
-  els.loadSceneBtn.addEventListener("click", loadLastScene);
-  els.exportPngBtn.addEventListener("click", exportPng);
-  els.exportProjectBtn.addEventListener("click", exportProjectJson);
-  els.exportListBtn.addEventListener("click", exportUsedProductsJson);
+  on(els.projectNameInput, "input", updateProposalData);
+  on(els.clientNameInput, "input", updateProposalData);
+  on(els.clientEmailInput, "input", updateProposalData);
+  on(els.clientPhoneInput, "input", updateProposalData);
+  on(els.proposalNotesInput, "input", updateProposalData);
+  on(els.loadSceneBtn, "click", loadLastScene);
+  on(els.exportPngBtn, "click", exportPng);
+  on(els.exportProjectBtn, "click", exportProjectJson);
+  on(els.exportListBtn, "click", exportUsedProductsJson);
 
   const exportCommercialBtn = document.querySelector("#exportCommercialBtn");
   const printProposalBtn = document.querySelector("#printProposalBtn");
@@ -323,7 +322,7 @@ function bindEvents() {
   if (exportHtmlBtn) exportHtmlBtn.addEventListener("click", exportProposalHtml);
   if (requestDemoBtn) requestDemoBtn.addEventListener("click", requestDemo);
 
-  els.stage.addEventListener("pointerdown", (event) => {
+  on(els.stage, "pointerdown", (event) => {
     if (event.target === els.stage || event.target === els.layerRoot || event.target === els.roomScene || event.target === els.roomShell || event.target.classList.contains("wall-back") || event.target.classList.contains("room-floor")) {
       selectLayer(null);
     }
@@ -408,20 +407,30 @@ async function loadCatalog() {
     if (!response.ok) throw new Error(`Manifest HTTP ${response.status}`);
     const manifest = await response.json();
     state.catalog = manifest.filter((asset) => asset.hasRealModel === true);
-    state.filteredCatalog = [...state.catalog];
-    updateCatalogStatus();
+    if (!state.catalog.length) {
+      state.filteredCatalog = [];
+      renderCatalogMessage("No hay productos reales disponibles en el manifest.");
+      updateCatalogStatus();
+      return;
+    }
+    normalizeCatalogFilters();
+    applyCatalogFilters();
   } catch (error) {
-    els.catalogStatus.textContent = `No se pudo cargar el catálogo: ${error.message}`;
+    state.catalog = [];
+    state.filteredCatalog = [];
+    renderCatalogMessage("No se pudo cargar el catalogo. Revisa manifest/ikea-sample.manifest.json.");
+    if (els.catalogStatus) els.catalogStatus.textContent = `No se pudo cargar el catalogo: ${error.message}`;
   }
 }
 
 function applyCatalogFilters() {
-  const query = els.catalogSearch.value.trim().toLowerCase();
-  const collection = els.collectionFilter.value;
-  const type = els.typeFilter.value;
+  try {
+  const query = (els.catalogSearch?.value || "").trim().toLowerCase();
+  const collection = normalizeFilterValue(els.collectionFilter?.value);
+  const type = normalizeFilterValue(els.typeFilter?.value);
 
   state.filteredCatalog = state.catalog.filter((asset) => {
-    if (collection && asset.demoScene !== collection) return false;
+    if (collection && getCollectionKey(asset) !== collection) return false;
     if (type) {
       const allowed = TYPE_MAP[type] || [];
       if (!allowed.includes(asset.category)) return false;
@@ -432,11 +441,17 @@ function applyCatalogFilters() {
 
   renderCatalog();
   updateCatalogStatus();
+  } catch (error) {
+    console.error("Room Designer catalog render failed:", error);
+    renderCatalogMessage(`Error renderizando catalogo: ${error.message}`);
+    if (els.catalogStatus) els.catalogStatus.textContent = "Error renderizando catalogo.";
+  }
 }
 
 function renderCatalog() {
+  try {
   if (!state.filteredCatalog.length) {
-    els.productList.innerHTML = `<div class="used-item">No hay productos reales que coincidan.</div>`;
+    renderCatalogMessage("No hay productos reales que coincidan.");
     return;
   }
   els.productList.innerHTML = state.filteredCatalog.map((asset) => {
@@ -456,6 +471,10 @@ function renderCatalog() {
   els.productList.querySelectorAll("[data-add-asset]").forEach((button) => {
     button.addEventListener("click", () => addAssetToScene(button.dataset.addAsset));
   });
+  } catch (error) {
+    console.error("Room Designer renderCatalog failed:", error);
+    renderCatalogMessage(`Error renderizando catalogo: ${error.message}`);
+  }
 }
 
 function addAssetToScene(assetId) {
@@ -1485,7 +1504,41 @@ function categoryLabel(value) {
 }
 
 function updateCatalogStatus() {
-  els.catalogStatus.textContent = `${state.filteredCatalog.length} productos disponibles.`;
+  if (els.catalogStatus) els.catalogStatus.textContent = `${state.filteredCatalog.length} productos disponibles.`;
+}
+
+function on(element, eventName, handler) {
+  if (!element) {
+    console.warn(`Room Designer: missing DOM element for ${eventName} listener`);
+    return;
+  }
+  element.addEventListener(eventName, handler);
+}
+
+function normalizeCatalogFilters() {
+  resetInvalidSelect(els.collectionFilter, ["", "all", "terrace-mediterranean-premium", "living-room-nordic-premium"]);
+  resetInvalidSelect(els.typeFilter, ["", "all", ...Object.keys(TYPE_MAP)]);
+  if (els.catalogSearch && typeof els.catalogSearch.value !== "string") els.catalogSearch.value = "";
+}
+
+function resetInvalidSelect(select, allowedValues) {
+  if (!select) return;
+  if (!allowedValues.includes(select.value)) select.value = "";
+}
+
+function normalizeFilterValue(value) {
+  if (!value || value === "all") return "";
+  return value;
+}
+
+function getCollectionKey(asset) {
+  return asset.collectionId || asset.demoScene || "";
+}
+
+function renderCatalogMessage(message) {
+  if (els.productList) {
+    els.productList.innerHTML = `<div class="used-item">${escapeHtml(message)}</div>`;
+  }
 }
 
 function normalizePath(path) {
