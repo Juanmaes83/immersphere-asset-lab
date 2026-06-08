@@ -3,7 +3,11 @@ const SAMPLE_ROOM_URL = "/demos/empty-room-staging/assets/empty-room-placeholder
 const PRODUCT_TYPE_GROUPS = {
   sofas: ["sofa"],
   armchairs: ["armchair", "chair"],
+  chairs: ["chair"],
   tables: ["coffee-table", "table", "side-table"],
+  benches: ["bench"],
+  sideboards: ["sideboard"],
+  "display-cabinets": ["display-cabinet"],
   "tv-unit": ["tv-unit"],
   lighting: ["lighting", "lamp"],
   rugs: ["rug"],
@@ -510,6 +514,7 @@ function collectionLabel(value) {
     "terrace-mediterranean-premium": "Terraza Mediterranea Premium",
     "living-room-nordic-premium": "Salon Nordico Premium",
     "master-bedroom-premium": "Dormitorio Principal Premium",
+    "dining-room-mediterranean-premium": "Comedor Mediterraneo Premium",
   };
   return labels[value] || value;
 }
@@ -535,6 +540,9 @@ function categoryLabel(value) {
     wardrobe: "Armario",
     vanity: "Tocador",
     mirror: "Espejo",
+    bench: "Banco",
+    sideboard: "Aparador",
+    "display-cabinet": "Vitrina",
   };
   return labels[value] || value;
 }

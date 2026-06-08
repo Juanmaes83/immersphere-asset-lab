@@ -248,6 +248,27 @@ Tercera coleccion activa del **Decor Asset Lab** y primera coleccion de dormitor
 
 ---
 
+## Coleccion: Comedor Mediterraneo Premium
+
+Cuarta coleccion activa del **Decor Asset Lab** y primera coleccion especifica de comedor.
+
+**ID:** `dining-room-mediterranean-premium`
+
+**Cobertura actual:** 16 / 16 assets reales completados
+- Mesas: 5
+- Sillas: 6
+- Bancos: 2
+- Aparador: 1
+- Vitrina: 1
+- Alfombra: 1
+
+**Uso comercial:** staging visual de comedor, propuestas de vivienda amueblada, catalogo interactivo, Room Designer Lite y demos para inmobiliarias, promotoras e interioristas.
+
+**Documentacion:**
+- [`docs/collections/dining-room-mediterranean-premium.md`](docs/collections/dining-room-mediterranean-premium.md) - Vision, lista de assets, categorias y estado QA.
+
+---
+
 ## Commercial demo: Terrace Mediterranean Premium
 
 Demo comercial interactiva que muestra cómo un espacio vacío se transforma en una terraza mediterránea premium amueblada con productos reales de catálogo autorizado.

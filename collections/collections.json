@@ -1,7 +1,7 @@
 {
   "version": "0.1.0",
   "updatedAt": "2026-06-08",
-  "description": "Catalogo multiestancia inicial para Decor Asset Lab con colecciones reales de terraza, salon y dormitorio principal.",
+  "description": "Catalogo multiestancia inicial para Decor Asset Lab con colecciones reales de terraza, salon, dormitorio principal y comedor.",
   "collections": [
     {
       "id": "terrace-mediterranean-premium",
@@ -68,24 +68,26 @@
       "notes": "Coleccion activa con 16 GLB reales para dormitorio principal: camas, mesitas, comodas, armario, tocadores, espejo y alfombra."
     },
     {
-      "id": "mediterranean-dining-room",
-      "name": "Comedor Mediterraneo",
-      "status": "planned",
+      "id": "dining-room-mediterranean-premium",
+      "name": "Comedor Mediterraneo Premium",
+      "status": "active",
       "roomType": "dining-room",
-      "targetAssetCount": 10,
-      "currentRealAssetCount": 0,
+      "targetAssetCount": 16,
+      "currentRealAssetCount": 16,
       "styleTags": [
         "mediterranean",
-        "hosting",
-        "wood",
-        "light"
+        "dining",
+        "natural wood",
+        "warm",
+        "premium"
       ],
       "commercialUseCases": [
-        "escenas familiares",
-        "promociones residenciales",
-        "contenido para campanas visuales"
+        "staging de comedor",
+        "catalogo interactivo",
+        "developer showroom",
+        "interior design demo"
       ],
-      "notes": "Pensada para reforzar narrativa de vivienda lista para vivir y contenido comercial aspiracional."
+      "notes": "Coleccion activa con 16 GLB reales para comedor mediterraneo: mesas, sillas, bancos, aparador, vitrina y alfombra."
     },
     {
       "id": "master-bedroom-minimal",

@@ -524,6 +524,7 @@ function collectionLabel(value) {
     "terrace-mediterranean-premium": "Terraza Mediterranea Premium",
     "living-room-nordic-premium": "Salon Nordico Premium",
     "master-bedroom-premium": "Dormitorio Principal Premium",
+    "dining-room-mediterranean-premium": "Comedor Mediterraneo Premium",
   };
   return labels[value] || value;
 }
@@ -533,6 +534,7 @@ function roomLabel(value) {
     terrace: "Terraza",
     "living-room": "Salon",
     bedroom: "Dormitorio",
+    "dining-room": "Comedor",
   };
   return labels[value] || value;
 }
@@ -558,6 +560,9 @@ function categoryLabel(value) {
     wardrobe: "Armario",
     vanity: "Tocador",
     mirror: "Espejo",
+    bench: "Banco",
+    sideboard: "Aparador",
+    "display-cabinet": "Vitrina",
   };
   return labels[value] || value;
 }

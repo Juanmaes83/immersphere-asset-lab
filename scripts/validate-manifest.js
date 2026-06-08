@@ -27,7 +27,7 @@ const REQUIRED_FIELDS = [
 
 const VALID_CATEGORIES = [
   'sofa', 'armchair', 'coffee-table', 'dining-table', 'chair',
-  'bed', 'bedside-table', 'dresser', 'wardrobe', 'vanity', 'mirror', 'lamp', 'rug', 'decor', 'shelf',
+  'bed', 'bedside-table', 'dresser', 'wardrobe', 'vanity', 'mirror', 'bench', 'sideboard', 'display-cabinet', 'lamp', 'rug', 'decor', 'shelf',
   'kitchen', 'bathroom', 'office', 'textile', 'other',
   'table', 'side-table', 'tv-unit', 'lounge', 'lighting', 'planter'
 ];

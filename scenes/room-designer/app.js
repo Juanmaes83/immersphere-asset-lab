@@ -44,6 +44,9 @@ const TYPE_MAP = {
   sofas: ["sofa"],
   armchairs: ["armchair"],
   tables: ["table", "coffee-table", "side-table", "dining-table"],
+  benches: ["bench"],
+  sideboards: ["sideboard"],
+  "display-cabinets": ["display-cabinet"],
   "tv-units": ["tv-unit"],
   lighting: ["lighting", "lamp"],
   rugs: ["rug"],
@@ -67,6 +70,9 @@ const COMBINES_RULES = {
   lighting: ["sofa", "armchair", "decor"],
   chair: ["table", "side-table", "decor"],
   table: ["chair", "lighting", "decor"],
+  bench: ["table", "rug", "decor"],
+  sideboard: ["table", "chair", "decor"],
+  "display-cabinet": ["table", "chair", "decor"],
   bed: ["side-table", "lighting", "rug", "wardrobe"],
   "bedside-table": ["bed", "lighting", "mirror", "vanity"],
   dresser: ["mirror", "lighting", "decor", "bed"],
@@ -1525,6 +1531,9 @@ function categoryLabel(value) {
     wardrobe: "Armario",
     vanity: "Tocador",
     mirror: "Espejo",
+    bench: "Banco",
+    sideboard: "Aparador",
+    "display-cabinet": "Vitrina",
   };
   return labels[value] || value;
 }
@@ -1542,7 +1551,7 @@ function on(element, eventName, handler) {
 }
 
 function normalizeCatalogFilters() {
-  resetInvalidSelect(els.collectionFilter, ["", "all", "terrace-mediterranean-premium", "living-room-nordic-premium", "master-bedroom-premium"]);
+  resetInvalidSelect(els.collectionFilter, ["", "all", "terrace-mediterranean-premium", "living-room-nordic-premium", "master-bedroom-premium", "dining-room-mediterranean-premium"]);
   resetInvalidSelect(els.typeFilter, ["", "all", ...Object.keys(TYPE_MAP)]);
   if (els.catalogSearch && typeof els.catalogSearch.value !== "string") els.catalogSearch.value = "";
 }
