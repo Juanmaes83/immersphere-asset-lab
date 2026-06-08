@@ -96,6 +96,37 @@ Crear un módulo MVP visual para diseñar estancias base personalizables sin nec
 7. **Export comercial:** generar PDF de propuesta con precios.
 8. **Presets por cliente:** guardar configuraciones de marca/inmobiliaria.
 
+### Fase 4H.3 completada — Mejoras visuales y de interacción
+- ✅ Sombra elíptica bajo cada producto.
+- ✅ Contorno de selección mejorado (azul premium + glow).
+- ✅ Mini menú flotante con acciones rápidas: girar, duplicar, traer al frente, enviar atrás, eliminar.
+- ✅ Panel de producto más comercial (preview, marca, categoría, colección, SKU, badge "Producto real 3D disponible").
+- ✅ Botón "Añadir a propuesta" con toggle.
+- ✅ Resumen de propuesta con cards visuales, contador y agrupación.
+- ✅ Enlace "Ver en catálogo 3D" al viewer.
+
+### Fase 4H.4 — Panel de producto avanzado (próxima)
+- Ficha lateral de producto con más metadatos.
+- Variantes visuales del producto si existen.
+- "Sustituir por similar" con sugerencias del catálogo.
+- "Combina bien con" recomendaciones.
+- Añadir a presupuesto con cantidad editable.
+- Listado de productos usados más comercial con precios (cuando estén disponibles).
+
+### Fase 4H.5 — Vistas avanzadas y miniaturas (próxima)
+- Miniaturas de vistas en barra lateral.
+- Guardar cámara/vista preferida.
+- Vista superior más clara con grid.
+- Vista lateral izquierda/derecha con perspectiva refinada.
+- Modo casa de muñecas más pulido con sombras ambientales.
+
+### Fase 4H.6 — Materiales y pintura avanzada (próxima)
+- Pintar pared principal y pared lateral por separado.
+- Cambiar suelo con más opciones y texturas.
+- Guardar presets de estilo personalizados.
+- Paletas por estancia: mood mediterráneo, nórdico, minimal, industrial.
+- Aplicar mood con un solo clic.
+
 ## URLs
 
 - Local: `http://localhost:3456/scenes/room-designer/`

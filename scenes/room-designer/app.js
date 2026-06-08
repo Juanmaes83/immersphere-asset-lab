@@ -86,7 +86,9 @@ const els = {
 
   selectionStatus: document.querySelector("#selectionStatus"),
   inspectorFields: document.querySelector("#inspectorFields"),
-  selectedName: document.querySelector("#selectedName"),
+  inspectorPreview: document.querySelector("#inspectorPreview"),
+  inspectorBadge: document.querySelector("#inspectorBadge"),
+  inspectorMeta: document.querySelector("#inspectorMeta"),
   scaleInput: document.querySelector("#scaleInput"),
   rotationInput: document.querySelector("#rotationInput"),
   xInput: document.querySelector("#xInput"),
@@ -94,6 +96,9 @@ const els = {
   deleteBtn: document.querySelector("#deleteBtn"),
   frontBtn: document.querySelector("#frontBtn"),
   backBtn: document.querySelector("#backBtn"),
+  proposalToggleBtn: document.querySelector("#proposalToggleBtn"),
+  viewerLink: document.querySelector("#viewerLink"),
+  proposalCount: document.querySelector("#proposalCount"),
 
   usedProductsList: document.querySelector("#usedProductsList"),
   exportPngBtn: document.querySelector("#exportPngBtn"),
@@ -172,6 +177,7 @@ function bindEvents() {
   els.deleteBtn.addEventListener("click", deleteSelected);
   els.frontBtn.addEventListener("click", () => moveSelectedZ("front"));
   els.backBtn.addEventListener("click", () => moveSelectedZ("back"));
+  els.proposalToggleBtn.addEventListener("click", toggleProposal);
 
   els.clearSceneBtn.addEventListener("click", clearScene);
   els.saveSceneBtn.addEventListener("click", saveScene);
@@ -314,6 +320,7 @@ function addAssetToScene(assetId) {
     scale: 1,
     rotation: 0,
     z: ++state.zCounter,
+    includedInProposal: true,
   };
   state.layers.push(layer);
   renderLayers();
@@ -337,7 +344,10 @@ function renderLayers() {
       item.style.top = `${layer.y}%`;
       item.style.zIndex = String(layer.z);
       item.style.transform = `translate(-50%, -50%) rotate(${layer.rotation}deg) scale(${layer.scale})`;
-      item.innerHTML = `<img src="${escapeAttr(normalizePath(asset.previewPath))}" alt="${escapeAttr(asset.productName)}">`;
+      item.innerHTML = `
+        <img src="${escapeAttr(normalizePath(asset.previewPath))}" alt="${escapeAttr(asset.productName)}">
+        <div class="item-shadow" style="transform:translateX(-50%) scale(${layer.scale})"></div>
+      `;
       item.addEventListener("pointerdown", startDrag);
       item.addEventListener("click", (event) => {
         event.stopPropagation();
@@ -345,6 +355,76 @@ function renderLayers() {
       });
       els.layerRoot.appendChild(item);
     });
+  renderMiniMenu();
+}
+
+function renderMiniMenu() {
+  const existing = els.layerRoot.querySelector(".item-mini-menu");
+  if (existing) existing.remove();
+  if (!state.selectedId) return;
+  const layer = getLayer(state.selectedId);
+  if (!layer) return;
+  const menu = document.createElement("div");
+  menu.className = "item-mini-menu";
+  menu.style.left = `${layer.x}%`;
+  menu.style.top = `${layer.y}%`;
+  menu.innerHTML = `
+    <button type="button" title="Girar 15°" data-action="rotate">↻</button>
+    <button type="button" title="Duplicar" data-action="duplicate">⧉</button>
+    <button type="button" title="Traer al frente" data-action="front">▵</button>
+    <button type="button" title="Enviar atrás" data-action="back">▿</button>
+    <button type="button" title="Eliminar" class="danger" data-action="delete">🗑</button>
+  `;
+  menu.querySelectorAll("[data-action]").forEach((btn) => {
+    btn.addEventListener("click", (event) => {
+      event.stopPropagation();
+      const action = btn.dataset.action;
+      if (action === "rotate") rotateSelected();
+      if (action === "duplicate") duplicateSelected();
+      if (action === "front") moveSelectedZ("front");
+      if (action === "back") moveSelectedZ("back");
+      if (action === "delete") deleteSelected();
+    });
+  });
+  els.layerRoot.appendChild(menu);
+}
+
+function rotateSelected() {
+  const layer = getLayer(state.selectedId);
+  if (!layer) return;
+  layer.rotation = ((layer.rotation || 0) + 15) % 360;
+  renderLayers();
+  renderInspector();
+  saveScene();
+}
+
+function duplicateSelected() {
+  const layer = getLayer(state.selectedId);
+  if (!layer) return;
+  const copy = {
+    id: `layer-${Date.now()}-${Math.random().toString(16).slice(2)}`,
+    assetId: layer.assetId,
+    x: clamp((layer.x || 50) + 4, 0, 100),
+    y: clamp((layer.y || 70) + 4, 0, 100),
+    scale: layer.scale ?? 1,
+    rotation: layer.rotation ?? 0,
+    z: ++state.zCounter,
+    includedInProposal: layer.includedInProposal !== false,
+  };
+  state.layers.push(copy);
+  renderLayers();
+  selectLayer(copy.id);
+  renderUsedProducts();
+  saveScene();
+}
+
+function toggleProposal() {
+  const layer = getLayer(state.selectedId);
+  if (!layer) return;
+  layer.includedInProposal = !layer.includedInProposal;
+  renderInspector();
+  renderUsedProducts();
+  saveScene();
 }
 
 function startDrag(event) {
@@ -426,7 +506,33 @@ function renderInspector() {
   const asset = layer ? getAsset(layer.assetId) : null;
   els.inspectorFields.classList.toggle("is-disabled", !layer);
   els.selectionStatus.textContent = asset ? `Editando: ${asset.productName}` : "Ningún elemento seleccionado.";
-  els.selectedName.value = asset?.productName || "";
+
+  if (asset) {
+    els.inspectorPreview.style.display = "block";
+    els.inspectorPreview.src = normalizePath(asset.previewPath);
+    els.inspectorPreview.alt = asset.productName;
+    els.inspectorBadge.style.display = "inline-flex";
+    els.inspectorMeta.innerHTML = `
+      <strong style="color:var(--text)">${escapeHtml(asset.productName)}</strong><br>
+      ${escapeHtml(asset.brand || "")} · ${escapeHtml(categoryLabel(asset.category))}<br>
+      Colección: ${escapeHtml(asset.collection || "N/A")}<br>
+      SKU: ${escapeHtml(asset.sku || "N/A")}
+    `;
+    els.viewerLink.style.display = "inline-flex";
+    els.viewerLink.href = `/viewer/index.html`;
+    els.proposalToggleBtn.style.display = "block";
+    const isIn = layer.includedInProposal !== false;
+    els.proposalToggleBtn.classList.toggle("is-included", isIn);
+    els.proposalToggleBtn.textContent = isIn ? "✓ Incluido en propuesta" : "+ Añadir a propuesta";
+  } else {
+    els.inspectorPreview.style.display = "none";
+    els.inspectorPreview.src = "";
+    els.inspectorBadge.style.display = "none";
+    els.inspectorMeta.innerHTML = "";
+    els.viewerLink.style.display = "none";
+    els.proposalToggleBtn.style.display = "none";
+  }
+
   els.scaleInput.value = layer?.scale ?? 1;
   els.rotationInput.value = layer?.rotation ?? 0;
   els.xInput.value = layer ? round(layer.x) : "";
@@ -434,23 +540,35 @@ function renderInspector() {
 }
 
 function renderUsedProducts() {
+  const proposalLayers = state.layers.filter((l) => l.includedInProposal !== false);
   if (!state.layers.length) {
-    els.usedProductsList.textContent = "Sin productos en escena.";
+    els.usedProductsList.innerHTML = `<div class="proposal-empty">Sin productos en escena. Añade productos desde el catálogo.</div>`;
+    els.proposalCount.textContent = "0";
     return;
   }
-  const grouped = getUsedProducts();
+  if (!proposalLayers.length) {
+    els.usedProductsList.innerHTML = `<div class="proposal-empty">Ningún producto incluido en la propuesta.</div>`;
+    els.proposalCount.textContent = "0";
+    return;
+  }
+  const grouped = getUsedProducts(true);
+  els.proposalCount.textContent = `${grouped.length} ref. · ${proposalLayers.length} uds.`;
   els.usedProductsList.innerHTML = grouped.map((item) => `
-    <article class="used-item">
-      <strong>${escapeHtml(item.productName)} × ${item.quantity}</strong><br>
-      ${escapeHtml(item.brand)} · ${escapeHtml(item.category)}<br>
-      SKU: ${escapeHtml(item.sku || "N/A")} · Colección: ${escapeHtml(item.collection || "N/A")}
+    <article class="proposal-card">
+      <img src="${escapeAttr(normalizePath(item.previewPath))}" alt="${escapeAttr(item.productName)}">
+      <div class="info">
+        <p class="name">${escapeHtml(item.productName)}</p>
+        <p class="meta">${escapeHtml(item.brand)} · ${escapeHtml(categoryLabel(item.category))} · SKU: ${escapeHtml(item.sku || "N/A")}</p>
+      </div>
+      <span class="qty">×${item.quantity}</span>
     </article>
   `).join("");
 }
 
-function getUsedProducts() {
+function getUsedProducts(onlyProposal = false) {
   const map = new Map();
   state.layers.forEach((layer) => {
+    if (onlyProposal && layer.includedInProposal === false) return;
     const asset = getAsset(layer.assetId);
     if (!asset) return;
     const key = asset.sku || asset.id;
@@ -461,6 +579,7 @@ function getUsedProducts() {
       category: asset.category || "",
       collection: asset.collection || "",
       sku: asset.sku || "",
+      previewPath: asset.previewPath || "",
       quantity: 0,
     };
     existing.quantity += 1;
@@ -495,6 +614,10 @@ function loadLastScene() {
     state.floorType = payload.floorType || "light-wood";
     state.view = payload.view || "dollhouse";
     state.layers = Array.isArray(payload.layers) ? payload.layers : [];
+    // Backward compatibility: ensure includedInProposal exists
+    state.layers.forEach((layer) => {
+      if (layer.includedInProposal === undefined) layer.includedInProposal = true;
+    });
     state.zCounter = Number(payload.zCounter) || 10;
     state.selectedId = null;
     renderControls();

@@ -110,15 +110,14 @@
       <div id="productList" class="product-list" aria-live="polite"></div>
 
       <div class="panel-head" style="margin-top:18px;border-top:1px solid rgba(255,255,255,.12);padding-top:14px;">
-        <h2>Elemento seleccionado</h2>
+        <h2>Producto seleccionado</h2>
         <p id="selectionStatus">Ningún elemento seleccionado.</p>
       </div>
 
       <div id="inspectorFields" class="inspector-fields is-disabled">
-        <label class="field">
-          <span>Producto</span>
-          <input id="selectedName" type="text" readonly>
-        </label>
+        <img id="inspectorPreview" class="inspector-preview" src="" alt="" style="display:none">
+        <div id="inspectorBadge" class="inspector-badge" style="display:none">Producto real 3D disponible</div>
+        <div id="inspectorMeta" class="inspector-meta"></div>
         <label class="field">
           <span>Escala</span>
           <input id="scaleInput" type="range" min="0.2" max="2.5" step="0.05" value="1">
@@ -141,11 +140,16 @@
           <button id="frontBtn" type="button">Traer al frente</button>
           <button id="backBtn" type="button">Enviar atrás</button>
         </div>
-        <button id="deleteBtn" type="button" class="danger">Eliminar elemento</button>
+        <button id="proposalToggleBtn" type="button" class="proposal-toggle is-included">Añadir a propuesta</button>
+        <a id="viewerLink" class="viewer-link" href="/viewer/index.html" target="_blank" style="display:none">Ver en catálogo 3D →</a>
+        <button id="deleteBtn" type="button" class="danger" style="margin-top:10px;width:100%">Eliminar de escena</button>
       </div>
 
       <section class="used-products" aria-labelledby="usedTitle">
-        <h2 id="usedTitle">Productos usados</h2>
+        <div class="section-header">
+          <h2 id="usedTitle">Resumen de propuesta</h2>
+          <span id="proposalCount" class="proposal-count"></span>
+        </div>
         <div id="usedProductsList" class="used-list">Sin productos en escena.</div>
       </section>
 
