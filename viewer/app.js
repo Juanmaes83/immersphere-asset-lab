@@ -17,12 +17,16 @@
   // ── DOM References ─────────────────────────────────────────────
   const grid = document.getElementById('catalog-grid');
   const searchInput = document.getElementById('search-input');
+  const collectionFilter = document.getElementById('collection-filter');
   const categoryFilter = document.getElementById('category-filter');
   const roomFilter = document.getElementById('room-filter');
   const styleFilter = document.getElementById('style-filter');
   const licenseFilter = document.getElementById('license-filter');
   const qaFilter = document.getElementById('qa-filter');
+  const realOnlyFilter = document.getElementById('real-only-filter');
+  const resetFilters = document.getElementById('reset-filters');
   const resultCount = document.getElementById('result-count');
+  const totalCount = document.getElementById('total-count');
   const modalOverlay = document.getElementById('modal-overlay');
   const modalClose = document.getElementById('modal-close');
   const modalDetails = document.getElementById('modal-details');
@@ -33,9 +37,10 @@
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     allAssets = await res.json();
     if (!Array.isArray(allAssets)) throw new Error('Manifest is not an array');
+    populateCatalogFilters();
     filteredAssets = [...allAssets];
     renderGrid(filteredAssets);
-    updateCount(filteredAssets.length);
+    updateCount(filteredAssets.length, allAssets.length);
   } catch (err) {
     grid.innerHTML = `<div class="error-message">Error loading manifest: ${escapeHtml(err.message)}</div>`;
     console.error('Asset Lab Viewer:', err);
@@ -43,11 +48,24 @@
 
   // ── Event Listeners ────────────────────────────────────────────
   searchInput.addEventListener('input', debounce(applyFilters, 150));
+  collectionFilter.addEventListener('change', applyFilters);
   categoryFilter.addEventListener('change', applyFilters);
   roomFilter.addEventListener('change', applyFilters);
   styleFilter.addEventListener('change', applyFilters);
   licenseFilter.addEventListener('change', applyFilters);
   qaFilter.addEventListener('change', applyFilters);
+  realOnlyFilter.addEventListener('change', applyFilters);
+  resetFilters.addEventListener('click', () => {
+    searchInput.value = '';
+    collectionFilter.value = '';
+    categoryFilter.value = '';
+    roomFilter.value = '';
+    styleFilter.value = '';
+    licenseFilter.value = '';
+    qaFilter.value = '';
+    realOnlyFilter.checked = false;
+    applyFilters();
+  });
 
   modalClose.addEventListener('click', closeModal);
   modalOverlay.addEventListener('click', (e) => {
@@ -315,24 +333,28 @@
   // ── Filters ────────────────────────────────────────────────────
   function applyFilters() {
     const q = searchInput.value.trim().toLowerCase();
+    const collection = collectionFilter.value;
     const cat = categoryFilter.value;
     const room = roomFilter.value;
     const style = styleFilter.value;
     const lic = licenseFilter.value;
     const qa = qaFilter.value;
+    const realOnly = realOnlyFilter.checked;
 
     filteredAssets = allAssets.filter(asset => {
       if (q && !matchesSearch(asset, q)) return false;
+      if (collection && getCollectionKey(asset) !== collection) return false;
       if (cat && asset.category !== cat) return false;
-      if (room && !(asset.roomTags || []).includes(room)) return false;
+      if (room && getRoomKey(asset) !== room && !(asset.roomTags || []).includes(room)) return false;
       if (style && !(asset.styleTags || []).includes(style)) return false;
       if (lic && !asset.licenseType.toLowerCase().includes(lic)) return false;
       if (qa && asset.qaStatus !== qa) return false;
+      if (realOnly && asset.hasRealModel !== true) return false;
       return true;
     });
 
     renderGrid(filteredAssets);
-    updateCount(filteredAssets.length);
+    updateCount(filteredAssets.length, allAssets.length);
   }
 
   function matchesSearch(asset, q) {
@@ -340,11 +362,17 @@
       asset.productName,
       asset.brand,
       asset.category,
+      categoryLabel(asset.category),
       asset.subcategory,
       asset.sku,
       asset.color,
       asset.material,
       asset.collection,
+      asset.collectionId,
+      collectionLabel(getCollectionKey(asset)),
+      asset.demoScene,
+      asset.roomType,
+      roomLabel(getRoomKey(asset)),
       ...(asset.styleTags || []),
       ...(asset.roomTags || [])
     ];
@@ -352,8 +380,75 @@
   }
 
   // ── Utilities ──────────────────────────────────────────────────
-  function updateCount(n) {
+  function populateCatalogFilters() {
+    fillSelect(collectionFilter, uniqueValues(allAssets.map(getCollectionKey)).map(value => [value, collectionLabel(value)]));
+    fillSelect(roomFilter, uniqueValues(allAssets.map(getRoomKey)).map(value => [value, roomLabel(value)]));
+    fillSelect(categoryFilter, uniqueValues(allAssets.map(asset => asset.category)).map(value => [value, categoryLabel(value)]));
+  }
+
+  function fillSelect(select, entries) {
+    const first = select.options[0];
+    select.innerHTML = '';
+    select.appendChild(first);
+    for (const [value, label] of entries) {
+      const option = document.createElement('option');
+      option.value = value;
+      option.textContent = label;
+      select.appendChild(option);
+    }
+  }
+
+  function uniqueValues(values) {
+    return Array.from(new Set(values.filter(Boolean))).sort();
+  }
+
+  function getCollectionKey(asset) {
+    return asset.collectionId || asset.demoScene || '';
+  }
+
+  function getRoomKey(asset) {
+    if (asset.roomType) return asset.roomType;
+    const tags = asset.roomTags || [];
+    if (tags.includes('terrace') || tags.includes('outdoor') || tags.includes('garden')) return 'terrace';
+    if (tags.includes('living-room') || tags.includes('salon')) return 'living-room';
+    return tags[0] || '';
+  }
+
+  function collectionLabel(value) {
+    const labels = {
+      'terrace-mediterranean-premium': 'Terraza Mediterranea Premium',
+      'living-room-nordic-premium': 'Salon Nordico Premium'
+    };
+    return labels[value] || value;
+  }
+
+  function roomLabel(value) {
+    const labels = { terrace: 'Terraza', 'living-room': 'Salon' };
+    return labels[value] || value;
+  }
+
+  function categoryLabel(value) {
+    const labels = {
+      'tv-unit': 'Mueble TV',
+      'coffee-table': 'Mesa centro',
+      armchair: 'Sillon',
+      sofa: 'Sofa',
+      rug: 'Alfombra',
+      lighting: 'Iluminacion',
+      chair: 'Silla',
+      table: 'Mesa',
+      decor: 'Decoracion',
+      planter: 'Macetero',
+      textile: 'Textil',
+      lounge: 'Lounge',
+      'side-table': 'Mesa auxiliar'
+    };
+    return labels[value] || value;
+  }
+
+  function updateCount(n, total) {
     resultCount.textContent = n;
+    totalCount.textContent = total;
   }
 
   function getLicenseBadge(type) {

@@ -154,6 +154,35 @@ body {
 .filter-input::placeholder {
   color: var(--text-muted);
 }
+.filter-check {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  line-height: 1.4;
+  cursor: pointer;
+}
+.filter-check input {
+  width: auto;
+  accent-color: var(--accent-cyan);
+}
+.filter-reset {
+  width: 100%;
+  margin-top: 0.9rem;
+  padding: 0.55rem 0.7rem;
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+.filter-reset:hover,
+.filter-reset:focus-visible {
+  border-color: var(--accent-cyan);
+  color: var(--accent-cyan);
+  outline: none;
+}
 .filter-count {
   margin-top: 1.25rem;
   padding-top: 1rem;

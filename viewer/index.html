@@ -26,24 +26,9 @@
       </div>
 
       <div class="filter-group">
-        <label class="filter-label">Category</label>
-        <select id="category-filter" class="filter-select">
-          <option value="">All categories</option>
-          <option value="sofa">Sofas</option>
-          <option value="armchair">Armchairs</option>
-          <option value="coffee-table">Coffee Tables</option>
-          <option value="dining-table">Dining Tables</option>
-          <option value="chair">Chairs</option>
-          <option value="bed">Beds</option>
-          <option value="wardrobe">Wardrobes</option>
-          <option value="lamp">Lamps</option>
-          <option value="rug">Rugs</option>
-          <option value="decor">Decor</option>
-          <option value="shelf">Shelves</option>
-          <option value="kitchen">Kitchen</option>
-          <option value="bathroom">Bathroom</option>
-          <option value="office">Office</option>
-          <option value="textile">Textiles</option>
+        <label class="filter-label">Collection</label>
+        <select id="collection-filter" class="filter-select">
+          <option value="">All collections</option>
         </select>
       </div>
 
@@ -51,14 +36,21 @@
         <label class="filter-label">Room</label>
         <select id="room-filter" class="filter-select">
           <option value="">All rooms</option>
-          <option value="living-room">Living Room</option>
-          <option value="bedroom">Bedroom</option>
-          <option value="dining-room">Dining Room</option>
-          <option value="kitchen">Kitchen</option>
-          <option value="bathroom">Bathroom</option>
-          <option value="office">Office</option>
-          <option value="hallway">Hallway</option>
         </select>
+      </div>
+
+      <div class="filter-group">
+        <label class="filter-label">Category</label>
+        <select id="category-filter" class="filter-select">
+          <option value="">All categories</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label class="filter-check">
+          <input type="checkbox" id="real-only-filter">
+          <span>Solo modelos reales</span>
+        </label>
       </div>
 
       <div class="filter-group">
@@ -98,8 +90,10 @@
       </div>
 
       <div class="filter-count">
-        <span id="result-count">0</span> assets
+        Mostrando <span id="result-count">0</span> de <span id="total-count">0</span> assets
       </div>
+
+      <button type="button" id="reset-filters" class="filter-reset">Reset filters</button>
     </aside>
 
     <section class="catalog-grid" id="catalog-grid">

@@ -31,6 +31,26 @@
         <span>Filtrar</span>
         <input id="catalogSearch" type="search" placeholder="Nombre, categoria, SKU">
       </label>
+      <div class="filter-grid" aria-label="Filtros del catalogo">
+        <label class="field">
+          <span>Coleccion</span>
+          <select id="collectionFilter">
+            <option value="">Todas</option>
+          </select>
+        </label>
+        <label class="field">
+          <span>Estancia</span>
+          <select id="roomFilter">
+            <option value="">Todas</option>
+          </select>
+        </label>
+        <label class="field">
+          <span>Categoria</span>
+          <select id="categoryFilter">
+            <option value="">Todas</option>
+          </select>
+        </label>
+      </div>
       <div id="productList" class="product-list" aria-live="polite"></div>
     </aside>
 

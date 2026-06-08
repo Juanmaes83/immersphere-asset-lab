@@ -104,7 +104,8 @@ h2 { margin-bottom: 8px; font-size: 18px; }
 .file-button input { display: none; }
 
 .field { display: grid; gap: 7px; margin-bottom: 14px; color: var(--soft); font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.4px; }
-.field input {
+.field input,
+.field select {
   width: 100%;
   border: 1px solid var(--line);
   border-radius: 12px;
@@ -114,6 +115,12 @@ h2 { margin-bottom: 8px; font-size: 18px; }
   text-transform: none;
   letter-spacing: 0;
   font-weight: 600;
+}
+
+.filter-grid {
+  display: grid;
+  gap: 10px;
+  margin-bottom: 14px;
 }
 
 .product-list, .used-list {

@@ -336,6 +336,20 @@ El composer consume el manifest actual y queda preparado para crecer con `collec
 Documentacion:
 - [`docs/collections/multiroom-catalog-strategy.md`](docs/collections/multiroom-catalog-strategy.md)
 - [`docs/scenes/scene-composer-roadmap.md`](docs/scenes/scene-composer-roadmap.md)
+- [`docs/catalog/catalog-filtering.md`](docs/catalog/catalog-filtering.md)
+
+---
+
+## Filtros de catalogo
+
+El viewer publico, el Scene Composer y la demo "Estancia vacia -> Estancia amueblada" incluyen filtros de catalogo por coleccion, estancia o tipo de producto, categoria y busqueda por nombre, SKU, marca o taxonomia.
+
+- El viewer muestra todos los assets por defecto e incluye el toggle "Solo modelos reales".
+- Scene Composer trabaja por defecto solo con productos reales para evitar placeholders en la composicion.
+- La demo comercial simplifica categorias en tipos comprensibles: sofas, sillones, mesas, muebles TV, lamparas, alfombras y decoracion.
+
+Documentacion:
+- [`docs/catalog/catalog-filtering.md`](docs/catalog/catalog-filtering.md)
 
 ---
 

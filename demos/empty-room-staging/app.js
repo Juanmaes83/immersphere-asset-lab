@@ -1,5 +1,14 @@
 const MANIFEST_URL = "/manifest/ikea-sample.manifest.json";
 const SAMPLE_ROOM_URL = "/demos/empty-room-staging/assets/empty-room-placeholder.svg";
+const PRODUCT_TYPE_GROUPS = {
+  sofas: ["sofa"],
+  armchairs: ["armchair", "chair"],
+  tables: ["coffee-table", "table", "side-table"],
+  "tv-unit": ["tv-unit"],
+  lighting: ["lighting", "lamp"],
+  rugs: ["rug"],
+  decor: ["decor", "planter", "textile"],
+};
 
 const state = {
   catalog: [],
@@ -14,6 +23,8 @@ const state = {
 const els = {
   catalogStatus: document.querySelector("#catalogStatus"),
   catalogSearch: document.querySelector("#catalogSearch"),
+  collectionFilter: document.querySelector("#collectionFilter"),
+  productTypeFilter: document.querySelector("#productTypeFilter"),
   productList: document.querySelector("#productList"),
   sampleRoomBtn: document.querySelector("#sampleRoomBtn"),
   roomUpload: document.querySelector("#roomUpload"),
@@ -47,6 +58,8 @@ async function init() {
 
 function bindEvents() {
   els.catalogSearch.addEventListener("input", filterCatalog);
+  els.collectionFilter.addEventListener("change", filterCatalog);
+  els.productTypeFilter.addEventListener("change", filterCatalog);
   els.sampleRoomBtn.addEventListener("click", useSampleRoom);
   els.roomUpload.addEventListener("change", handleUpload);
   els.clearSceneBtn.addEventListener("click", clearScene);
@@ -72,7 +85,8 @@ async function loadCatalog() {
     const manifest = await response.json();
     state.catalog = manifest.filter((asset) => asset.hasRealModel === true);
     state.filteredCatalog = [...state.catalog];
-    els.catalogStatus.textContent = `${state.catalog.length} productos reales disponibles.`;
+    populateCollectionFilter();
+    updateCatalogStatus();
   } catch (error) {
     els.catalogStatus.textContent = `No se pudo cargar el catalogo: ${error.message}`;
   }
@@ -80,11 +94,16 @@ async function loadCatalog() {
 
 function filterCatalog() {
   const query = els.catalogSearch.value.trim().toLowerCase();
+  const collection = els.collectionFilter.value;
+  const productType = els.productTypeFilter.value;
   state.filteredCatalog = state.catalog.filter((asset) => {
-    const haystack = [asset.productName, asset.category, asset.collection, asset.sku, asset.brand].join(" ").toLowerCase();
-    return haystack.includes(query);
+    if (collection && getCollectionKey(asset) !== collection) return false;
+    if (productType && !matchesProductType(asset, productType)) return false;
+    if (query && !matchesSearch(asset, query)) return false;
+    return true;
   });
   renderCatalog();
+  updateCatalogStatus();
 }
 
 function renderCatalog() {
@@ -97,7 +116,7 @@ function renderCatalog() {
       <img src="${escapeAttr(normalizePath(asset.previewPath))}" alt="${escapeAttr(asset.productName)}" loading="lazy">
       <div>
         <h4>${escapeHtml(asset.productName)}</h4>
-        <p>${escapeHtml(asset.category || "sin categoria")} · SKU ${escapeHtml(asset.sku || "N/A")}</p>
+        <p>${escapeHtml(categoryLabel(asset.category) || "sin categoria")} · SKU ${escapeHtml(asset.sku || "N/A")}</p>
         <button type="button" data-add-asset="${escapeAttr(asset.id)}">Anadir</button>
       </div>
     </article>
@@ -442,6 +461,73 @@ function getLayer(layerId) {
 
 function makeLayerId() {
   return `layer-${Date.now()}-${Math.random().toString(16).slice(2)}`;
+}
+
+function populateCollectionFilter() {
+  const firstOption = els.collectionFilter.options[0];
+  els.collectionFilter.innerHTML = "";
+  els.collectionFilter.appendChild(firstOption);
+  Array.from(new Set(state.catalog.map(getCollectionKey).filter(Boolean))).sort().forEach((value) => {
+    const option = document.createElement("option");
+    option.value = value;
+    option.textContent = collectionLabel(value);
+    els.collectionFilter.appendChild(option);
+  });
+}
+
+function matchesSearch(asset, query) {
+  return [
+    asset.productName,
+    asset.sku,
+    asset.category,
+    categoryLabel(asset.category),
+    asset.brand,
+    asset.collection,
+    asset.collectionId,
+    collectionLabel(getCollectionKey(asset)),
+    asset.demoScene,
+    asset.roomType,
+  ].join(" ").toLowerCase().includes(query);
+}
+
+function matchesProductType(asset, productType) {
+  const categories = PRODUCT_TYPE_GROUPS[productType] || [];
+  return categories.includes(asset.category);
+}
+
+function getCollectionKey(asset) {
+  return asset.collectionId || asset.demoScene || "";
+}
+
+function collectionLabel(value) {
+  const labels = {
+    "terrace-mediterranean-premium": "Terraza Mediterranea Premium",
+    "living-room-nordic-premium": "Salon Nordico Premium",
+  };
+  return labels[value] || value;
+}
+
+function categoryLabel(value) {
+  const labels = {
+    "tv-unit": "Mueble TV",
+    "coffee-table": "Mesa centro",
+    armchair: "Sillon",
+    sofa: "Sofa",
+    rug: "Alfombra",
+    lighting: "Iluminacion",
+    chair: "Silla",
+    table: "Mesa",
+    decor: "Decoracion",
+    planter: "Macetero",
+    textile: "Textil",
+    lounge: "Lounge",
+    "side-table": "Mesa auxiliar",
+  };
+  return labels[value] || value;
+}
+
+function updateCatalogStatus() {
+  els.catalogStatus.textContent = `${state.filteredCatalog.length} productos reales disponibles.`;
 }
 
 function normalizePath(path) {

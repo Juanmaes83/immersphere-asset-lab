@@ -14,6 +14,9 @@ const state = {
 const els = {
   catalogStatus: document.querySelector("#catalogStatus"),
   catalogSearch: document.querySelector("#catalogSearch"),
+  collectionFilter: document.querySelector("#collectionFilter"),
+  roomFilter: document.querySelector("#roomFilter"),
+  categoryFilter: document.querySelector("#categoryFilter"),
   productList: document.querySelector("#productList"),
   roomUpload: document.querySelector("#roomUpload"),
   stage: document.querySelector("#stage"),
@@ -49,20 +52,10 @@ async function init() {
 }
 
 function bindEvents() {
-  els.catalogSearch.addEventListener("input", () => {
-    const query = els.catalogSearch.value.trim().toLowerCase();
-    state.filteredCatalog = state.catalog.filter((asset) => {
-      const haystack = [
-        asset.productName,
-        asset.category,
-        asset.collection,
-        asset.sku,
-        asset.brand,
-      ].join(" ").toLowerCase();
-      return haystack.includes(query);
-    });
-    renderCatalog();
-  });
+  els.catalogSearch.addEventListener("input", applyCatalogFilters);
+  els.collectionFilter.addEventListener("change", applyCatalogFilters);
+  els.roomFilter.addEventListener("change", applyCatalogFilters);
+  els.categoryFilter.addEventListener("change", applyCatalogFilters);
 
   els.roomUpload.addEventListener("change", handleBackgroundUpload);
   els.scaleInput.addEventListener("input", () => updateSelected({ scale: Number(els.scaleInput.value) }));
@@ -92,10 +85,29 @@ async function loadCatalog() {
     const manifest = await response.json();
     state.catalog = manifest.filter((asset) => asset.hasRealModel === true);
     state.filteredCatalog = [...state.catalog];
-    els.catalogStatus.textContent = `${state.catalog.length} productos reales disponibles.`;
+    populateCatalogFilters();
+    updateCatalogStatus();
   } catch (error) {
     els.catalogStatus.textContent = `No se pudo cargar el catalogo: ${error.message}`;
   }
+}
+
+function applyCatalogFilters() {
+  const query = els.catalogSearch.value.trim().toLowerCase();
+  const collection = els.collectionFilter.value;
+  const room = els.roomFilter.value;
+  const category = els.categoryFilter.value;
+
+  state.filteredCatalog = state.catalog.filter((asset) => {
+    if (collection && getCollectionKey(asset) !== collection) return false;
+    if (room && getRoomKey(asset) !== room && !(asset.roomTags || []).includes(room)) return false;
+    if (category && asset.category !== category) return false;
+    if (query && !matchesSearch(asset, query)) return false;
+    return true;
+  });
+
+  renderCatalog();
+  updateCatalogStatus();
 }
 
 function renderCatalog() {
@@ -111,7 +123,7 @@ function renderCatalog() {
         <img src="${escapeAttr(preview)}" alt="${escapeAttr(asset.productName)}" loading="lazy">
         <div>
           <h3>${escapeHtml(asset.productName)}</h3>
-          <p>${escapeHtml(asset.brand || "")} · ${escapeHtml(asset.category || "sin categoria")}<br>${escapeHtml(asset.collection || "sin coleccion")}</p>
+          <p>${escapeHtml(asset.brand || "")} · ${escapeHtml(categoryLabel(asset.category) || "sin categoria")}<br>${escapeHtml(collectionLabel(getCollectionKey(asset)) || asset.collection || "sin coleccion")}</p>
           <button type="button" data-add-asset="${escapeAttr(asset.id)}">Anadir a escena</button>
         </div>
       </article>
@@ -458,6 +470,92 @@ function getAsset(assetId) {
 
 function getLayer(layerId) {
   return state.layers.find((layer) => layer.id === layerId);
+}
+
+function populateCatalogFilters() {
+  fillSelect(els.collectionFilter, uniqueValues(state.catalog, getCollectionKey), collectionLabel);
+  fillSelect(els.roomFilter, uniqueValues(state.catalog, getRoomKey), roomLabel);
+  fillSelect(els.categoryFilter, uniqueValues(state.catalog, (asset) => asset.category), categoryLabel);
+}
+
+function fillSelect(select, values, labeler) {
+  const firstOption = select.options[0];
+  select.innerHTML = "";
+  select.appendChild(firstOption);
+  values.forEach((value) => {
+    if (!value) return;
+    const option = document.createElement("option");
+    option.value = value;
+    option.textContent = labeler(value);
+    select.appendChild(option);
+  });
+}
+
+function uniqueValues(items, getter) {
+  return Array.from(new Set(items.map(getter).filter(Boolean))).sort();
+}
+
+function matchesSearch(asset, query) {
+  return [
+    asset.productName,
+    asset.sku,
+    asset.category,
+    categoryLabel(asset.category),
+    asset.brand,
+    asset.collection,
+    asset.collectionId,
+    collectionLabel(getCollectionKey(asset)),
+    asset.demoScene,
+    asset.roomType,
+    roomLabel(getRoomKey(asset)),
+  ].join(" ").toLowerCase().includes(query);
+}
+
+function getCollectionKey(asset) {
+  return asset.collectionId || asset.demoScene || "";
+}
+
+function getRoomKey(asset) {
+  return asset.roomType || asset.roomTags?.[0] || "";
+}
+
+function collectionLabel(value) {
+  const labels = {
+    "terrace-mediterranean-premium": "Terraza Mediterranea Premium",
+    "living-room-nordic-premium": "Salon Nordico Premium",
+  };
+  return labels[value] || value;
+}
+
+function roomLabel(value) {
+  const labels = {
+    terrace: "Terraza",
+    "living-room": "Salon",
+  };
+  return labels[value] || value;
+}
+
+function categoryLabel(value) {
+  const labels = {
+    "tv-unit": "Mueble TV",
+    "coffee-table": "Mesa centro",
+    armchair: "Sillon",
+    sofa: "Sofa",
+    rug: "Alfombra",
+    lighting: "Iluminacion",
+    chair: "Silla",
+    table: "Mesa",
+    decor: "Decoracion",
+    planter: "Macetero",
+    textile: "Textil",
+    lounge: "Lounge",
+    "side-table": "Mesa auxiliar",
+  };
+  return labels[value] || value;
+}
+
+function updateCatalogStatus() {
+  els.catalogStatus.textContent = `${state.filteredCatalog.length} productos disponibles.`;
 }
 
 function normalizePath(path) {
