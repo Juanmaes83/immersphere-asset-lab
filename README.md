@@ -205,6 +205,27 @@ Primera colección comercial del **Decor Asset Lab**: un set de 10 assets IKEA p
 
 ---
 
+## Coleccion: Salon Nordico Premium
+
+Segunda coleccion activa del **Decor Asset Lab** y primera coleccion de salon interior.
+
+**ID:** `living-room-nordic-premium`
+
+**Cobertura actual:** 14 / 14 assets reales completados
+- Sofas: 5
+- Sillones: 3
+- Muebles TV: 3
+- Alfombra: 1
+- Lampara: 1
+- Mesa de centro: 1
+
+**Uso comercial:** staging visual de salon, propuestas con Scene Composer, catalogo interactivo y demos para inmobiliarias, promotoras e interioristas.
+
+**Documentacion:**
+- [`docs/collections/living-room-nordic-premium.md`](docs/collections/living-room-nordic-premium.md) - Concepto, lista de assets y estado QA.
+
+---
+
 ## Commercial demo: Terrace Mediterranean Premium
 
 Demo comercial interactiva que muestra cómo un espacio vacío se transforma en una terraza mediterránea premium amueblada con productos reales de catálogo autorizado.

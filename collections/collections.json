@@ -18,13 +18,13 @@
     {
       "id": "living-room-nordic-premium",
       "name": "Salon Nordico Premium",
-      "status": "planned",
+      "status": "active",
       "roomType": "living-room",
-      "targetAssetCount": 10,
-      "currentRealAssetCount": 0,
+      "targetAssetCount": 14,
+      "currentRealAssetCount": 14,
       "styleTags": ["nordic", "warm", "premium", "neutral"],
       "commercialUseCases": ["staging de salon", "piso piloto digital", "campana de captacion inmobiliaria"],
-      "notes": "Siguiente coleccion recomendada por valor comercial transversal en vivienda residencial."
+      "notes": "Primera coleccion de salon activa con 14 GLB reales: sofas, sillones, muebles TV, alfombra, lampara y mesa de centro."
     },
     {
       "id": "mediterranean-dining-room",
