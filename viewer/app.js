@@ -421,7 +421,8 @@
       'living-room-nordic-premium': 'Salon Nordico Premium',
       'master-bedroom-premium': 'Dormitorio Principal Premium',
       'dining-room-mediterranean-premium': 'Comedor Mediterraneo Premium',
-      'kitchen-mediterranean-modular': 'Cocina Mediterranea Modular'
+      'kitchen-mediterranean-modular': 'Cocina Mediterranea Modular',
+      'living-room-lounge-extension': 'Salon Lounge Premium'
     };
     return labels[value] || value;
   }
@@ -455,6 +456,10 @@
       , bench: 'Banco'
       , sideboard: 'Aparador'
       , 'display-cabinet': 'Vitrina'
+      , 'lounge-chair': 'Butaca lounge'
+      , pouf: 'Puf'
+      , footstool: 'Reposapies'
+      , cabinet: 'Armario salon'
       , 'kitchen-wall-cabinet': 'Armario pared cocina'
       , 'kitchen-base-cabinet': 'Armario bajo cocina'
       , 'kitchen-tall-cabinet': 'Armario alto cocina'

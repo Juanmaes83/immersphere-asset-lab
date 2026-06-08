@@ -1,7 +1,7 @@
 {
   "version": "0.1.0",
   "updatedAt": "2026-06-08",
-  "description": "Catalogo multiestancia inicial para Decor Asset Lab con colecciones reales de terraza, salon, dormitorio principal, comedor y cocina.",
+  "description": "Catalogo multiestancia inicial para Decor Asset Lab con colecciones reales de terraza, salon, dormitorio principal, comedor, cocina y lounge.",
   "collections": [
     {
       "id": "terrace-mediterranean-premium",
@@ -110,6 +110,28 @@
         "catalogo interactivo"
       ],
       "notes": "Coleccion activa con 21 GLB reales KNOXHULT para cocina modular: armarios altos, bajos, pared, esquina, correderas y almacenaje."
+    },
+    {
+      "id": "living-room-lounge-extension",
+      "name": "Salon Lounge Premium",
+      "status": "active",
+      "roomType": "living-room",
+      "targetAssetCount": 20,
+      "currentRealAssetCount": 20,
+      "styleTags": [
+        "living-room",
+        "lounge",
+        "premium",
+        "warm",
+        "stockholm"
+      ],
+      "commercialUseCases": [
+        "staging de salon premium",
+        "piso piloto digital",
+        "catalogo interactivo",
+        "propuestas de interiorismo"
+      ],
+      "notes": "Extension activa de salon con 20 GLB reales: sofas, sillones, lounge chairs, puf, reposapies, mesa centro, mueble TV y cabinet."
     },
     {
       "id": "master-bedroom-minimal",

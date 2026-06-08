@@ -2,8 +2,11 @@ const MANIFEST_URL = "/manifest/ikea-sample.manifest.json";
 const SAMPLE_ROOM_URL = "/demos/empty-room-staging/assets/empty-room-placeholder.svg";
 const PRODUCT_TYPE_GROUPS = {
   sofas: ["sofa"],
-  armchairs: ["armchair", "chair"],
+  armchairs: ["armchair", "chair", "lounge-chair"],
   chairs: ["chair"],
+  poufs: ["pouf"],
+  footstools: ["footstool"],
+  cabinets: ["cabinet"],
   tables: ["coffee-table", "table", "side-table"],
   benches: ["bench"],
   sideboards: ["sideboard"],
@@ -517,6 +520,7 @@ function collectionLabel(value) {
     "master-bedroom-premium": "Dormitorio Principal Premium",
     "dining-room-mediterranean-premium": "Comedor Mediterraneo Premium",
     "kitchen-mediterranean-modular": "Cocina Mediterranea Modular",
+    "living-room-lounge-extension": "Salon Lounge Premium",
   };
   return labels[value] || value;
 }
@@ -545,6 +549,10 @@ function categoryLabel(value) {
     bench: "Banco",
     sideboard: "Aparador",
     "display-cabinet": "Vitrina",
+    "lounge-chair": "Butaca lounge",
+    pouf: "Puf",
+    footstool: "Reposapies",
+    cabinet: "Armario salon",
     "kitchen-wall-cabinet": "Armario pared cocina",
     "kitchen-base-cabinet": "Armario bajo cocina",
     "kitchen-tall-cabinet": "Armario alto cocina",

@@ -290,6 +290,29 @@ Quinta coleccion activa del **Decor Asset Lab** y primera coleccion especifica d
 
 ---
 
+## Coleccion: Salon Lounge Premium
+
+Sexta coleccion activa del **Decor Asset Lab** y extension premium de salon.
+
+**ID:** `living-room-lounge-extension`
+
+**Cobertura actual:** 20 / 20 assets reales completados
+- Sofas: 6
+- Sillones: 7
+- Butacas lounge: 2
+- Puf: 1
+- Reposapies: 1
+- Mesa de centro: 1
+- Mueble TV: 1
+- Armario salon: 1
+
+**Uso comercial:** staging visual de salon premium, piso piloto digital, catalogo interactivo, escenas lounge y propuestas de interiorismo.
+
+**Documentacion:**
+- [`docs/collections/living-room-lounge-extension.md`](docs/collections/living-room-lounge-extension.md) - Vision, lista de assets, categorias y estado QA.
+
+---
+
 ## Commercial demo: Terrace Mediterranean Premium
 
 Demo comercial interactiva que muestra cómo un espacio vacío se transforma en una terraza mediterránea premium amueblada con productos reales de catálogo autorizado.

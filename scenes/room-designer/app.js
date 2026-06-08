@@ -42,11 +42,14 @@ const VIEWS = {
 
 const TYPE_MAP = {
   sofas: ["sofa"],
-  armchairs: ["armchair"],
+  armchairs: ["armchair", "lounge-chair"],
+  poufs: ["pouf"],
+  footstools: ["footstool"],
   tables: ["table", "coffee-table", "side-table", "dining-table"],
   benches: ["bench"],
   sideboards: ["sideboard"],
   "display-cabinets": ["display-cabinet"],
+  cabinets: ["cabinet"],
   "kitchen-cabinets": ["kitchen-wall-cabinet", "kitchen-base-cabinet", "kitchen-tall-cabinet", "kitchen-corner-cabinet", "kitchen-sliding-wall-cabinet", "kitchen-storage", "kitchen-cabinet"],
   "tv-units": ["tv-unit"],
   lighting: ["lighting", "lamp"],
@@ -65,6 +68,10 @@ const TYPE_MAP = {
 const COMBINES_RULES = {
   sofa: ["coffee-table", "rug", "lighting", "textile", "decor"],
   armchair: ["coffee-table", "rug", "lighting", "decor"],
+  "lounge-chair": ["footstool", "coffee-table", "rug", "lighting"],
+  pouf: ["sofa", "armchair", "lounge-chair", "rug"],
+  footstool: ["lounge-chair", "armchair", "sofa"],
+  cabinet: ["sofa", "armchair", "decor", "lighting"],
   "tv-unit": ["sofa", "armchair", "decor", "lighting"],
   "coffee-table": ["sofa", "armchair", "rug", "decor"],
   rug: ["sofa", "armchair", "coffee-table"],
@@ -1541,6 +1548,10 @@ function categoryLabel(value) {
     bench: "Banco",
     sideboard: "Aparador",
     "display-cabinet": "Vitrina",
+    "lounge-chair": "Butaca lounge",
+    pouf: "Puf",
+    footstool: "Reposapies",
+    cabinet: "Armario salon",
     "kitchen-wall-cabinet": "Armario pared cocina",
     "kitchen-base-cabinet": "Armario bajo cocina",
     "kitchen-tall-cabinet": "Armario alto cocina",
@@ -1565,7 +1576,7 @@ function on(element, eventName, handler) {
 }
 
 function normalizeCatalogFilters() {
-  resetInvalidSelect(els.collectionFilter, ["", "all", "terrace-mediterranean-premium", "living-room-nordic-premium", "master-bedroom-premium", "dining-room-mediterranean-premium", "kitchen-mediterranean-modular"]);
+  resetInvalidSelect(els.collectionFilter, ["", "all", "terrace-mediterranean-premium", "living-room-nordic-premium", "master-bedroom-premium", "dining-room-mediterranean-premium", "kitchen-mediterranean-modular", "living-room-lounge-extension"]);
   resetInvalidSelect(els.typeFilter, ["", "all", ...Object.keys(TYPE_MAP)]);
   if (els.catalogSearch && typeof els.catalogSearch.value !== "string") els.catalogSearch.value = "";
 }
