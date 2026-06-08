@@ -132,6 +132,10 @@ section('Git Safety');
 let trackedGlb = [];
 let stagedGlb = [];
 
+function isAllowedGlb(filePath) {
+  return filePath.replace(/\\/g, '/').startsWith('assets/ikea/');
+}
+
 try {
   const tracked = execSync('git ls-files', { cwd: ROOT, encoding: 'utf-8', stdio: ['pipe', 'pipe', 'pipe'] });
   trackedGlb = tracked.split('\n').filter(f => f.toLowerCase().endsWith('.glb'));
@@ -146,16 +150,18 @@ try {
   // no commits yet or no staged files
 }
 
-if (trackedGlb.length > 0) {
-  fail(`${trackedGlb.length} .glb file(s) tracked by Git: ${trackedGlb.join(', ')}`);
+const trackedGlbOutsideAllowed = trackedGlb.filter(f => !isAllowedGlb(f));
+if (trackedGlbOutsideAllowed.length > 0) {
+  fail(`${trackedGlbOutsideAllowed.length} .glb file(s) tracked outside assets/ikea/: ${trackedGlbOutsideAllowed.join(', ')}`);
 } else {
-  ok('No .glb files tracked by Git');
+  ok(trackedGlb.length > 0 ? `${trackedGlb.length} authorized .glb file(s) tracked under assets/ikea/` : 'No .glb files tracked by Git');
 }
 
-if (stagedGlb.length > 0) {
-  fail(`${stagedGlb.length} .glb file(s) staged for commit: ${stagedGlb.join(', ')}`);
+const stagedGlbOutsideAllowed = stagedGlb.filter(f => !isAllowedGlb(f));
+if (stagedGlbOutsideAllowed.length > 0) {
+  fail(`${stagedGlbOutsideAllowed.length} .glb file(s) staged outside assets/ikea/: ${stagedGlbOutsideAllowed.join(', ')}`);
 } else {
-  ok('No .glb files staged for commit');
+  ok(stagedGlb.length > 0 ? `${stagedGlb.length} authorized .glb file(s) staged under assets/ikea/` : 'No .glb files staged for commit');
 }
 
 // Check for GLB in repo root

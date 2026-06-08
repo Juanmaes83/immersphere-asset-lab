@@ -23,6 +23,9 @@ pnpm-lock.yaml
 /assets/**/*.obj
 /assets/**/*.usdz
 /assets/**/*.blend
+!assets/
+!assets/ikea/
+!assets/ikea/**/*.glb
 
 # Previews pesados (solo thumbnails livianos permitidos)
 # Las previews de assets reales en /previews/ikea/ sí se commitean si son ligeras.

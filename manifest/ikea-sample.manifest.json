@@ -885,7 +885,7 @@
     "texturesChecked": "pending",
     "optimized": false,
     "createdForDemo": true,
-    "demoScene": "empty-apartment-to-furnished",
+    "demoScene": "terrace-mediterranean-premium",
     "recommendedFor": [
       "inmobiliarias",
       "promotoras",
@@ -960,7 +960,7 @@
     "texturesChecked": false,
     "optimized": false,
     "createdForDemo": true,
-    "demoScene": "empty-apartment-to-furnished",
+    "demoScene": "terrace-mediterranean-premium",
     "recommendedFor": [
       "inmobiliarias",
       "promotoras",

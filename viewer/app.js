@@ -8,7 +8,7 @@
   'use strict';
 
   // ── Configuration ──────────────────────────────────────────────
-  const MANIFEST_PATH = '../manifest/ikea-sample.manifest.json';
+  const MANIFEST_PATH = '/manifest/ikea-sample.manifest.json';
 
   // ── State ──────────────────────────────────────────────────────
   let allAssets = [];
@@ -77,7 +77,7 @@
 
   function resolvePreviewUrl(asset) {
     if (!asset.previewPath) return null;
-    return '../' + asset.previewPath;
+    return '/' + asset.previewPath;
   }
 
   function isPlaceholderPreview(asset) {
@@ -278,7 +278,7 @@
 
   function buildModalPreview(asset) {
     if (asset.hasRealModel && asset.modelPath) {
-      const modelUrl = '../' + asset.modelPath;
+      const modelUrl = '/' + asset.modelPath;
       const fallbackId = 'mv-fallback-' + Math.random().toString(36).slice(2, 8);
       return `
         <model-viewer

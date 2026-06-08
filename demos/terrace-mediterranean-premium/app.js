@@ -3,7 +3,7 @@
  * Carga manifest, filtra colección, renderiza landing y modal 3D.
  */
 
-const MANIFEST_PATH = '../../manifest/ikea-sample.manifest.json';
+const MANIFEST_PATH = '/manifest/ikea-sample.manifest.json';
 
 // Copy comercial: función de cada asset en la escena
 const SCENE_ROLE = {
@@ -62,7 +62,7 @@ function renderMiniGrid(assets) {
   const container = document.getElementById('ba-mini-grid');
   if (!container) return;
   container.innerHTML = assets.map(a => {
-    const src = a.previewPath ? `../../${a.previewPath}` : '';
+    const src = a.previewPath ? `/${a.previewPath}` : '';
     return src
       ? `<img src="${escapeHtml(src)}" alt="${escapeHtml(a.productName)}" loading="lazy">`
       : `<div style="background:var(--sand);border-radius:6px"></div>`;
@@ -77,7 +77,7 @@ function renderCollectionGrid(assets) {
     <article class="product-card" data-id="${escapeHtml(a.id)}" onclick="window.openProductModal('${escapeHtml(a.id)}')">
       <div class="card-image">
         ${a.previewPath ? `
-          <img src="../../${escapeHtml(a.previewPath)}" alt="${escapeHtml(a.productName)}" loading="lazy"
+          <img src="/${escapeHtml(a.previewPath)}" alt="${escapeHtml(a.productName)}" loading="lazy"
             onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
           <div class="preview-placeholder" style="display:none;align-items:center;justify-content:center;height:100%;color:var(--warm-grey);font-size:0.8rem">${escapeHtml(a.category)}</div>
         ` : `
@@ -128,7 +128,7 @@ window.openProductModal = function(assetId) {
 
   // Preview area
   if (asset.hasRealModel && asset.modelPath) {
-    const modelUrl = `../../${asset.modelPath}`;
+    const modelUrl = `/${asset.modelPath}`;
     const fallbackId = 'mv-fallback-' + Math.random().toString(36).slice(2, 8);
     preview.innerHTML = `
       <model-viewer
@@ -182,7 +182,7 @@ window.openProductModal = function(assetId) {
     </dl>
     <div class="modal-actions">
       <button class="btn btn-primary" onclick="window.closeProductModal()">Cerrar</button>
-      <a class="btn btn-secondary" href="../../viewer/index.html" target="_blank">Abrir en Asset Lab Viewer</a>
+      <a class="btn btn-secondary" href="/viewer/index.html" target="_blank">Abrir en Asset Lab Viewer</a>
     </div>
   `;
 

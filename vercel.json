@@ -1,0 +1,26 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "rewrites": [
+    {
+      "source": "/viewer",
+      "destination": "/viewer/index.html"
+    },
+    {
+      "source": "/viewer/",
+      "destination": "/viewer/index.html"
+    },
+    {
+      "source": "/demos/terrace-mediterranean-premium",
+      "destination": "/demos/terrace-mediterranean-premium/index.html"
+    },
+    {
+      "source": "/demos/terrace-mediterranean-premium/",
+      "destination": "/demos/terrace-mediterranean-premium/index.html"
+    },
+    {
+      "source": "/sales/decor-asset-lab-one-pager",
+      "destination": "/sales/decor-asset-lab-one-pager.html"
+    }
+  ]
+}
