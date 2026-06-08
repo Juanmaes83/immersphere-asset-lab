@@ -1,7 +1,7 @@
 {
   "version": "0.1.0",
   "updatedAt": "2026-06-08",
-  "description": "Catalogo multiestancia inicial para Decor Asset Lab. Solo la terraza mediterranea premium contiene assets reales en esta fase.",
+  "description": "Catalogo multiestancia inicial para Decor Asset Lab con colecciones reales de terraza, salon y dormitorio principal.",
   "collections": [
     {
       "id": "terrace-mediterranean-premium",
@@ -11,8 +11,18 @@
       "targetAssetCount": 10,
       "currentRealAssetCount": 10,
       "demoUrl": "/demos/terrace-mediterranean-premium/index.html",
-      "styleTags": ["mediterranean", "outdoor", "premium", "natural-materials"],
-      "commercialUseCases": ["staging digital de terraza", "demo comercial 3D", "catalogo interactivo", "dossier de mobiliario"],
+      "styleTags": [
+        "mediterranean",
+        "outdoor",
+        "premium",
+        "natural-materials"
+      ],
+      "commercialUseCases": [
+        "staging digital de terraza",
+        "demo comercial 3D",
+        "catalogo interactivo",
+        "dossier de mobiliario"
+      ],
       "notes": "Coleccion activa con 10 GLB reales autorizados en assets/ikea/. Base actual de la demo publica."
     },
     {
@@ -22,9 +32,40 @@
       "roomType": "living-room",
       "targetAssetCount": 14,
       "currentRealAssetCount": 14,
-      "styleTags": ["nordic", "warm", "premium", "neutral"],
-      "commercialUseCases": ["staging de salon", "piso piloto digital", "campana de captacion inmobiliaria"],
+      "styleTags": [
+        "nordic",
+        "warm",
+        "premium",
+        "neutral"
+      ],
+      "commercialUseCases": [
+        "staging de salon",
+        "piso piloto digital",
+        "campana de captacion inmobiliaria"
+      ],
       "notes": "Primera coleccion de salon activa con 14 GLB reales: sofas, sillones, muebles TV, alfombra, lampara y mesa de centro."
+    },
+    {
+      "id": "master-bedroom-premium",
+      "name": "Dormitorio Principal Premium",
+      "status": "active",
+      "roomType": "bedroom",
+      "targetAssetCount": 16,
+      "currentRealAssetCount": 16,
+      "styleTags": [
+        "bedroom",
+        "premium",
+        "nordic",
+        "minimal",
+        "warm"
+      ],
+      "commercialUseCases": [
+        "staging",
+        "catalog",
+        "developer showroom",
+        "interior design demo"
+      ],
+      "notes": "Coleccion activa con 16 GLB reales para dormitorio principal: camas, mesitas, comodas, armario, tocadores, espejo y alfombra."
     },
     {
       "id": "mediterranean-dining-room",
@@ -33,8 +74,17 @@
       "roomType": "dining-room",
       "targetAssetCount": 10,
       "currentRealAssetCount": 0,
-      "styleTags": ["mediterranean", "hosting", "wood", "light"],
-      "commercialUseCases": ["escenas familiares", "promociones residenciales", "contenido para campanas visuales"],
+      "styleTags": [
+        "mediterranean",
+        "hosting",
+        "wood",
+        "light"
+      ],
+      "commercialUseCases": [
+        "escenas familiares",
+        "promociones residenciales",
+        "contenido para campanas visuales"
+      ],
       "notes": "Pensada para reforzar narrativa de vivienda lista para vivir y contenido comercial aspiracional."
     },
     {
@@ -44,8 +94,17 @@
       "roomType": "bedroom",
       "targetAssetCount": 10,
       "currentRealAssetCount": 0,
-      "styleTags": ["minimal", "calm", "hotel-feel", "neutral"],
-      "commercialUseCases": ["home staging de dormitorio", "promocion de vivienda premium", "dossier de interiorismo"],
+      "styleTags": [
+        "minimal",
+        "calm",
+        "hotel-feel",
+        "neutral"
+      ],
+      "commercialUseCases": [
+        "home staging de dormitorio",
+        "promocion de vivienda premium",
+        "dossier de interiorismo"
+      ],
       "notes": "Debe priorizar cama, mesillas, iluminacion, textil, alfombra y piezas de decoracion ligeras."
     },
     {
@@ -55,8 +114,17 @@
       "roomType": "kids-bedroom",
       "targetAssetCount": 10,
       "currentRealAssetCount": 0,
-      "styleTags": ["soft", "family", "playful", "safe"],
-      "commercialUseCases": ["venta a familias", "piso piloto digital", "campanas de vivienda familiar"],
+      "styleTags": [
+        "soft",
+        "family",
+        "playful",
+        "safe"
+      ],
+      "commercialUseCases": [
+        "venta a familias",
+        "piso piloto digital",
+        "campanas de vivienda familiar"
+      ],
       "notes": "Debe evitar saturacion visual y seleccionar assets con licencia clara y peso controlado."
     },
     {
@@ -66,8 +134,17 @@
       "roomType": "office",
       "targetAssetCount": 10,
       "currentRealAssetCount": 0,
-      "styleTags": ["work-from-home", "warm", "compact", "productive"],
-      "commercialUseCases": ["viviendas con zona de trabajo", "alquiler premium", "contenido para teletrabajo"],
+      "styleTags": [
+        "work-from-home",
+        "warm",
+        "compact",
+        "productive"
+      ],
+      "commercialUseCases": [
+        "viviendas con zona de trabajo",
+        "alquiler premium",
+        "contenido para teletrabajo"
+      ],
       "notes": "Coleccion util para diferenciar viviendas pequenas o estancias flexibles."
     },
     {
@@ -77,8 +154,17 @@
       "roomType": "kitchen",
       "targetAssetCount": 10,
       "currentRealAssetCount": 0,
-      "styleTags": ["kitchen", "mediterranean", "practical", "bright"],
-      "commercialUseCases": ["reformas", "constructoras", "promociones con cocina equipada"],
+      "styleTags": [
+        "kitchen",
+        "mediterranean",
+        "practical",
+        "bright"
+      ],
+      "commercialUseCases": [
+        "reformas",
+        "constructoras",
+        "promociones con cocina equipada"
+      ],
       "notes": "Fase futura con mayor exigencia de escala, materiales y coherencia tecnica."
     },
     {
@@ -88,8 +174,17 @@
       "roomType": "bathroom",
       "targetAssetCount": 10,
       "currentRealAssetCount": 0,
-      "styleTags": ["spa", "wellness", "minimal", "premium"],
-      "commercialUseCases": ["reformas de bano", "promocion residencial premium", "visualizacion de acabados"],
+      "styleTags": [
+        "spa",
+        "wellness",
+        "minimal",
+        "premium"
+      ],
+      "commercialUseCases": [
+        "reformas de bano",
+        "promocion residencial premium",
+        "visualizacion de acabados"
+      ],
       "notes": "Debe abordarse cuando exista criterio claro de licencias, materiales y escala real."
     }
   ]

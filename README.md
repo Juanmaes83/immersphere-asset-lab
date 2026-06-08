@@ -226,6 +226,28 @@ Segunda coleccion activa del **Decor Asset Lab** y primera coleccion de salon in
 
 ---
 
+## Coleccion: Dormitorio Principal Premium
+
+Tercera coleccion activa del **Decor Asset Lab** y primera coleccion de dormitorio principal.
+
+**ID:** `master-bedroom-premium`
+
+**Cobertura actual:** 16 / 16 assets reales completados
+- Camas: 4
+- Mesitas: 2
+- Comodas: 5
+- Armario: 1
+- Tocadores: 2
+- Espejo: 1
+- Alfombra: 1
+
+**Uso comercial:** staging visual de dormitorio principal, propuestas con Room Designer Lite, catalogo interactivo y demos para inmobiliarias, promotoras e interioristas.
+
+**Documentacion:**
+- [`docs/collections/master-bedroom-premium.md`](docs/collections/master-bedroom-premium.md) - Vision, lista de assets, categorias y estado QA.
+
+---
+
 ## Commercial demo: Terrace Mediterranean Premium
 
 Demo comercial interactiva que muestra cómo un espacio vacío se transforma en una terraza mediterránea premium amueblada con productos reales de catálogo autorizado.

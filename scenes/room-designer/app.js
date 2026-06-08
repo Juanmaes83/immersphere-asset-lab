@@ -50,6 +50,12 @@ const TYPE_MAP = {
   decor: ["decor", "planter"],
   chairs: ["chair"],
   textile: ["textile"],
+  beds: ["bed"],
+  "bedside-tables": ["bedside-table"],
+  dressers: ["dresser"],
+  wardrobes: ["wardrobe"],
+  vanities: ["vanity"],
+  mirrors: ["mirror"],
 };
 
 const COMBINES_RULES = {
@@ -62,6 +68,11 @@ const COMBINES_RULES = {
   chair: ["table", "side-table", "decor"],
   table: ["chair", "lighting", "decor"],
   bed: ["side-table", "lighting", "rug", "wardrobe"],
+  "bedside-table": ["bed", "lighting", "mirror", "vanity"],
+  dresser: ["mirror", "lighting", "decor", "bed"],
+  wardrobe: ["bed", "dresser", "mirror"],
+  vanity: ["mirror", "lighting", "bedside-table"],
+  mirror: ["vanity", "dresser", "bedside-table"],
   desk: ["chair", "lighting", "shelf"],
   decor: ["sofa", "armchair", "table", "lighting"],
   planter: ["decor", "table"],
@@ -116,6 +127,15 @@ const STYLE_PRESETS = {
     wallSideColor: "sand",
     floorType: "light-wood",
     collectionFilter: "",
+  },
+  bedroom: {
+    name: "Dormitorio premium",
+    icon: "🛏",
+    template: "bedroom",
+    wallColor: "stone-beige",
+    wallSideColor: "warm-white",
+    floorType: "light-wood",
+    collectionFilter: "master-bedroom-premium",
   },
 };
 
@@ -1499,6 +1519,12 @@ function categoryLabel(value) {
     lounge: "Lounge",
     "side-table": "Mesa auxiliar",
     "dining-table": "Mesa comedor",
+    bed: "Cama",
+    "bedside-table": "Mesita",
+    dresser: "Comoda",
+    wardrobe: "Armario",
+    vanity: "Tocador",
+    mirror: "Espejo",
   };
   return labels[value] || value;
 }
@@ -1516,7 +1542,7 @@ function on(element, eventName, handler) {
 }
 
 function normalizeCatalogFilters() {
-  resetInvalidSelect(els.collectionFilter, ["", "all", "terrace-mediterranean-premium", "living-room-nordic-premium"]);
+  resetInvalidSelect(els.collectionFilter, ["", "all", "terrace-mediterranean-premium", "living-room-nordic-premium", "master-bedroom-premium"]);
   resetInvalidSelect(els.typeFilter, ["", "all", ...Object.keys(TYPE_MAP)]);
   if (els.catalogSearch && typeof els.catalogSearch.value !== "string") els.catalogSearch.value = "";
 }

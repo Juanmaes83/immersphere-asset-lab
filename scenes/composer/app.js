@@ -523,6 +523,7 @@ function collectionLabel(value) {
   const labels = {
     "terrace-mediterranean-premium": "Terraza Mediterranea Premium",
     "living-room-nordic-premium": "Salon Nordico Premium",
+    "master-bedroom-premium": "Dormitorio Principal Premium",
   };
   return labels[value] || value;
 }
@@ -531,6 +532,7 @@ function roomLabel(value) {
   const labels = {
     terrace: "Terraza",
     "living-room": "Salon",
+    bedroom: "Dormitorio",
   };
   return labels[value] || value;
 }
@@ -550,6 +552,12 @@ function categoryLabel(value) {
     textile: "Textil",
     lounge: "Lounge",
     "side-table": "Mesa auxiliar",
+    bed: "Cama",
+    "bedside-table": "Mesita",
+    dresser: "Comoda",
+    wardrobe: "Armario",
+    vanity: "Tocador",
+    mirror: "Espejo",
   };
   return labels[value] || value;
 }

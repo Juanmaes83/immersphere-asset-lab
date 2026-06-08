@@ -411,19 +411,21 @@
     const tags = asset.roomTags || [];
     if (tags.includes('terrace') || tags.includes('outdoor') || tags.includes('garden')) return 'terrace';
     if (tags.includes('living-room') || tags.includes('salon')) return 'living-room';
+    if (tags.includes('bedroom') || tags.includes('master-bedroom')) return 'bedroom';
     return tags[0] || '';
   }
 
   function collectionLabel(value) {
     const labels = {
       'terrace-mediterranean-premium': 'Terraza Mediterranea Premium',
-      'living-room-nordic-premium': 'Salon Nordico Premium'
+      'living-room-nordic-premium': 'Salon Nordico Premium',
+      'master-bedroom-premium': 'Dormitorio Principal Premium'
     };
     return labels[value] || value;
   }
 
   function roomLabel(value) {
-    const labels = { terrace: 'Terraza', 'living-room': 'Salon' };
+    const labels = { terrace: 'Terraza', 'living-room': 'Salon', bedroom: 'Dormitorio' };
     return labels[value] || value;
   }
 
@@ -442,6 +444,12 @@
       textile: 'Textil',
       lounge: 'Lounge',
       'side-table': 'Mesa auxiliar'
+      , bed: 'Cama'
+      , 'bedside-table': 'Mesita'
+      , dresser: 'Comoda'
+      , wardrobe: 'Armario'
+      , vanity: 'Tocador'
+      , mirror: 'Espejo'
     };
     return labels[value] || value;
   }

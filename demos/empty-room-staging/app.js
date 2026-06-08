@@ -8,6 +8,12 @@ const PRODUCT_TYPE_GROUPS = {
   lighting: ["lighting", "lamp"],
   rugs: ["rug"],
   decor: ["decor", "planter", "textile"],
+  beds: ["bed"],
+  "bedside-tables": ["bedside-table"],
+  dressers: ["dresser"],
+  wardrobes: ["wardrobe"],
+  vanities: ["vanity"],
+  mirrors: ["mirror"],
 };
 
 const state = {
@@ -503,6 +509,7 @@ function collectionLabel(value) {
   const labels = {
     "terrace-mediterranean-premium": "Terraza Mediterranea Premium",
     "living-room-nordic-premium": "Salon Nordico Premium",
+    "master-bedroom-premium": "Dormitorio Principal Premium",
   };
   return labels[value] || value;
 }
@@ -522,6 +529,12 @@ function categoryLabel(value) {
     textile: "Textil",
     lounge: "Lounge",
     "side-table": "Mesa auxiliar",
+    bed: "Cama",
+    "bedside-table": "Mesita",
+    dresser: "Comoda",
+    wardrobe: "Armario",
+    vanity: "Tocador",
+    mirror: "Espejo",
   };
   return labels[value] || value;
 }
