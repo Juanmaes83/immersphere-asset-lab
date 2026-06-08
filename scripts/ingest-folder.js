@@ -46,7 +46,7 @@ const VALID_CATEGORIES = new Set([
 ]);
 
 const CATEGORY_RULES = [
-  ['coffee-table', ['mesa-centro', 'mesa centro', 'coffee']],
+  ['coffee-table', ['mesa-de-centro', 'mesa de centro', 'mesa-centro', 'mesa centro', 'coffee-table', 'coffee table', 'centre table', 'center table', 'coffee']],
   ['side-table', ['mesa-auxiliar', 'mesa auxiliar', 'side']],
   ['tv-unit', ['mueble-tv', 'mueble tv', 'tv']],
   ['office-chair', ['office-chair', 'silla-oficina', 'silla oficina']],
