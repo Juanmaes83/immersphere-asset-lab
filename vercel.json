@@ -21,6 +21,14 @@
     {
       "source": "/sales/decor-asset-lab-one-pager",
       "destination": "/sales/decor-asset-lab-one-pager.html"
+    },
+    {
+      "source": "/scenes/composer",
+      "destination": "/scenes/composer/index.html"
+    },
+    {
+      "source": "/scenes/composer/",
+      "destination": "/scenes/composer/index.html"
     }
   ]
 }

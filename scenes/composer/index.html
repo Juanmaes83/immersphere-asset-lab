@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Scene Composer MVP 2.5D para componer propuestas visuales con productos reales del catalogo Decor Asset Lab.">
+  <title>Scene Composer MVP · Immersphere Asset Lab</title>
+  <link rel="stylesheet" href="/scenes/composer/styles.css">
+</head>
+<body>
+  <header class="app-header">
+    <div>
+      <p class="eyebrow">Immersphere Asset Lab</p>
+      <h1>Scene Composer MVP <span>2.5D</span></h1>
+      <p class="intro">Sube una imagen de una estancia vacia y compón una propuesta visual con productos reales del catálogo.</p>
+    </div>
+    <nav class="top-actions" aria-label="Accesos Asset Lab">
+      <a href="/" class="ghost-link">Home</a>
+      <a href="/viewer/index.html" class="ghost-link">Viewer</a>
+      <a href="/demos/terrace-mediterranean-premium/index.html" class="ghost-link">Demo 3D</a>
+    </nav>
+  </header>
+
+  <main class="app-shell">
+    <aside class="panel catalog-panel" aria-label="Catalogo de productos">
+      <div class="panel-head">
+        <h2>Productos reales</h2>
+        <p id="catalogStatus">Cargando catalogo...</p>
+      </div>
+      <label class="field">
+        <span>Filtrar</span>
+        <input id="catalogSearch" type="search" placeholder="Nombre, categoria, SKU">
+      </label>
+      <div id="productList" class="product-list" aria-live="polite"></div>
+    </aside>
+
+    <section class="workspace">
+      <div class="notice">
+        MVP 2.5D: composicion visual conceptual. No sustituye una escena 3D calibrada.
+      </div>
+
+      <div class="toolbar" aria-label="Herramientas de escena">
+        <label class="file-button">
+          <input id="roomUpload" type="file" accept="image/jpeg,image/png,image/webp">
+          Subir estancia vacia
+        </label>
+        <button id="loadLastBtn" type="button">Cargar ultima escena</button>
+        <button id="clearSceneBtn" type="button">Limpiar escena</button>
+        <button id="exportPngBtn" type="button">Exportar PNG</button>
+        <button id="exportProjectBtn" type="button">Exportar proyecto JSON</button>
+        <button id="exportListBtn" type="button">Listado productos JSON</button>
+      </div>
+
+      <div id="stage" class="stage" aria-label="Area de composicion">
+        <div class="empty-state">
+          <strong>Sube una imagen de fondo</strong>
+          <span>Despues anade productos desde el catalogo lateral.</span>
+        </div>
+        <img id="backgroundImage" class="background-image" alt="">
+        <div id="layerRoot" class="layer-root"></div>
+      </div>
+    </section>
+
+    <aside class="panel inspector-panel" aria-label="Propiedades y listado">
+      <div class="panel-head">
+        <h2>Elemento seleccionado</h2>
+        <p id="selectionStatus">Ningun elemento seleccionado.</p>
+      </div>
+
+      <div id="inspectorFields" class="inspector-fields is-disabled">
+        <label class="field">
+          <span>Producto</span>
+          <input id="selectedName" type="text" readonly>
+        </label>
+        <label class="field">
+          <span>Escala</span>
+          <input id="scaleInput" type="range" min="0.2" max="2.5" step="0.05" value="1">
+        </label>
+        <label class="field">
+          <span>Rotacion</span>
+          <input id="rotationInput" type="range" min="-180" max="180" step="1" value="0">
+        </label>
+        <div class="coord-grid">
+          <label class="field">
+            <span>X</span>
+            <input id="xInput" type="number" min="0" max="100" step="0.1">
+          </label>
+          <label class="field">
+            <span>Y</span>
+            <input id="yInput" type="number" min="0" max="100" step="0.1">
+          </label>
+        </div>
+        <div class="button-row">
+          <button id="frontBtn" type="button">Traer al frente</button>
+          <button id="backBtn" type="button">Enviar atras</button>
+        </div>
+        <button id="deleteBtn" type="button" class="danger">Eliminar elemento</button>
+      </div>
+
+      <section class="used-products" aria-labelledby="usedTitle">
+        <h2 id="usedTitle">Productos usados</h2>
+        <div id="usedProductsList" class="used-list">Sin productos en escena.</div>
+      </section>
+    </aside>
+  </main>
+
+  <script src="/scenes/composer/app.js" defer></script>
+</body>
+</html>

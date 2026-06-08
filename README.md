@@ -278,6 +278,46 @@ npm run export
 
 ---
 
+## Scene Composer MVP
+
+Herramienta estatica 2.5D para crear propuestas visuales rapidas con productos reales del catalogo.
+
+**URL local:**
+```bash
+npm run start
+# -> http://localhost:3456/scenes/composer/
+```
+
+**URL publica esperada:**
+```text
+https://immersphere-asset-lab.vercel.app/scenes/composer/
+```
+
+**Que permite hacer:**
+- Subir una imagen de una estancia vacia.
+- Colocar previews de productos reales del catalogo.
+- Mover, escalar, rotar, eliminar y ordenar productos.
+- Guardar la ultima escena en el navegador.
+- Exportar composicion PNG cuando el navegador lo permite.
+- Exportar proyecto JSON.
+- Descargar listado de productos usados.
+
+**Que no hace todavia:**
+- No carga GLB dentro de la escena.
+- No calibra camara ni escala real.
+- No genera sombras, oclusion ni depth map.
+- No sustituye una escena 3D calibrada.
+- No usa backend ni crea marketplace.
+
+**Relacion con el catalogo multiestancia:**
+El composer consume el manifest actual y queda preparado para crecer con `collections/collections.json`, donde cada nueva estancia se escala en bloques controlados de 10 assets reales.
+
+Documentacion:
+- [`docs/collections/multiroom-catalog-strategy.md`](docs/collections/multiroom-catalog-strategy.md)
+- [`docs/scenes/scene-composer-roadmap.md`](docs/scenes/scene-composer-roadmap.md)
+
+---
+
 ## Reglas del repositorio
 
 1. **NO subir assets reales a Git.** Usar `.gitignore` para GLB, GLTF, FBX, OBJ, USDZ, BLEND, ZIP.
