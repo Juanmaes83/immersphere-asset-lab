@@ -527,6 +527,7 @@ function collectionLabel(value) {
     "dining-room-mediterranean-premium": "Comedor Mediterraneo Premium",
     "kitchen-mediterranean-modular": "Cocina Mediterranea Modular",
     "living-room-lounge-extension": "Salon Lounge Premium",
+    "outdoor-storage-terrace-extension": "Exterior Storage / Terraza ampliada",
   };
   return labels[value] || value;
 }
@@ -570,6 +571,17 @@ function categoryLabel(value) {
     pouf: "Puf",
     footstool: "Reposapies",
     cabinet: "Armario salon",
+    "outdoor-storage": "Almacenaje exterior",
+    "storage-shelf": "Estanteria exterior",
+    "outdoor-cabinet": "Armario exterior",
+    "outdoor-bench": "Banco exterior",
+    "outdoor-stool": "Taburete exterior",
+    "outdoor-chair": "Silla exterior",
+    "outdoor-table": "Mesa exterior",
+    "outdoor-sofa": "Sofa exterior",
+    "privacy-screen": "Pantalla privacidad",
+    "deck-box": "Baul exterior",
+    "outdoor-box": "Caja exterior",
     "kitchen-wall-cabinet": "Armario pared cocina",
     "kitchen-base-cabinet": "Armario bajo cocina",
     "kitchen-tall-cabinet": "Armario alto cocina",

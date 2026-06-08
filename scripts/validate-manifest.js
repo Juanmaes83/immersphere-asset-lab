@@ -28,6 +28,7 @@ const REQUIRED_FIELDS = [
 const VALID_CATEGORIES = [
   'sofa', 'armchair', 'coffee-table', 'dining-table', 'chair',
   'bed', 'bedside-table', 'dresser', 'wardrobe', 'vanity', 'mirror', 'bench', 'sideboard', 'display-cabinet', 'lounge-chair', 'pouf', 'footstool', 'cabinet',
+  'outdoor-storage', 'storage-shelf', 'outdoor-cabinet', 'outdoor-bench', 'outdoor-stool', 'outdoor-chair', 'outdoor-table', 'outdoor-sofa', 'privacy-screen', 'deck-box', 'outdoor-box',
   'kitchen-wall-cabinet', 'kitchen-base-cabinet', 'kitchen-tall-cabinet', 'kitchen-corner-cabinet', 'kitchen-sliding-wall-cabinet', 'kitchen-storage', 'kitchen-cabinet',
   'lamp', 'rug', 'decor', 'shelf',
   'kitchen', 'bathroom', 'office', 'textile', 'other',

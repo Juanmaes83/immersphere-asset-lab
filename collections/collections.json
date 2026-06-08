@@ -1,7 +1,7 @@
 {
   "version": "0.1.0",
   "updatedAt": "2026-06-08",
-  "description": "Catalogo multiestancia inicial para Decor Asset Lab con colecciones reales de terraza, salon, dormitorio principal, comedor, cocina y lounge.",
+  "description": "Catalogo multiestancia inicial para Decor Asset Lab con colecciones reales de terraza, salon, dormitorio principal, comedor, cocina, lounge y exterior storage.",
   "collections": [
     {
       "id": "terrace-mediterranean-premium",
@@ -132,6 +132,28 @@
         "propuestas de interiorismo"
       ],
       "notes": "Extension activa de salon con 20 GLB reales: sofas, sillones, lounge chairs, puf, reposapies, mesa centro, mueble TV y cabinet."
+    },
+    {
+      "id": "outdoor-storage-terrace-extension",
+      "name": "Exterior Storage / Terraza ampliada",
+      "status": "active",
+      "roomType": "terrace",
+      "targetAssetCount": 17,
+      "currentRealAssetCount": 17,
+      "styleTags": [
+        "terrace",
+        "outdoor",
+        "storage",
+        "privacy",
+        "premium"
+      ],
+      "commercialUseCases": [
+        "staging de terraza ampliada",
+        "almacenaje exterior",
+        "zonas exteriores funcionales",
+        "catalogo interactivo"
+      ],
+      "notes": "Extension activa de terraza con 17 GLB reales: almacenaje exterior, estanterias, bancos, silla, sofa, mesas exteriores, pantalla de privacidad y baul."
     },
     {
       "id": "master-bedroom-minimal",

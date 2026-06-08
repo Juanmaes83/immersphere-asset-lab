@@ -313,6 +313,31 @@ Sexta coleccion activa del **Decor Asset Lab** y extension premium de salon.
 
 ---
 
+## Coleccion: Exterior Storage / Terraza ampliada
+
+Septima coleccion activa del **Decor Asset Lab** y extension exterior para terrazas, patios y espacios outdoor.
+
+**ID:** `outdoor-storage-terrace-extension`
+
+**Cobertura actual:** 17 / 17 assets reales completados
+- Armario exterior: 1
+- Estanterias exterior/interior: 4
+- Almacenaje exterior: 1
+- Silla exterior: 1
+- Sofa exterior: 1
+- Mesas exteriores: 2
+- Bancos exteriores: 3
+- Baul exterior: 1
+- Pantallas de privacidad: 2
+- Taburete exterior: 1
+
+**Uso comercial:** ampliacion de terraza premium, staging de patios y jardines, zonas chill-out, organizacion exterior y propuestas visuales con privacidad y almacenaje.
+
+**Documentacion:**
+- [`docs/collections/outdoor-storage-terrace-extension.md`](docs/collections/outdoor-storage-terrace-extension.md) - Vision, lista de assets, categorias y estado QA.
+
+---
+
 ## Commercial demo: Terrace Mediterranean Premium
 
 Demo comercial interactiva que muestra cómo un espacio vacío se transforma en una terraza mediterránea premium amueblada con productos reales de catálogo autorizado.

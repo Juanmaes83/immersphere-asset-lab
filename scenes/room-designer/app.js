@@ -50,6 +50,10 @@ const TYPE_MAP = {
   sideboards: ["sideboard"],
   "display-cabinets": ["display-cabinet"],
   cabinets: ["cabinet"],
+  "outdoor-seating": ["outdoor-chair", "outdoor-sofa", "outdoor-bench", "outdoor-stool"],
+  "outdoor-tables": ["outdoor-table"],
+  "outdoor-storage": ["outdoor-storage", "storage-shelf", "outdoor-cabinet", "deck-box", "outdoor-box"],
+  privacy: ["privacy-screen"],
   "kitchen-cabinets": ["kitchen-wall-cabinet", "kitchen-base-cabinet", "kitchen-tall-cabinet", "kitchen-corner-cabinet", "kitchen-sliding-wall-cabinet", "kitchen-storage", "kitchen-cabinet"],
   "tv-units": ["tv-unit"],
   lighting: ["lighting", "lamp"],
@@ -87,6 +91,16 @@ const COMBINES_RULES = {
   "kitchen-corner-cabinet": ["kitchen-base-cabinet", "kitchen-wall-cabinet"],
   "kitchen-sliding-wall-cabinet": ["kitchen-base-cabinet", "kitchen-storage"],
   "kitchen-storage": ["kitchen-base-cabinet", "kitchen-wall-cabinet"],
+  "outdoor-storage": ["storage-shelf", "outdoor-cabinet", "deck-box", "privacy-screen"],
+  "storage-shelf": ["outdoor-cabinet", "deck-box", "outdoor-bench"],
+  "outdoor-cabinet": ["storage-shelf", "deck-box", "privacy-screen"],
+  "outdoor-bench": ["outdoor-table", "privacy-screen", "deck-box"],
+  "outdoor-stool": ["outdoor-table", "outdoor-bench"],
+  "outdoor-chair": ["outdoor-table", "privacy-screen"],
+  "outdoor-table": ["outdoor-chair", "outdoor-bench", "outdoor-sofa"],
+  "outdoor-sofa": ["outdoor-table", "outdoor-bench", "privacy-screen"],
+  "privacy-screen": ["outdoor-bench", "outdoor-cabinet", "deck-box"],
+  "deck-box": ["outdoor-bench", "storage-shelf", "privacy-screen"],
   bed: ["side-table", "lighting", "rug", "wardrobe"],
   "bedside-table": ["bed", "lighting", "mirror", "vanity"],
   dresser: ["mirror", "lighting", "decor", "bed"],
@@ -1552,6 +1566,17 @@ function categoryLabel(value) {
     pouf: "Puf",
     footstool: "Reposapies",
     cabinet: "Armario salon",
+    "outdoor-storage": "Almacenaje exterior",
+    "storage-shelf": "Estanteria exterior",
+    "outdoor-cabinet": "Armario exterior",
+    "outdoor-bench": "Banco exterior",
+    "outdoor-stool": "Taburete exterior",
+    "outdoor-chair": "Silla exterior",
+    "outdoor-table": "Mesa exterior",
+    "outdoor-sofa": "Sofa exterior",
+    "privacy-screen": "Pantalla privacidad",
+    "deck-box": "Baul exterior",
+    "outdoor-box": "Caja exterior",
     "kitchen-wall-cabinet": "Armario pared cocina",
     "kitchen-base-cabinet": "Armario bajo cocina",
     "kitchen-tall-cabinet": "Armario alto cocina",
@@ -1576,7 +1601,7 @@ function on(element, eventName, handler) {
 }
 
 function normalizeCatalogFilters() {
-  resetInvalidSelect(els.collectionFilter, ["", "all", "terrace-mediterranean-premium", "living-room-nordic-premium", "master-bedroom-premium", "dining-room-mediterranean-premium", "kitchen-mediterranean-modular", "living-room-lounge-extension"]);
+  resetInvalidSelect(els.collectionFilter, ["", "all", "terrace-mediterranean-premium", "living-room-nordic-premium", "master-bedroom-premium", "dining-room-mediterranean-premium", "kitchen-mediterranean-modular", "living-room-lounge-extension", "outdoor-storage-terrace-extension"]);
   resetInvalidSelect(els.typeFilter, ["", "all", ...Object.keys(TYPE_MAP)]);
   if (els.catalogSearch && typeof els.catalogSearch.value !== "string") els.catalogSearch.value = "";
 }
