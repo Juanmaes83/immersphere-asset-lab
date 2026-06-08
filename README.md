@@ -269,6 +269,27 @@ Cuarta coleccion activa del **Decor Asset Lab** y primera coleccion especifica d
 
 ---
 
+## Coleccion: Cocina Mediterranea Modular
+
+Quinta coleccion activa del **Decor Asset Lab** y primera coleccion especifica de cocina modular.
+
+**ID:** `kitchen-mediterranean-modular`
+
+**Cobertura actual:** 21 / 21 assets reales completados
+- Armarios bajos cocina: 7
+- Armarios altos cocina: 4
+- Armario esquina cocina: 1
+- Armarios pared cocina: 5
+- Armarios pared correderas: 2
+- Almacenaje cocina: 2
+
+**Uso comercial:** staging visual de cocina, propuestas de reforma, promociones con cocina equipada, catalogo interactivo y demos para inmobiliarias, promotoras, constructoras e interioristas.
+
+**Documentacion:**
+- [`docs/collections/kitchen-mediterranean-modular.md`](docs/collections/kitchen-mediterranean-modular.md) - Vision, lista de assets, categorias y estado QA.
+
+---
+
 ## Commercial demo: Terrace Mediterranean Premium
 
 Demo comercial interactiva que muestra cómo un espacio vacío se transforma en una terraza mediterránea premium amueblada con productos reales de catálogo autorizado.

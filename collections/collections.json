@@ -1,7 +1,7 @@
 {
   "version": "0.1.0",
   "updatedAt": "2026-06-08",
-  "description": "Catalogo multiestancia inicial para Decor Asset Lab con colecciones reales de terraza, salon, dormitorio principal y comedor.",
+  "description": "Catalogo multiestancia inicial para Decor Asset Lab con colecciones reales de terraza, salon, dormitorio principal, comedor y cocina.",
   "collections": [
     {
       "id": "terrace-mediterranean-premium",
@@ -90,6 +90,28 @@
       "notes": "Coleccion activa con 16 GLB reales para comedor mediterraneo: mesas, sillas, bancos, aparador, vitrina y alfombra."
     },
     {
+      "id": "kitchen-mediterranean-modular",
+      "name": "Cocina Mediterranea Modular",
+      "status": "active",
+      "roomType": "kitchen",
+      "targetAssetCount": 21,
+      "currentRealAssetCount": 21,
+      "styleTags": [
+        "kitchen",
+        "mediterranean",
+        "modular",
+        "bright",
+        "practical"
+      ],
+      "commercialUseCases": [
+        "staging de cocina",
+        "reformas",
+        "promociones con cocina equipada",
+        "catalogo interactivo"
+      ],
+      "notes": "Coleccion activa con 21 GLB reales KNOXHULT para cocina modular: armarios altos, bajos, pared, esquina, correderas y almacenaje."
+    },
+    {
       "id": "master-bedroom-minimal",
       "name": "Dormitorio Principal Minimal",
       "status": "planned",
@@ -148,26 +170,6 @@
         "contenido para teletrabajo"
       ],
       "notes": "Coleccion util para diferenciar viviendas pequenas o estancias flexibles."
-    },
-    {
-      "id": "kitchen-mediterranean",
-      "name": "Cocina Mediterranea",
-      "status": "planned",
-      "roomType": "kitchen",
-      "targetAssetCount": 10,
-      "currentRealAssetCount": 0,
-      "styleTags": [
-        "kitchen",
-        "mediterranean",
-        "practical",
-        "bright"
-      ],
-      "commercialUseCases": [
-        "reformas",
-        "constructoras",
-        "promociones con cocina equipada"
-      ],
-      "notes": "Fase futura con mayor exigencia de escala, materiales y coherencia tecnica."
     },
     {
       "id": "bathroom-spa",

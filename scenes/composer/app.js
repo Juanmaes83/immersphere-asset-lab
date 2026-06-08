@@ -525,6 +525,7 @@ function collectionLabel(value) {
     "living-room-nordic-premium": "Salon Nordico Premium",
     "master-bedroom-premium": "Dormitorio Principal Premium",
     "dining-room-mediterranean-premium": "Comedor Mediterraneo Premium",
+    "kitchen-mediterranean-modular": "Cocina Mediterranea Modular",
   };
   return labels[value] || value;
 }
@@ -535,6 +536,7 @@ function roomLabel(value) {
     "living-room": "Salon",
     bedroom: "Dormitorio",
     "dining-room": "Comedor",
+    kitchen: "Cocina",
   };
   return labels[value] || value;
 }
@@ -563,6 +565,13 @@ function categoryLabel(value) {
     bench: "Banco",
     sideboard: "Aparador",
     "display-cabinet": "Vitrina",
+    "kitchen-wall-cabinet": "Armario pared cocina",
+    "kitchen-base-cabinet": "Armario bajo cocina",
+    "kitchen-tall-cabinet": "Armario alto cocina",
+    "kitchen-corner-cabinet": "Armario esquina cocina",
+    "kitchen-sliding-wall-cabinet": "Armario pared correderas",
+    "kitchen-storage": "Almacenaje cocina",
+    "kitchen-cabinet": "Modulo cocina",
   };
   return labels[value] || value;
 }

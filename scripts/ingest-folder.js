@@ -38,6 +38,13 @@ const VALID_CATEGORIES = new Set([
   'bench',
   'sideboard',
   'display-cabinet',
+  'kitchen-wall-cabinet',
+  'kitchen-base-cabinet',
+  'kitchen-tall-cabinet',
+  'kitchen-corner-cabinet',
+  'kitchen-sliding-wall-cabinet',
+  'kitchen-storage',
+  'kitchen-cabinet',
   'desk',
   'office-chair',
   'lighting',
@@ -52,6 +59,13 @@ const VALID_CATEGORIES = new Set([
 ]);
 
 const CATEGORY_RULES = [
+  ['kitchen-sliding-wall-cabinet', ['armario-de-pared-puertas-correderas', 'armario de pared puertas correderas', 'armario-de-pared&puertas-correderas', 'armario de pared&puertas correderas']],
+  ['kitchen-corner-cabinet', ['armario-bajo-cocina-esquina', 'armario bajo cocina esquina']],
+  ['kitchen-base-cabinet', ['armario-bajo-con-puertas-y-cajon', 'armario bajo con puertas y cajon', 'armario bajo con puertas y cajÃ³n', 'armario-bajo-puerta-y-hueco', 'armario bajo puerta y hueco', 'armario-bajo+puerta-y-hueco', 'armario bajo+puerta y hueco', 'ab-cajones', 'ab cajones']],
+  ['kitchen-tall-cabinet', ['armario-alto-con-puerta', 'armario alto con puerta']],
+  ['kitchen-wall-cabinet', ['armario-de-pared-con-puertas', 'armario de pared con puertas', 'armario-de-pared-con-puerta', 'armario de pared con puerta']],
+  ['kitchen-storage', ['modulo-almacenaje-cocina', 'modulo almacenaje cocina', 'mÃ³dulo almacenaje cocina']],
+  ['kitchen-cabinet', ['knoxhult']],
   ['coffee-table', ['mesa-de-centro', 'mesa de centro', 'mesa-centro', 'mesa centro', 'coffee-table', 'coffee table', 'centre table', 'center table', 'coffee']],
   ['side-table', ['mesa-auxiliar', 'mesa auxiliar', 'side']],
   ['rug', ['alfombra', 'rug']],
