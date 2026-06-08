@@ -318,6 +318,45 @@ Documentacion:
 
 ---
 
+## Demo comercial "Estancia vacia -> Estancia amueblada"
+
+Demo comercial guiada basada en el Scene Composer MVP. Esta pensada para explicar el flujo completo: imagen de estancia vacia, propuesta visual amueblada, listado de productos y exportacion.
+
+**URL local:**
+```bash
+npm run start
+# -> http://localhost:3456/demos/empty-room-staging/
+```
+
+**URL publica esperada:**
+```text
+https://immersphere-asset-lab.vercel.app/demos/empty-room-staging/
+```
+
+**Que permite:**
+- Usar una estancia de ejemplo o subir JPG, PNG o WebP.
+- Anadir productos reales del catalogo Decor Asset Lab.
+- Mover, escalar, rotar, seleccionar y eliminar productos.
+- Usar presets conceptuales de composicion.
+- Exportar PNG, proyecto JSON y listado JSON.
+
+**Relacion con Scene Composer:**
+Reutiliza el enfoque del composer 2.5D, pero lo presenta como demo comercial guiada para vender staging visual con catalogo real.
+
+**Que no hace todavia:**
+- No carga GLB dentro de la composicion.
+- No calibra perspectiva o escala fisica.
+- No genera sombras reales ni oclusion.
+- No sustituye un render 3D calibrado.
+
+**Uso comercial:**
+Sirve para explicar rapidamente a inmobiliarias, promotoras, interioristas y marcas como una estancia vacia puede transformarse en una propuesta visual accionable.
+
+Documentacion:
+- [`docs/demos/empty-room-staging-demo.md`](docs/demos/empty-room-staging-demo.md)
+
+---
+
 ## Reglas del repositorio
 
 1. **NO subir assets reales a Git.** Usar `.gitignore` para GLB, GLTF, FBX, OBJ, USDZ, BLEND, ZIP.

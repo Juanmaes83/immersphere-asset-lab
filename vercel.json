@@ -19,6 +19,14 @@
       "destination": "/demos/terrace-mediterranean-premium/index.html"
     },
     {
+      "source": "/demos/empty-room-staging",
+      "destination": "/demos/empty-room-staging/index.html"
+    },
+    {
+      "source": "/demos/empty-room-staging/",
+      "destination": "/demos/empty-room-staging/index.html"
+    },
+    {
       "source": "/sales/decor-asset-lab-one-pager",
       "destination": "/sales/decor-asset-lab-one-pager.html"
     },

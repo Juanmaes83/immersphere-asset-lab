@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Demo comercial Decor Asset Lab: estancia vacia a estancia amueblada con productos reales del catalogo.">
+  <title>Estancia vacia -> Estancia amueblada · Decor Asset Lab</title>
+  <link rel="stylesheet" href="/demos/empty-room-staging/styles.css">
+</head>
+<body>
+  <header class="hero">
+    <nav class="nav" aria-label="Navegacion demo">
+      <a href="/" class="brand">Immersphere <span>Asset Lab</span></a>
+      <div class="nav-links">
+        <a href="/viewer/index.html">Catalogo 3D</a>
+        <a href="/scenes/composer/index.html">Composer avanzado</a>
+        <a href="/sales/decor-asset-lab-one-pager.html">Dossier</a>
+      </div>
+    </nav>
+    <div class="hero-grid">
+      <div>
+        <p class="eyebrow">Demo comercial 2.5D</p>
+        <h1>Estancia vacia <span>-></span> Estancia amueblada</h1>
+        <p class="subtitle">Sube una imagen de una terraza, salon o dormitorio vacio y crea una propuesta visual con productos reales del catalogo Decor Asset Lab.</p>
+        <div class="actions">
+          <a class="primary" href="#demo">Crear propuesta visual</a>
+          <a href="/viewer/index.html">Ver catalogo 3D</a>
+          <a href="/sales/decor-asset-lab-one-pager.html">Descargar dossier</a>
+        </div>
+      </div>
+      <div class="hero-card" aria-label="Resumen del flujo comercial">
+        <strong>Estancia vacia -> propuesta visual -> listado de productos -> exportacion -> CTA comercial</strong>
+        <p>Una demo sencilla para explicar el valor del staging visual con catalogo real antes de invertir en una escena 3D calibrada.</p>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="section" id="como-funciona">
+      <div class="section-head">
+        <p class="eyebrow">Como funciona</p>
+        <h2>Tres pasos para convertir una estancia vacia en una propuesta vendible.</h2>
+      </div>
+      <div class="steps">
+        <article><span>1</span><h3>Sube una imagen</h3><p>Parte de una terraza, salon o dormitorio vacio.</p></article>
+        <article><span>2</span><h3>Anade productos reales</h3><p>Usa piezas reales del catalogo Decor Asset Lab.</p></article>
+        <article><span>3</span><h3>Exporta la propuesta</h3><p>Genera imagen visual y listado de mobiliario.</p></article>
+      </div>
+    </section>
+
+    <section class="section demo-section" id="demo">
+      <div class="section-head">
+        <p class="eyebrow">Demo interactiva</p>
+        <h2>Crea una propuesta visual guiada.</h2>
+        <p>Demo conceptual 2.5D. No sustituye una escena 3D calibrada, pero permite validar composicion, producto y propuesta visual rapidamente.</p>
+      </div>
+
+      <div class="demo-shell">
+        <aside class="panel">
+          <h3>Productos reales</h3>
+          <p id="catalogStatus">Cargando catalogo...</p>
+          <input id="catalogSearch" class="search" type="search" placeholder="Filtrar producto, categoria o SKU">
+          <div class="preset-row">
+            <button id="terracePresetBtn" type="button">Composicion terraza</button>
+            <button id="livingPresetBtn" type="button">Composicion salon</button>
+          </div>
+          <div id="productList" class="product-list"></div>
+        </aside>
+
+        <section class="composer">
+          <div class="toolbar">
+            <button id="sampleRoomBtn" type="button">Usar estancia de ejemplo</button>
+            <label class="file-button">
+              <input id="roomUpload" type="file" accept="image/jpeg,image/png,image/webp">
+              Subir imagen
+            </label>
+            <button id="clearSceneBtn" type="button">Limpiar escena</button>
+            <button id="exportPngBtn" type="button">Exportar PNG</button>
+            <button id="exportProjectBtn" type="button">Proyecto JSON</button>
+            <button id="exportListBtn" type="button">Listado JSON</button>
+          </div>
+
+          <div id="stage" class="stage" aria-label="Area de composicion">
+            <div class="empty-state">
+              <strong>Usa la estancia de ejemplo o sube tu imagen</strong>
+              <span>Despues anade productos desde el panel lateral.</span>
+            </div>
+            <img id="backgroundImage" class="background-image" alt="">
+            <div id="layerRoot" class="layer-root"></div>
+          </div>
+
+          <div class="inspector">
+            <div>
+              <strong id="selectionStatus">Ningun producto seleccionado.</strong>
+              <span id="selectedName"></span>
+            </div>
+            <label>Escala <input id="scaleInput" type="range" min="0.2" max="2.5" step="0.05" value="1"></label>
+            <label>Rotacion <input id="rotationInput" type="range" min="-180" max="180" step="1" value="0"></label>
+            <button id="deleteBtn" type="button">Eliminar</button>
+          </div>
+        </section>
+
+        <aside class="panel">
+          <h3>Productos usados</h3>
+          <div id="usedProductsList" class="used-list">Sin productos en escena.</div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <p class="eyebrow">Para quien sirve</p>
+        <h2>Una demo pensada para vender visualmente.</h2>
+      </div>
+      <div class="cards">
+        <article><h3>Inmobiliarias</h3><p>Convierte viviendas vacias en espacios mas faciles de imaginar.</p></article>
+        <article><h3>Promotoras</h3><p>Muestra viviendas tipo amuebladas antes de construir o entregar.</p></article>
+        <article><h3>Interioristas</h3><p>Crea propuestas rapidas con producto real.</p></article>
+        <article><h3>Marcas</h3><p>Ensena como tu catalogo puede aparecer dentro de experiencias inmobiliarias.</p></article>
+      </div>
+    </section>
+
+    <section class="section deliverables">
+      <div class="section-head">
+        <p class="eyebrow">Que entregamos</p>
+        <h2>Del concepto a una pieza comercial accionable.</h2>
+      </div>
+      <div class="deliverable-grid">
+        <article>Imagen antes/despues</article>
+        <article>Propuesta visual amueblada</article>
+        <article>Listado de productos usados</article>
+        <article>Dossier comercial</article>
+        <article>Demo 3D de catalogo</article>
+        <article>CTA para solicitar staging</article>
+      </div>
+    </section>
+
+    <section class="final-cta">
+      <p class="eyebrow">Siguiente paso</p>
+      <h2>Quieres probarlo con una vivienda real?</h2>
+      <div class="actions">
+        <a class="primary" href="mailto:hola@immersphere.pro?subject=Demo%20privada%20Decor%20Asset%20Lab">Solicitar demo privada</a>
+        <a href="/viewer/index.html">Ver catalogo interactivo</a>
+        <a href="/scenes/composer/index.html">Abrir Scene Composer avanzado</a>
+      </div>
+    </section>
+  </main>
+
+  <script src="/demos/empty-room-staging/app.js" defer></script>
+</body>
+</html>

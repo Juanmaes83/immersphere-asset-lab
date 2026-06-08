@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000" role="img" aria-label="Estancia vacia neutra">
+  <defs>
+    <linearGradient id="wall" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#edf1f0"/>
+      <stop offset="1" stop-color="#d8dddc"/>
+    </linearGradient>
+    <linearGradient id="floor" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0" stop-color="#c7b79c"/>
+      <stop offset="1" stop-color="#e4d7bf"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="1000" fill="#f3f4f2"/>
+  <path d="M0 0h1600v610H0z" fill="url(#wall)"/>
+  <path d="M0 610h1600v390H0z" fill="url(#floor)"/>
+  <path d="M0 610h1600" stroke="#b9c0bf" stroke-width="5"/>
+  <path d="M300 690 0 1000M1300 690l300 310" stroke="#bda987" stroke-width="3" opacity=".35"/>
+  <path d="M210 120h360v270H210z" fill="#dfeff4" stroke="#a8b8bc" stroke-width="8"/>
+  <path d="M390 120v270M210 255h360" stroke="#a8b8bc" stroke-width="6"/>
+  <path d="M215 390h350" stroke="#c7c0b4" stroke-width="16" stroke-linecap="round"/>
+  <path d="M960 180h270v380H960z" fill="#eceae5" stroke="#c3c5c1" stroke-width="7"/>
+  <path d="M1188 370h16" stroke="#9e9f9a" stroke-width="8" stroke-linecap="round"/>
+  <ellipse cx="800" cy="820" rx="390" ry="70" fill="#bba884" opacity=".28"/>
+  <text x="800" y="535" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="34" fill="#87908e">Estancia vacia de ejemplo</text>
+</svg>
