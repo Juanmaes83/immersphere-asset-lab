@@ -37,6 +37,14 @@
     {
       "source": "/scenes/composer/",
       "destination": "/scenes/composer/index.html"
+    },
+    {
+      "source": "/scenes/room-designer",
+      "destination": "/scenes/room-designer/index.html"
+    },
+    {
+      "source": "/scenes/room-designer/",
+      "destination": "/scenes/room-designer/index.html"
     }
   ]
 }

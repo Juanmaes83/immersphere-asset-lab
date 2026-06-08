@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Room Designer Lite · Diseña una estancia base, personaliza paredes y suelo, cambia la vista y coloca productos reales del catálogo.">
+  <title>Room Designer Lite · Immersphere Asset Lab</title>
+  <link rel="stylesheet" href="/scenes/room-designer/styles.css">
+</head>
+<body>
+  <header class="app-header">
+    <div>
+      <p class="eyebrow">Immersphere Asset Lab</p>
+      <h1>Room Designer <span>Lite</span></h1>
+      <p class="intro">Diseña una estancia base, personaliza paredes y suelo, cambia la vista y coloca productos reales del catálogo.</p>
+    </div>
+    <nav class="top-actions" aria-label="Accesos Asset Lab">
+      <a href="/" class="ghost-link">Home</a>
+      <a href="/viewer/index.html" class="ghost-link">Viewer</a>
+      <a href="/scenes/composer/index.html" class="ghost-link">Scene Composer</a>
+      <a href="/demos/empty-room-staging/index.html" class="ghost-link">Empty Room</a>
+    </nav>
+  </header>
+
+  <div class="limitation-bar" aria-label="Aviso de limitacion">
+    <span>MVP visual 2.5D. No sustituye todavía un planner 3D calibrado con medidas reales.</span>
+  </div>
+
+  <main class="app-shell">
+    <aside class="panel control-panel" aria-label="Controles de estancia">
+      <div class="panel-head">
+        <h2>Estancia</h2>
+        <p>Personaliza la base de la escena.</p>
+      </div>
+
+      <section class="control-group">
+        <h3>Plantilla</h3>
+        <div class="template-grid" id="templateGrid" aria-label="Plantillas de estancia"></div>
+      </section>
+
+      <section class="control-group">
+        <h3>Color de paredes</h3>
+        <div class="swatch-grid" id="wallColorGrid" aria-label="Paleta de paredes"></div>
+      </section>
+
+      <section class="control-group">
+        <h3>Tipo de suelo</h3>
+        <div class="floor-grid" id="floorGrid" aria-label="Tipos de suelo"></div>
+      </section>
+
+      <section class="control-group">
+        <h3>Vista</h3>
+        <div class="view-grid" id="viewGrid" aria-label="Selector de vista"></div>
+      </section>
+    </aside>
+
+    <section class="workspace">
+      <div class="scene-label" id="sceneLabel">Salón · Casa de muñecas</div>
+      <div class="stage" id="stage" aria-label="Area de escena">
+        <div class="room-scene" id="roomScene">
+          <div class="room-shell" id="roomShell">
+            <div class="wall-back" id="wallBack"></div>
+            <div class="wall-side wall-side-left" id="wallLeft"></div>
+            <div class="wall-side wall-side-right" id="wallRight"></div>
+            <div class="room-floor" id="roomFloor"></div>
+            <div class="room-features" id="roomFeatures"></div>
+          </div>
+          <div class="layer-root" id="layerRoot"></div>
+        </div>
+      </div>
+    </section>
+
+    <aside class="panel catalog-panel" aria-label="Catalogo y propiedades">
+      <div class="panel-head">
+        <h2>Catálogo</h2>
+        <p id="catalogStatus">Cargando catálogo...</p>
+      </div>
+
+      <label class="field">
+        <span>Buscar</span>
+        <input id="catalogSearch" type="search" placeholder="Nombre, SKU, categoría, marca">
+      </label>
+
+      <div class="filter-grid" aria-label="Filtros del catálogo">
+        <label class="field">
+          <span>Colección</span>
+          <select id="collectionFilter">
+            <option value="">Todas</option>
+            <option value="terrace-mediterranean-premium">Terraza Mediterránea Premium</option>
+            <option value="living-room-nordic-premium">Salón Nórdico Premium</option>
+          </select>
+        </label>
+        <label class="field">
+          <span>Tipo</span>
+          <select id="typeFilter">
+            <option value="">Todos</option>
+            <option value="sofas">Sofás</option>
+            <option value="armchairs">Sillones</option>
+            <option value="tables">Mesas</option>
+            <option value="tv-units">Muebles TV</option>
+            <option value="lighting">Lámparas</option>
+            <option value="rugs">Alfombras</option>
+            <option value="decor">Decoración</option>
+            <option value="chairs">Sillas</option>
+            <option value="textile">Textil</option>
+          </select>
+        </label>
+      </div>
+
+      <div id="productList" class="product-list" aria-live="polite"></div>
+
+      <div class="panel-head" style="margin-top:18px;border-top:1px solid rgba(255,255,255,.12);padding-top:14px;">
+        <h2>Elemento seleccionado</h2>
+        <p id="selectionStatus">Ningún elemento seleccionado.</p>
+      </div>
+
+      <div id="inspectorFields" class="inspector-fields is-disabled">
+        <label class="field">
+          <span>Producto</span>
+          <input id="selectedName" type="text" readonly>
+        </label>
+        <label class="field">
+          <span>Escala</span>
+          <input id="scaleInput" type="range" min="0.2" max="2.5" step="0.05" value="1">
+        </label>
+        <label class="field">
+          <span>Rotación</span>
+          <input id="rotationInput" type="range" min="-180" max="180" step="1" value="0">
+        </label>
+        <div class="coord-grid">
+          <label class="field">
+            <span>X %</span>
+            <input id="xInput" type="number" min="0" max="100" step="0.1">
+          </label>
+          <label class="field">
+            <span>Y %</span>
+            <input id="yInput" type="number" min="0" max="100" step="0.1">
+          </label>
+        </div>
+        <div class="button-row">
+          <button id="frontBtn" type="button">Traer al frente</button>
+          <button id="backBtn" type="button">Enviar atrás</button>
+        </div>
+        <button id="deleteBtn" type="button" class="danger">Eliminar elemento</button>
+      </div>
+
+      <section class="used-products" aria-labelledby="usedTitle">
+        <h2 id="usedTitle">Productos usados</h2>
+        <div id="usedProductsList" class="used-list">Sin productos en escena.</div>
+      </section>
+
+      <section class="exports" aria-label="Exportaciones">
+        <h2>Exportar</h2>
+        <div class="button-row exports-row">
+          <button id="exportPngBtn" type="button">PNG</button>
+          <button id="exportProjectBtn" type="button">Proyecto JSON</button>
+          <button id="exportListBtn" type="button">Listado JSON</button>
+        </div>
+        <div class="button-row exports-row">
+          <button id="saveSceneBtn" type="button">Guardar</button>
+          <button id="loadSceneBtn" type="button">Cargar</button>
+          <button id="clearSceneBtn" type="button" class="danger">Limpiar</button>
+        </div>
+      </section>
+    </aside>
+  </main>
+
+  <footer class="app-footer">
+    <p>MVP visual 2.5D. Para staging final se recomienda calibración visual, ajuste de escala y revisión humana.</p>
+  </footer>
+
+  <script src="/scenes/room-designer/app.js" defer></script>
+</body>
+</html>

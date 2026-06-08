@@ -340,6 +340,49 @@ Documentacion:
 
 ---
 
+## Room Designer Lite
+
+Diseña una estancia base, personaliza paredes y suelo, cambia la vista y coloca productos reales del catálogo.
+
+**URL local:**
+```bash
+npm run start
+# -> http://localhost:3456/scenes/room-designer/
+```
+
+**URL publica esperada:**
+```text
+https://immersphere-asset-lab.vercel.app/scenes/room-designer/
+```
+
+**Que permite hacer:**
+- Seleccionar plantilla de estancia: Salón, Terraza, Dormitorio, Comedor, Home Office.
+- Personalizar color de paredes entre 8 opciones.
+- Cambiar tipo de suelo entre 6 opciones.
+- Cambiar vista: Casa de muñecas, Frontal, Superior, Lateral izquierda, Lateral derecha.
+- Colocar productos reales del catálogo (mover, escalar, rotar, ordenar, eliminar).
+- Guardar y cargar escenas en localStorage.
+- Exportar PNG, proyecto JSON y listado de productos JSON.
+
+**Que no hace todavía:**
+- No carga GLB dentro de la escena.
+- No calibra perspectiva ni escala física real.
+- No genera sombras, oclusión ni depth map.
+- No sustituye un planner 3D calibrado con medidas.
+
+**Diferencia con Scene Composer:**
+- Scene Composer parte de una imagen subida por el usuario.
+- Room Designer Lite genera la estancia visualmente sin necesidad de subir imagen.
+
+**Diferencia con Empty Room Staging:**
+- Empty Room Staging es una demo comercial guiada sobre imagen subida.
+- Room Designer Lite es una herramienta de exploración y moodboard con estancia generada.
+
+Documentacion:
+- [`docs/scenes/room-designer-lite.md`](docs/scenes/room-designer-lite.md)
+
+---
+
 ## Filtros de catalogo
 
 El viewer publico, el Scene Composer y la demo "Estancia vacia -> Estancia amueblada" incluyen filtros de catalogo por coleccion, estancia o tipo de producto, categoria y busqueda por nombre, SKU, marca o taxonomia.
