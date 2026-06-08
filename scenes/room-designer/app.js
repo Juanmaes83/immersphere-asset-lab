@@ -347,8 +347,8 @@ function bindEvents() {
 
   on(els.scaleInput, "input", () => updateSelected({ scale: Number(els.scaleInput.value) }));
   on(els.rotationInput, "input", () => updateSelected({ rotation: Number(els.rotationInput.value) }));
-  on(els.xInput, "input", () => updateSelected({ x: clamp(Number(els.xInput.value), 0, 100) }));
-  on(els.yInput, "input", () => updateSelected({ y: clamp(Number(els.yInput.value), 0, 100) }));
+  on(els.xInput, "input", () => updateSelected({ x: clamp(Number(els.xInput.value), 2, 98) }));
+  on(els.yInput, "input", () => updateSelected({ y: clamp(Number(els.yInput.value), 5, 95) }));
   on(els.deleteBtn, "click", deleteSelected);
   on(els.frontBtn, "click", () => moveSelectedZ("front"));
   on(els.backBtn, "click", () => moveSelectedZ("back"));
@@ -381,6 +381,7 @@ function bindEvents() {
       selectLayer(null);
     }
   });
+  on(document, "keydown", handleLayerNudge);
 }
 
 function setTemplate(key) {
@@ -567,12 +568,16 @@ function renderLayers() {
       item.style.zIndex = String(layer.z);
       item.style.transform = `translate(-50%, -50%) rotate(${layer.rotation}deg) scale(${layer.scale})`;
       item.innerHTML = `
-        <img src="${escapeAttr(normalizePath(asset.previewPath))}" alt="${escapeAttr(asset.productName)}">
+        <img src="${escapeAttr(normalizePath(asset.previewPath))}" alt="${escapeAttr(asset.productName)}" draggable="false">
         <div class="item-shadow" style="transform:translateX(-50%) scale(${layer.scale})"></div>
       `;
       item.addEventListener("pointerdown", startDrag);
       item.addEventListener("click", (event) => {
         event.stopPropagation();
+        if (state.drag?.suppressClickLayerId === layer.id) {
+          state.drag = null;
+          return;
+        }
         selectLayer(layer.id);
       });
       els.layerRoot.appendChild(item);
@@ -650,39 +655,111 @@ function toggleProposal() {
 }
 
 function startDrag(event) {
+  if (event.button !== undefined && event.button !== 0) return;
   event.preventDefault();
+  event.stopPropagation();
   const layerId = event.currentTarget.dataset.layerId;
-  selectLayer(layerId);
   const layer = getLayer(layerId);
+  if (!layer) return;
   const rect = els.stage.getBoundingClientRect();
+  const item = event.currentTarget;
+  selectLayerLive(layerId);
   state.drag = {
     layerId,
-    startX: event.clientX,
-    startY: event.clientY,
-    originalX: layer.x,
-    originalY: layer.y,
+    pointerId: event.pointerId,
+    item,
+    offsetX: event.clientX - rect.left - (layer.x / 100) * rect.width,
+    offsetY: event.clientY - rect.top - (layer.y / 100) * rect.height,
     rect,
+    moved: false,
+    suppressClickLayerId: null,
   };
-  event.currentTarget.setPointerCapture(event.pointerId);
+  item.classList.add("is-dragging");
+  item.setPointerCapture?.(event.pointerId);
   window.addEventListener("pointermove", onDragMove);
-  window.addEventListener("pointerup", stopDrag, { once: true });
+  window.addEventListener("pointerup", stopDrag);
+  window.addEventListener("pointercancel", stopDrag);
 }
 
 function onDragMove(event) {
-  if (!state.drag) return;
-  const dx = ((event.clientX - state.drag.startX) / state.drag.rect.width) * 100;
-  const dy = ((event.clientY - state.drag.startY) / state.drag.rect.height) * 100;
+  if (!state.drag || event.pointerId !== state.drag.pointerId) return;
+  event.preventDefault();
   const layer = getLayer(state.drag.layerId);
   if (!layer) return;
-  layer.x = clamp(state.drag.originalX + dx, 0, 100);
-  layer.y = clamp(state.drag.originalY + dy, 0, 100);
-  renderLayers();
-  renderInspector();
+  const nextX = ((event.clientX - state.drag.rect.left - state.drag.offsetX) / state.drag.rect.width) * 100;
+  const nextY = ((event.clientY - state.drag.rect.top - state.drag.offsetY) / state.drag.rect.height) * 100;
+  layer.x = clamp(nextX, 2, 98);
+  layer.y = clamp(nextY, 5, 95);
+  state.drag.moved = true;
+  updateLayerPosition(layer);
+  updatePositionInputs(layer);
 }
 
-function stopDrag() {
+function stopDrag(event) {
+  if (!state.drag || (event?.pointerId !== undefined && event.pointerId !== state.drag.pointerId)) return;
+  const drag = state.drag;
   window.removeEventListener("pointermove", onDragMove);
-  state.drag = null;
+  window.removeEventListener("pointerup", stopDrag);
+  window.removeEventListener("pointercancel", stopDrag);
+  drag.item?.classList.remove("is-dragging");
+  drag.item?.releasePointerCapture?.(drag.pointerId);
+  if (drag.moved) {
+    renderInspector();
+    renderMiniMenu();
+    saveScene();
+    state.drag = { suppressClickLayerId: drag.layerId };
+    window.setTimeout(() => {
+      if (state.drag?.suppressClickLayerId === drag.layerId) state.drag = null;
+    }, 0);
+  } else {
+    state.drag = null;
+  }
+}
+
+function selectLayerLive(layerId) {
+  state.selectedId = layerId;
+  els.layerRoot.querySelectorAll(".scene-item").forEach((item) => {
+    item.classList.toggle("is-selected", item.dataset.layerId === layerId);
+  });
+  renderInspector();
+  renderMiniMenu();
+}
+
+function updateLayerPosition(layer) {
+  const item = els.layerRoot.querySelector(`[data-layer-id="${CSS.escape(layer.id)}"]`);
+  if (item) {
+    item.style.left = `${layer.x}%`;
+    item.style.top = `${layer.y}%`;
+  }
+  const menu = els.layerRoot.querySelector(".item-mini-menu");
+  if (menu && state.selectedId === layer.id) {
+    menu.style.left = `${layer.x}%`;
+    menu.style.top = `${layer.y}%`;
+  }
+}
+
+function updatePositionInputs(layer) {
+  if (!layer || state.selectedId !== layer.id) return;
+  els.xInput.value = round(layer.x);
+  els.yInput.value = round(layer.y);
+}
+
+function handleLayerNudge(event) {
+  if (!state.selectedId || !["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"].includes(event.key)) return;
+  const target = event.target;
+  if (target && ["INPUT", "TEXTAREA", "SELECT"].includes(target.tagName)) return;
+  const layer = getLayer(state.selectedId);
+  if (!layer) return;
+  event.preventDefault();
+  const step = event.shiftKey ? 5 : 1;
+  if (event.key === "ArrowLeft") layer.x = clamp(layer.x - step, 2, 98);
+  if (event.key === "ArrowRight") layer.x = clamp(layer.x + step, 2, 98);
+  if (event.key === "ArrowUp") layer.y = clamp(layer.y - step, 5, 95);
+  if (event.key === "ArrowDown") layer.y = clamp(layer.y + step, 5, 95);
+  updateLayerPosition(layer);
+  updatePositionInputs(layer);
+  renderInspector();
+  renderMiniMenu();
   saveScene();
 }
 
