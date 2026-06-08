@@ -2,6 +2,7 @@ const MANIFEST_URL = "/manifest/ikea-sample.manifest.json";
 const STORAGE_KEY = "immersphere.assetLab.roomDesignerLite.v1";
 const VIEWS_STORAGE_KEY = "immersphere.assetLab.roomDesignerLite.views.v1";
 const PRESETS_STORAGE_KEY = "immersphere.assetLab.roomDesignerLite.presets.v1";
+const DEMO_REQUEST_EMAIL = "demo@immersphere.pro";
 
 const TEMPLATES = {
   "living-room": { name: "Salón", defaultWall: "warm-white", defaultWallSide: "light-grey", defaultFloor: "light-wood", hasWindow: true, hasDoor: false },
@@ -132,6 +133,13 @@ const state = {
   zCounter: 10,
   savedViews: [],
   savedPresets: [],
+  proposalData: {
+    projectName: "Proyecto Room Designer",
+    clientName: "Cliente pendiente",
+    email: "",
+    phone: "",
+    notes: "",
+  },
 };
 
 const els = {
@@ -181,6 +189,13 @@ const els = {
   viewerLink: document.querySelector("#viewerLink"),
   proposalCount: document.querySelector("#proposalCount"),
 
+  projectNameInput: document.querySelector("#projectNameInput"),
+  clientNameInput: document.querySelector("#clientNameInput"),
+  clientEmailInput: document.querySelector("#clientEmailInput"),
+  clientPhoneInput: document.querySelector("#clientPhoneInput"),
+  proposalNotesInput: document.querySelector("#proposalNotesInput"),
+  proposalTotals: document.querySelector("#proposalTotals"),
+
   usedProductsList: document.querySelector("#usedProductsList"),
   exportPngBtn: document.querySelector("#exportPngBtn"),
   exportProjectBtn: document.querySelector("#exportProjectBtn"),
@@ -204,6 +219,7 @@ async function init() {
   renderInspector();
   renderUsedProducts();
   renderViewThumbnails();
+  renderProposalData();
 }
 
 function renderControls() {
@@ -287,10 +303,25 @@ function bindEvents() {
 
   els.clearSceneBtn.addEventListener("click", clearScene);
   els.saveSceneBtn.addEventListener("click", saveScene);
+
+  els.projectNameInput.addEventListener("input", updateProposalData);
+  els.clientNameInput.addEventListener("input", updateProposalData);
+  els.clientEmailInput.addEventListener("input", updateProposalData);
+  els.clientPhoneInput.addEventListener("input", updateProposalData);
+  els.proposalNotesInput.addEventListener("input", updateProposalData);
   els.loadSceneBtn.addEventListener("click", loadLastScene);
   els.exportPngBtn.addEventListener("click", exportPng);
   els.exportProjectBtn.addEventListener("click", exportProjectJson);
   els.exportListBtn.addEventListener("click", exportUsedProductsJson);
+
+  const exportCommercialBtn = document.querySelector("#exportCommercialBtn");
+  const printProposalBtn = document.querySelector("#printProposalBtn");
+  const exportHtmlBtn = document.querySelector("#exportHtmlBtn");
+  const requestDemoBtn = document.querySelector("#requestDemoBtn");
+  if (exportCommercialBtn) exportCommercialBtn.addEventListener("click", exportCommercialJson);
+  if (printProposalBtn) printProposalBtn.addEventListener("click", openPrintableProposal);
+  if (exportHtmlBtn) exportHtmlBtn.addEventListener("click", exportProposalHtml);
+  if (requestDemoBtn) requestDemoBtn.addEventListener("click", requestDemo);
 
   els.stage.addEventListener("pointerdown", (event) => {
     if (event.target === els.stage || event.target === els.layerRoot || event.target === els.roomScene || event.target === els.roomShell || event.target.classList.contains("wall-back") || event.target.classList.contains("room-floor")) {
@@ -981,6 +1012,7 @@ function saveScene() {
     view: state.view,
     layers: state.layers,
     zCounter: state.zCounter,
+    proposalData: state.proposalData,
     savedAt: new Date().toISOString(),
   };
   localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
@@ -1004,6 +1036,13 @@ function loadLastScene() {
       if (layer.includedInProposal === undefined) layer.includedInProposal = true;
     });
     state.zCounter = Number(payload.zCounter) || 10;
+    state.proposalData = payload.proposalData || {
+      projectName: "Proyecto Room Designer",
+      clientName: "Cliente pendiente",
+      email: "",
+      phone: "",
+      notes: "",
+    };
     state.selectedId = null;
     renderControls();
     updateRoomVisuals();
@@ -1089,7 +1128,9 @@ function exportProjectJson() {
     floorType: state.floorType,
     view: state.view,
     layers: state.layers,
+    proposalData: state.proposalData,
     usedProducts: getUsedProducts(),
+    commercialSummary: buildCommercialSummary(),
   }, `room-project-${Date.now()}.json`);
 }
 
@@ -1099,6 +1140,273 @@ function exportUsedProductsJson() {
     template: state.template,
     products: getUsedProducts(),
   }, `room-products-${Date.now()}.json`);
+}
+
+function buildCommercialSummary() {
+  const grouped = getUsedProducts(true);
+  let total = 0;
+  let pendingCount = 0;
+  const lines = grouped.map((item) => {
+    const price = getAssetPrice(item.id);
+    const lineTotal = price !== null ? price * item.quantity : null;
+    if (lineTotal !== null) total += lineTotal;
+    else pendingCount += item.quantity;
+    return {
+      assetId: item.id,
+      name: item.productName,
+      brand: item.brand,
+      category: item.category,
+      sku: item.sku,
+      quantity: item.quantity,
+      unitPrice: price,
+      lineTotal,
+    };
+  });
+  return {
+    projectName: state.proposalData.projectName,
+    clientName: state.proposalData.clientName,
+    lineItems: lines,
+    totalAmount: total,
+    pendingValuationCount: pendingCount,
+    generatedAt: new Date().toISOString(),
+  };
+}
+
+function getAssetPrice(assetId) {
+  const asset = getAsset(assetId);
+  if (!asset) return null;
+  const candidates = [asset.price, asset.priceEUR, asset.unitPrice, asset.priceValue];
+  for (const v of candidates) {
+    if (v !== undefined && v !== null && v !== "" && !Number.isNaN(Number(v))) {
+      return Number(v);
+    }
+  }
+  return null;
+}
+
+function renderProposalData() {
+  const pd = state.proposalData;
+  if (els.projectNameInput) els.projectNameInput.value = pd.projectName || "";
+  if (els.clientNameInput) els.clientNameInput.value = pd.clientName || "";
+  if (els.clientEmailInput) els.clientEmailInput.value = pd.email || "";
+  if (els.clientPhoneInput) els.clientPhoneInput.value = pd.phone || "";
+  if (els.proposalNotesInput) els.proposalNotesInput.value = pd.notes || "";
+}
+
+function updateProposalData() {
+  state.proposalData = {
+    projectName: els.projectNameInput?.value?.trim() || "Proyecto Room Designer",
+    clientName: els.clientNameInput?.value?.trim() || "Cliente pendiente",
+    email: els.clientEmailInput?.value?.trim() || "",
+    phone: els.clientPhoneInput?.value?.trim() || "",
+    notes: els.proposalNotesInput?.value?.trim() || "",
+  };
+}
+
+function adjustQuantity(assetId, delta) {
+  const layers = state.layers.filter((l) => l.assetId === assetId && l.includedInProposal !== false);
+  if (!layers.length) return;
+  if (delta > 0) {
+    const first = layers[0];
+    const asset = getAsset(assetId);
+    const layer = {
+      id: crypto.randomUUID ? crypto.randomUUID() : `l-${Date.now()}-${Math.random().toString(36).slice(2)}`,
+      assetId,
+      x: first.x + (Math.random() * 10 - 5),
+      y: first.y + (Math.random() * 10 - 5),
+      scale: first.scale,
+      rotation: first.rotation,
+      z: ++state.zCounter,
+      includedInProposal: true,
+    };
+    state.layers.push(layer);
+  } else if (delta < 0 && layers.length > 1) {
+    const toRemove = layers[layers.length - 1];
+    state.layers = state.layers.filter((l) => l.id !== toRemove.id);
+    if (state.selectedId === toRemove.id) state.selectedId = null;
+  }
+  renderLayers();
+  renderUsedProducts();
+  renderInspector();
+}
+
+function locateProductInScene(assetId) {
+  const layer = state.layers.find((l) => l.assetId === assetId);
+  if (!layer) return;
+  state.selectedId = layer.id;
+  renderLayers();
+  renderInspector();
+  const rect = els.stage.getBoundingClientRect();
+  const x = (layer.x / 100) * rect.width;
+  const y = (layer.y / 100) * rect.height;
+  els.stage.scrollTo({
+    left: x - rect.width / 2,
+    top: y - rect.height / 2,
+    behavior: "smooth",
+  });
+}
+
+function renderProposalTotals(grouped) {
+  if (!els.proposalTotals) return;
+  let total = 0;
+  let pendingCount = 0;
+  for (const item of grouped) {
+    const price = getAssetPrice(item.id);
+    if (price !== null) total += price * item.quantity;
+    else pendingCount += item.quantity;
+  }
+  const totalRow = total > 0
+    ? `<div class="total-row"><span>Total estimado</span><span class="total-amount">${total.toFixed(2)} €</span></div>`
+    : "";
+  const pendingRow = pendingCount > 0
+    ? `<div class="total-row pending"><span>${pendingCount} producto(s) pendiente(s) de valoración</span><span>—</span></div>`
+    : "";
+  els.proposalTotals.innerHTML = totalRow + pendingRow;
+  els.proposalTotals.style.display = totalRow || pendingRow ? "block" : "none";
+}
+
+function exportCommercialJson() {
+  const summary = buildCommercialSummary();
+  downloadJson(summary, `propuesta-${Date.now()}.json`);
+}
+
+function openPrintableProposal() {
+  const grouped = getUsedProducts(true);
+  const pd = state.proposalData;
+  let total = 0;
+  let pendingCount = 0;
+  const rows = grouped.map((item) => {
+    const price = getAssetPrice(item.id);
+    const lineTotal = price !== null ? price * item.quantity : null;
+    if (lineTotal !== null) total += lineTotal;
+    else pendingCount += item.quantity;
+    const priceCell = price !== null
+      ? `<td>${price.toFixed(2)} €</td><td>${lineTotal.toFixed(2)} €</td>`
+      : `<td colspan="2" style="font-style:italic;color:#666;">Precio pendiente de valoración</td>`;
+    return `
+      <tr>
+        <td>${escapeHtml(item.productName)}</td>
+        <td>${escapeHtml(item.brand)}</td>
+        <td>${escapeHtml(item.sku || "N/A")}</td>
+        <td>${item.quantity}</td>
+        ${priceCell}
+      </tr>
+    `;
+  }).join("");
+  const totalRow = total > 0 ? `<tr><td colspan="5" style="text-align:right;font-weight:bold;">Total estimado: ${total.toFixed(2)} €</td></tr>` : "";
+  const pendingNotice = pendingCount > 0 ? `<p style="margin-top:12px;font-style:italic;color:#666;">* ${pendingCount} producto(s) pendiente(s) de valoración por parte del equipo comercial.</p>` : "";
+  const html = `<!DOCTYPE html>
+<html lang="es">
+<head><meta charset="UTF-8"><title>Propuesta comercial</title>
+<style>
+body{font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;margin:40px auto;max-width:900px;color:#111;line-height:1.5}
+h1{margin-bottom:4px} .meta{color:#555;margin-bottom:24px}
+table{width:100%;border-collapse:collapse;margin-top:12px} th,td{border:1px solid #ddd;padding:8px;text-align:left} th{background:#f5f5f5}
+.total{font-weight:bold;background:#fafafa} .footer{margin-top:32px;color:#777;font-size:12px}
+@media print{body{margin:20px} .no-print{display:none}}
+</style></head>
+<body>
+<h1>${escapeHtml(pd.projectName || "Propuesta comercial")}</h1>
+<div class="meta">
+  <div><strong>Cliente:</strong> ${escapeHtml(pd.clientName || "—")}</div>
+  <div><strong>Email:</strong> ${escapeHtml(pd.email || "—")}</div>
+  <div><strong>Teléfono:</strong> ${escapeHtml(pd.phone || "—")}</div>
+  <div><strong>Fecha:</strong> ${new Date().toLocaleDateString("es-ES")}</div>
+</div>
+${pd.notes ? `<p style="white-space:pre-wrap;margin-bottom:16px;">${escapeHtml(pd.notes)}</p>` : ""}
+<table>
+  <thead>
+    <tr><th>Producto</th><th>Marca</th><th>SKU</th><th>Cant.</th><th>Precio unit.</th><th>Subtotal</th></tr>
+  </thead>
+  <tbody>${rows}${totalRow}</tbody>
+</table>
+${pendingNotice}
+<div class="footer">Generado por Immersphere Asset Lab · Room Designer Lite</div>
+<button class="no-print" onclick="window.print()" style="margin-top:20px;padding:10px 18px;font-size:16px;cursor:pointer;">Imprimir / Guardar como PDF</button>
+</body></html>`;
+  const w = window.open("", "_blank");
+  if (w) {
+    w.document.write(html);
+    w.document.close();
+  }
+}
+
+function exportProposalHtml() {
+  const grouped = getUsedProducts(true);
+  const pd = state.proposalData;
+  let total = 0;
+  let pendingCount = 0;
+  const rows = grouped.map((item) => {
+    const price = getAssetPrice(item.id);
+    const lineTotal = price !== null ? price * item.quantity : null;
+    if (lineTotal !== null) total += lineTotal;
+    else pendingCount += item.quantity;
+    const priceCell = price !== null
+      ? `<td>${price.toFixed(2)} €</td><td>${lineTotal.toFixed(2)} €</td>`
+      : `<td colspan="2" style="font-style:italic;color:#666;">Precio pendiente de valoración</td>`;
+    return `
+      <tr>
+        <td>${escapeHtml(item.productName)}</td>
+        <td>${escapeHtml(item.brand)}</td>
+        <td>${escapeHtml(item.sku || "N/A")}</td>
+        <td>${item.quantity}</td>
+        ${priceCell}
+      </tr>
+    `;
+  }).join("");
+  const totalRow = total > 0 ? `<tr><td colspan="5" style="text-align:right;font-weight:bold;">Total estimado: ${total.toFixed(2)} €</td></tr>` : "";
+  const pendingNotice = pendingCount > 0 ? `<p style="margin-top:12px;font-style:italic;color:#666;">* ${pendingCount} producto(s) pendiente(s) de valoración por parte del equipo comercial.</p>` : "";
+  const html = `<!DOCTYPE html>
+<html lang="es">
+<head><meta charset="UTF-8"><title>Propuesta comercial</title>
+<style>
+body{font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;margin:40px auto;max-width:900px;color:#111;line-height:1.5}
+h1{margin-bottom:4px} .meta{color:#555;margin-bottom:24px}
+table{width:100%;border-collapse:collapse;margin-top:12px} th,td{border:1px solid #ddd;padding:8px;text-align:left} th{background:#f5f5f5}
+.total{font-weight:bold;background:#fafafa} .footer{margin-top:32px;color:#777;font-size:12px}
+</style></head>
+<body>
+<h1>${escapeHtml(pd.projectName || "Propuesta comercial")}</h1>
+<div class="meta">
+  <div><strong>Cliente:</strong> ${escapeHtml(pd.clientName || "—")}</div>
+  <div><strong>Email:</strong> ${escapeHtml(pd.email || "—")}</div>
+  <div><strong>Teléfono:</strong> ${escapeHtml(pd.phone || "—")}</div>
+  <div><strong>Fecha:</strong> ${new Date().toLocaleDateString("es-ES")}</div>
+</div>
+${pd.notes ? `<p style="white-space:pre-wrap;margin-bottom:16px;">${escapeHtml(pd.notes)}</p>` : ""}
+<table>
+  <thead>
+    <tr><th>Producto</th><th>Marca</th><th>SKU</th><th>Cant.</th><th>Precio unit.</th><th>Subtotal</th></tr>
+  </thead>
+  <tbody>${rows}${totalRow}</tbody>
+</table>
+${pendingNotice}
+<div class="footer">Generado por Immersphere Asset Lab · Room Designer Lite</div>
+</body></html>`;
+  downloadBlob(new Blob([html], { type: "text/html" }), `propuesta-${Date.now()}.html`);
+}
+
+function requestDemo() {
+  const pd = state.proposalData;
+  const subject = encodeURIComponent(`Solicitud demo privada · ${pd.projectName || "Room Designer"}`);
+  const body = encodeURIComponent(`Hola equipo de Immersphere,
+
+Solicito una demostración privada de Room Designer para el siguiente proyecto:
+
+Proyecto: ${pd.projectName || "—"}
+Cliente: ${pd.clientName || "—"}
+Email: ${pd.email || "—"}
+Teléfono: ${pd.phone || "—"}
+
+Notas:
+${pd.notes || "Ninguna"}
+
+Productos en escena: ${state.layers.length}
+
+Por favor contacten conmigo para coordinar la sesión.
+
+Gracias.`);
+  window.location.href = `mailto:${DEMO_REQUEST_EMAIL}?subject=${subject}&body=${body}`;
 }
 
 function downloadJson(data, filename) {

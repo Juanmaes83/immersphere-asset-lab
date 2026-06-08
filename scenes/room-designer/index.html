@@ -174,20 +174,54 @@
         <div id="combinesList" class="compact-list">Selecciona un producto para ver recomendaciones.</div>
       </div>
 
+      <section class="proposal-data" aria-label="Datos de propuesta">
+        <div class="section-header" style="margin-top:18px;border-top:1px solid rgba(255,255,255,.12);padding-top:14px;">
+          <h2>Datos de propuesta</h2>
+        </div>
+        <label class="field">
+          <span>Proyecto</span>
+          <input id="projectNameInput" type="text" placeholder="Nombre del proyecto">
+        </label>
+        <label class="field">
+          <span>Cliente</span>
+          <input id="clientNameInput" type="text" placeholder="Nombre del cliente">
+        </label>
+        <label class="field">
+          <span>Email</span>
+          <input id="clientEmailInput" type="email" placeholder="email@ejemplo.com">
+        </label>
+        <label class="field">
+          <span>Teléfono</span>
+          <input id="clientPhoneInput" type="tel" placeholder="+34 600 000 000">
+        </label>
+        <label class="field">
+          <span>Notas</span>
+          <textarea id="proposalNotesInput" rows="2" placeholder="Notas de la propuesta"></textarea>
+        </label>
+      </section>
+
       <section class="used-products" aria-labelledby="usedTitle">
         <div class="section-header">
-          <h2 id="usedTitle">Resumen de propuesta</h2>
+          <h2 id="usedTitle">Resumen comercial</h2>
           <span id="proposalCount" class="proposal-count"></span>
         </div>
         <div id="usedProductsList" class="used-list">Sin productos en escena.</div>
+        <div id="proposalTotals" class="proposal-totals" style="display:none"></div>
       </section>
 
-      <section class="exports" aria-label="Exportaciones">
-        <h2>Exportar</h2>
+      <section class="exports" aria-label="Acciones comerciales">
+        <h2>Acciones comerciales</h2>
         <div class="button-row exports-row">
-          <button id="exportPngBtn" type="button">PNG</button>
+          <button id="exportCommercialBtn" type="button">Propuesta JSON</button>
           <button id="exportProjectBtn" type="button">Proyecto JSON</button>
-          <button id="exportListBtn" type="button">Listado JSON</button>
+          <button id="exportPngBtn" type="button">PNG</button>
+        </div>
+        <div class="button-row exports-row">
+          <button id="printProposalBtn" type="button">PDF / Imprimir</button>
+          <button id="exportHtmlBtn" type="button">Propuesta HTML</button>
+        </div>
+        <div class="button-row exports-row">
+          <button id="requestDemoBtn" type="button" class="primary">Solicitar demo privada</button>
         </div>
         <div class="button-row exports-row">
           <button id="saveSceneBtn" type="button">Guardar</button>
